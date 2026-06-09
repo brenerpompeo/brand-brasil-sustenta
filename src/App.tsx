@@ -1,29 +1,70 @@
+import { useEffect, useState, type ReactNode } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import tokens from "./data/tokens.json";
 import { Section, Eyebrow, CopyChip } from "./components/primitives";
 import { Logo } from "./components/Logo";
 import { ODSBadge } from "./components/ODSBadge";
+import { Grain, SectionGlow, Dot } from "./components/Atmosphere";
+import { FlowDemo } from "./components/FlowDemo";
+import { EaseDemo } from "./components/EaseDemo";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 const NAV = [
   { id: "fundacao", label: "Fundação" },
   { id: "logo", label: "Logo" },
   { id: "cores", label: "Cores" },
   { id: "tipografia", label: "Tipografia" },
+  { id: "metodo", label: "Método" },
   { id: "componentes", label: "Componentes" },
   { id: "voz", label: "Voz" },
   { id: "governanca", label: "Governança" },
 ];
 
+/** Scroll spy simples — a seção visível acende no menu, com o ponto verde. */
+function useActiveSection(ids: string[]) {
+  const [active, setActive] = useState(ids[0]);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) setActive(visible[0].target.id);
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.25, 0.5, 1] }
+    );
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, [ids]);
+  return active;
+}
+
 function Nav() {
+  const active = useActiveSection(NAV.map((n) => n.id));
   return (
     <header style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(5,5,5,0.85)", backdropFilter: "blur(12px)", borderBottom: "1px solid var(--color-border)" }}>
       <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0.9rem 1.5rem", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}>
         <Logo size={1} />
-        <nav style={{ display: "flex", gap: "1.25rem", flexWrap: "wrap" }}>
-          {NAV.map((n) => (
-            <a key={n.id} href={`#${n.id}`} className="font-mono" style={{ color: "#9CA3AF", textDecoration: "none", fontSize: "0.6875rem", textTransform: "uppercase", letterSpacing: "0.12em" }}>
-              {n.label}
-            </a>
-          ))}
+        <nav style={{ display: "flex", gap: "1.25rem", flexWrap: "wrap", alignItems: "center" }}>
+          {NAV.map((n) => {
+            const isActive = active === n.id;
+            return (
+              <a
+                key={n.id}
+                href={`#${n.id}`}
+                data-active={isActive}
+                className="font-mono bs-nav-link"
+                style={{ display: "inline-flex", alignItems: "center", gap: 6, color: "#9CA3AF", textDecoration: "none", fontSize: "0.6875rem", textTransform: "uppercase", letterSpacing: "0.12em" }}
+              >
+                {isActive && <Dot size={5} />}
+                {n.label}
+              </a>
+            );
+          })}
         </nav>
       </div>
     </header>
@@ -31,27 +72,68 @@ function Nav() {
 }
 
 function Hero() {
+  const reduced = useReducedMotion();
+  const fadeUp = {
+    hidden: { opacity: 0, y: reduced ? 0 : 18 },
+    show: { opacity: 1, y: 0 },
+  };
   return (
     <section style={{ padding: "6rem 0 4rem", position: "relative", overflow: "hidden" }}>
-      <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse at 70% 0%, rgba(0,230,118,0.06) 0%, transparent 55%)" }} />
-      <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 1.5rem", position: "relative" }}>
-        <Eyebrow color="#00E676">Brand System · v{tokens._meta.version}</Eyebrow>
-        <h1 className="font-display" style={{ fontSize: "clamp(3rem, 9vw, 7rem)", fontWeight: 900, lineHeight: 0.9, margin: "1rem 0", color: "#F3F4F6" }}>
+      <SectionGlow color="#00E676" position="70% 0%" opacity={0.06} />
+      {/* Glow pulsante MUITO sutil atrás do título — respiração bioluminescente. */}
+      {!reduced && (
+        <motion.div
+          aria-hidden
+          initial={{ opacity: 0.04 }}
+          animate={{ opacity: [0.04, 0.09, 0.04] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(circle at 32% 38%, rgba(0,230,118,0.5) 0%, transparent 38%)" }}
+        />
+      )}
+      <motion.div
+        initial="hidden"
+        animate="show"
+        transition={{ staggerChildren: reduced ? 0 : 0.09, delayChildren: 0.05 }}
+        style={{ maxWidth: 1120, margin: "0 auto", padding: "0 1.5rem", position: "relative" }}
+      >
+        <motion.div variants={fadeUp} transition={{ duration: 0.6, ease: EASE }}>
+          <p className="font-mono" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: "0.625rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.22em", color: "#00E676" }}>
+            <Dot /> Brand System · v{tokens._meta.version}
+          </p>
+        </motion.div>
+        <motion.h1 variants={fadeUp} transition={{ duration: 0.7, ease: EASE }} className="font-display" style={{ fontSize: "clamp(3rem, 9vw, 7rem)", fontWeight: 900, lineHeight: 0.9, margin: "1rem 0", color: "#F3F4F6" }}>
           Sistema de marca<br />que <span style={{ color: "#00E676" }}>opera.</span>
-        </h1>
-        <p style={{ color: "#9CA3AF", fontSize: "1.125rem", maxWidth: 600, lineHeight: 1.6 }}>
+        </motion.h1>
+        <motion.p variants={fadeUp} transition={{ duration: 0.7, ease: EASE }} style={{ color: "#9CA3AF", fontSize: "1.125rem", maxWidth: 600, lineHeight: 1.6 }}>
           Guia vivo do Brasil Sustenta — tokens, identidade, componentes, voz e governança.
           Não é PDF: renderiza dos mesmos tokens que o produto usa. {tokens._meta.direction}.
-        </p>
-        <div style={{ marginTop: "2rem", display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+        </motion.p>
+        <motion.div variants={fadeUp} transition={{ duration: 0.7, ease: EASE }} style={{ marginTop: "2rem", display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
           {tokens.color.persona.map((c) => (
-            <span key={c.name} className="font-mono" style={{ display: "inline-flex", alignItems: "center", gap: 8, border: "1px solid var(--color-border-strong)", borderRadius: 9999, padding: "0.4rem 0.9rem", fontSize: "0.75rem", color: "#9CA3AF" }}>
+            <span key={c.name} className="font-mono bs-card" style={{ display: "inline-flex", alignItems: "center", gap: 8, border: "1px solid var(--color-border-strong)", borderRadius: 9999, padding: "0.4rem 0.9rem", fontSize: "0.75rem", color: "#9CA3AF" }}>
               <span style={{ width: 10, height: 10, borderRadius: 9999, background: c.hex }} /> {c.persona}
             </span>
           ))}
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+}
+
+function LogoCard({ label, sub, bg, labelColor = "#9CA3AF", children }: { label: string; sub: string; bg: string; labelColor?: string; children: ReactNode }) {
+  return (
+    <div className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, overflow: "hidden", background: "#0D0E0E" }}>
+      <div style={{ background: bg, padding: "2.75rem 1.5rem", display: "flex", alignItems: "center", justifyContent: "center", minHeight: 150 }}>
+        {children}
+      </div>
+      <div style={{ padding: "0.9rem 1rem", borderTop: "1px solid var(--color-border)", display: "flex", alignItems: "center", gap: 8 }}>
+        <Dot size={5} />
+        <div>
+          <div className="font-mono" style={{ fontSize: "0.7rem", color: "#F3F4F6", textTransform: "uppercase", letterSpacing: "0.1em" }}>{label}</div>
+          <div className="font-mono" style={{ fontSize: "0.625rem", color: labelColor, marginTop: 2 }}>{sub}</div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -86,21 +168,24 @@ function tokenVar(name: string) {
 
 export default function App() {
   return (
-    <div>
+    <div style={{ position: "relative" }}>
+      <Grain />
+      <div style={{ position: "relative", zIndex: 2 }}>
       <Nav />
       <Hero />
 
-      {/* FUNDAÇÃO */}
+      {/* FUNDAÇÃO — glow verde (impacto / B2B) */}
       <Section id="fundacao" eyebrow="Camada 1 · Fundação Estratégica"
         title={<>O porquê antes<br />de qualquer pixel.</>}
         intro="Transformar a Agenda 2030 de manifesto em operação. ESG como entrega medível — brief, sprint, evidência, relatório auditável.">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "1rem" }}>
+        <SectionGlow color="#00E676" position="15% 30%" opacity={0.05} />
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "1rem", position: "relative" }}>
           {[
             { t: "Proposta única", b: "Desafios ESG → squads universitários com matching por IA, presença territorial e entregas mensuráveis." },
             { t: "Território de marca", b: "Operação ESG real com presença territorial. Não somos consultoria, job board nem ONG." },
             { t: "Arquitetura", b: "Master brand + produtos endossados: Suzely, HUB Local, Programa Municipal ODS, University Partner." },
           ].map((x) => (
-            <div key={x.t} style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
+            <div key={x.t} className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
               <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#F3F4F6", margin: "0 0 0.5rem" }}>{x.t}</h3>
               <p style={{ fontSize: "0.9rem", color: "#9CA3AF", lineHeight: 1.55, margin: 0 }}>{x.b}</p>
             </div>
@@ -108,19 +193,34 @@ export default function App() {
         </div>
       </Section>
 
-      {/* LOGO */}
+      {/* LOGO — 4 lockups */}
       <Section id="logo" eyebrow="Camada 2 · Logo" title="A assinatura."
-        intro="Antonio Black, empilhada, ponto final verde bandeira. Único elemento colorido.">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-          <div style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "3rem", background: "#050505", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Logo size={2.5} />
-          </div>
-          <div style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "3rem", background: "#F3F4F6", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <span className="font-display" style={{ display: "flex", flexDirection: "column", lineHeight: 0.88, fontSize: "2.5rem", fontWeight: 900 }}>
+        intro="Antonio Black, empilhada, ponto final verde bandeira. Único elemento colorido. Quatro lockups, um sistema.">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "1rem" }}>
+          {/* Principal */}
+          <LogoCard label="Principal" sub="Empilhado · fundo escuro" bg="#050505">
+            <Logo size={2.4} />
+          </LogoCard>
+          {/* Negativo */}
+          <LogoCard label="Negativo" sub="Fundo claro" bg="#F3F4F6" labelColor="#4B5563">
+            <span className="font-display" style={{ display: "flex", flexDirection: "column", lineHeight: 0.88, fontSize: "2.4rem", fontWeight: 900 }}>
               <span style={{ color: "#050505" }}>BRASIL</span>
               <span style={{ color: "#050505" }}>SUSTENTA<span style={{ color: "#00E676" }}>.</span></span>
             </span>
-          </div>
+          </LogoCard>
+          {/* Monocromático */}
+          <LogoCard label="Monocromático" sub="Tudo branco · sem ponto colorido" bg="#0D0E0E">
+            <span className="font-display" style={{ display: "flex", flexDirection: "column", lineHeight: 0.88, fontSize: "2.4rem", fontWeight: 900 }}>
+              <span style={{ color: "#F3F4F6" }}>BRASIL</span>
+              <span style={{ color: "#F3F4F6" }}>SUSTENTA<span style={{ color: "#F3F4F6" }}>.</span></span>
+            </span>
+          </LogoCard>
+          {/* Ícone */}
+          <LogoCard label="Ícone" sub='Reduzido · "BS." ' bg="#050505">
+            <span className="font-display" style={{ display: "inline-flex", alignItems: "baseline", fontSize: "3.4rem", fontWeight: 900, color: "#F3F4F6", lineHeight: 1 }}>
+              BS<Dot size={12} style={{ marginLeft: 4 }} />
+            </span>
+          </LogoCard>
         </div>
         <div style={{ marginTop: "1.5rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
           <div style={{ border: "1px solid rgba(0,230,118,0.2)", borderRadius: 12, padding: "1.25rem", background: "rgba(0,230,118,0.04)" }}>
@@ -171,6 +271,18 @@ export default function App() {
         </div>
       </Section>
 
+      {/* MÉTODO — fluxo operacional animado (didática por movimento) */}
+      <Section id="metodo" eyebrow="Camada 2 · O Método" title="Audite, não acredite."
+        intro="Cada etapa gera evidência. O fluxo abaixo não descreve a operação — ele é a operação, animada dos mesmos tokens. Prova antes de promessa.">
+        <SectionGlow color="#FFD600" position="50% 50%" opacity={0.04} />
+        <div style={{ position: "relative" }}>
+          <FlowDemo />
+        </div>
+        <p className="font-mono" style={{ display: "flex", alignItems: "center", gap: 8, fontSize: "0.7rem", color: "#4B5563", marginTop: 20 }}>
+          <Dot size={5} /> Brief → Shortlist → Squad → Sprint → Relatório · cinco nós, uma trilha de evidência.
+        </p>
+      </Section>
+
       {/* COMPONENTES */}
       <Section id="componentes" eyebrow="Camada 3 · Componentes" title="Vivos, não screenshots."
         intro="Renderizados dos mesmos tokens do produto. ODS Badges com cor oficial ONU, botões pílula, cards hairline.">
@@ -207,9 +319,10 @@ export default function App() {
         </p>
       </Section>
 
-      {/* VOZ */}
+      {/* VOZ — glow amarelo (talento / voz encarnada) */}
       <Section id="voz" eyebrow="Camada 4 · Tom de Voz" title="Fala como quem criou a categoria."
         intro="Direto, concreto, categórico, anti-greenwashing, territorial.">
+        <SectionGlow color="#FFD600" position="80% 20%" opacity={0.05} />
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
           <div style={{ border: "1px solid rgba(255,23,68,0.2)", borderRadius: 16, padding: "1.5rem", background: "rgba(255,23,68,0.03)" }}>
             <div className="font-mono" style={{ fontSize: "0.625rem", color: "#FF1744", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 12 }}>✕ Nunca dizer</div>
@@ -230,18 +343,40 @@ export default function App() {
             Transformamos desafios ESG em squads universitários com matching por IA, presença territorial e entregas mensuráveis.
           </p>
         </div>
+
+        {/* Reescrita ao vivo — voz encarnada em antes→depois */}
+        <div style={{ marginTop: "2.5rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16 }}>
+            <Dot />
+            <Eyebrow color="#00E676">Reescrita ao vivo</Eyebrow>
+          </div>
+          <div style={{ display: "grid", gap: "0.85rem" }}>
+            {[
+              { before: "Conectamos empresas e jovens", after: "Seu desafio ESG vira squad, sprint e relatório" },
+              { before: "Nossa plataforma de IA", after: "Fit Score explicável: você vê por que cada match faz sentido" },
+              { before: "Coloque sua empresa na vanguarda", after: "Coloque seu município no mapa das cidades ODS 2030" },
+            ].map((pair) => (
+              <div key={pair.before} className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, background: "#0D0E0E", display: "grid", gridTemplateColumns: "1fr auto 1fr", alignItems: "center", gap: "1rem", padding: "1.25rem 1.5rem" }}>
+                <span style={{ color: "#4B5563", fontSize: "0.95rem", textDecoration: "line-through", textDecorationColor: "rgba(255,23,68,0.45)" }}>{pair.before}</span>
+                <span className="font-mono" style={{ color: "#00E676", fontSize: "1.1rem", lineHeight: 1 }}>→</span>
+                <span style={{ color: "#F3F4F6", fontSize: "0.95rem", fontWeight: 600 }}>{pair.after}</span>
+              </div>
+            ))}
+          </div>
+        </div>
       </Section>
 
-      {/* GOVERNANÇA */}
+      {/* GOVERNANÇA — glow azul (compliance / B2G) */}
       <Section id="governanca" eyebrow="Camada 6 · Governança" title="Quem decide. Como muda."
         intro="Tokens são fonte única. Estratégia/voz/governança vivem no Vault (Obsidian). Este guia renderiza dos tokens — zero drift.">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px,1fr))", gap: "1rem" }}>
+        <SectionGlow color="#2979FF" position="85% 10%" opacity={0.06} />
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px,1fr))", gap: "1rem", position: "relative" }}>
           {[
             { l: "🔴 Inegociável", c: "#FF1744", b: "Logo, nome, frase de compra, cores de persona, anti-greenwashing. Só Brand Owner via ADR." },
             { l: "🟡 Adaptável", c: "#FFD600", b: "Escala tipográfica, novos componentes, layout, copy por canal. Steward propõe → Owner co-aprova." },
             { l: "🟢 Livre", c: "#00E676", b: "Combinar tokens existentes, conteúdo de página, posts no tom. Executor, sem aprovação." },
           ].map((x) => (
-            <div key={x.l} style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
+            <div key={x.l} className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
               <div style={{ fontWeight: 700, color: x.c, marginBottom: 8, fontSize: "0.95rem" }}>{x.l}</div>
               <p style={{ fontSize: "0.85rem", color: "#9CA3AF", lineHeight: 1.55, margin: 0 }}>{x.b}</p>
             </div>
@@ -255,6 +390,18 @@ export default function App() {
             Estratégia, voz e governança completas: Brand CMS no Obsidian → <span className="font-mono" style={{ color: "#F3F4F6" }}>20-Areas/20.02-Brasil-Sustenta-Venture/Brand/</span>
           </p>
         </div>
+
+        {/* Princípios de movimento — easing oficial demonstrado */}
+        <div style={{ marginTop: "1.5rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+            <Dot />
+            <Eyebrow>Princípios de movimento</Eyebrow>
+          </div>
+          <p style={{ color: "#9CA3AF", fontSize: "0.9rem", maxWidth: 560, lineHeight: 1.6, margin: "0.5rem 0 1rem" }}>
+            Uma curva, todo o sistema. Entrada decisiva, desaceleração suave — confiança sem pressa.
+          </p>
+          <EaseDemo />
+        </div>
       </Section>
 
       <footer style={{ borderTop: "1px solid var(--color-border)", padding: "3rem 1.5rem", textAlign: "center" }}>
@@ -263,6 +410,7 @@ export default function App() {
           Brand System v{tokens._meta.version} · Snapshot {tokens._meta.snapshot} · Agenda 2030 · ODS
         </p>
       </footer>
+      </div>
     </div>
   );
 }

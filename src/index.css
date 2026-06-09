@@ -17,6 +17,34 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: #4B5563; }
 .font-display { font-family: var(--font-impact); letter-spacing: -0.04em; text-transform: uppercase; }
 .font-mono { font-family: var(--font-mono); }
+
+/* Foco visível — outline verde bandeira em tudo que é interativo. */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-leaf);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Hover lift sutil — superfícies sobem 2px, hairline acende. */
+.bs-card {
+  transition: transform var(--dur, 0.28s) cubic-bezier(0.16, 1, 0.3, 1),
+    border-color var(--dur, 0.28s) cubic-bezier(0.16, 1, 0.3, 1),
+    background var(--dur, 0.28s) cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bs-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-border-strong);
+}
+
+/* Link de navegação — transição de cor + sublinhado de ponto ativo. */
+.bs-nav-link {
+  transition: color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bs-nav-link:hover { color: #F3F4F6; }
+.bs-nav-link[data-active="true"] { color: #00E676; }
+
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .bs-card:hover { transform: none; }
 }
