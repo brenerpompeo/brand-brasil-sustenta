@@ -6,3 +6,4 @@ dist-ssr
 .vercel
 *.log
 src/generated/
+brand-imagery/raw/
