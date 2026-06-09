@@ -278,6 +278,7 @@ export default function App() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1rem" }}>
           {[
             { src: "/imagery/territorio-campinas.jpg", cap: "Território · Campinas", credit: "Foto: Natália C. Terêncio / Wikimedia · CC BY-SA 4.0" },
+            { src: "/imagery/juventude-cop30.jpg", cap: "Juventude · rumo à COP30", credit: "Foto: Agência Senado / Openverse · CC BY 2.0" },
             { src: "/imagery/campus-praia-vermelha.jpg", cap: "Campus · Praia Vermelha (UFRJ)", credit: "Foto: IE-UFRJ / Wikimedia · CC0" },
           ].map((img) => (
             <figure key={img.src} className="bs-card" style={{ margin: 0, position: "relative", overflow: "hidden", borderRadius: 16, border: "1px solid var(--color-border)", aspectRatio: "16/10" }}>
