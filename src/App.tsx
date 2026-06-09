@@ -15,6 +15,7 @@ const NAV = [
   { id: "logo", label: "Logo" },
   { id: "cores", label: "Cores" },
   { id: "tipografia", label: "Tipografia" },
+  { id: "fotografia", label: "Fotografia" },
   { id: "metodo", label: "Método" },
   { id: "componentes", label: "Componentes" },
   { id: "voz", label: "Voz" },
@@ -272,6 +273,38 @@ export default function App() {
       </Section>
 
       {/* MÉTODO — fluxo operacional animado (didática por movimento) */}
+      <Section id="fotografia" eyebrow="Camada 2 · Fotografia" title="Documental. Territorial. Tratada."
+        intro="Brasil real — cidade, campus, trabalho. Dessaturado, baixo contraste, sob overlay escuro e grão. Nunca stock corporativo. A imagem abaixo é Campinas (HUB-piloto), tratada nos termos do DS v6.">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1rem" }}>
+          {[
+            { src: "/imagery/territorio-campinas.jpg", cap: "Território · Campinas", credit: "Foto: Natália C. Terêncio / Wikimedia · CC BY-SA 4.0" },
+            { src: "/imagery/campus-praia-vermelha.jpg", cap: "Campus · Praia Vermelha (UFRJ)", credit: "Foto: IE-UFRJ / Wikimedia · CC0" },
+          ].map((img) => (
+            <figure key={img.src} className="bs-card" style={{ margin: 0, position: "relative", overflow: "hidden", borderRadius: 16, border: "1px solid var(--color-border)", aspectRatio: "16/10" }}>
+              <img src={img.src} alt={img.cap} loading="lazy" decoding="async"
+                style={{ width: "100%", height: "100%", objectFit: "cover", filter: "grayscale(1) contrast(0.92) brightness(0.85)" }} />
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, #050505 5%, rgba(5,5,5,0.35) 55%, rgba(5,5,5,0.1) 100%)", pointerEvents: "none" }} />
+              <figcaption style={{ position: "absolute", left: 14, bottom: 12, right: 14 }}>
+                <div className="font-mono" style={{ display: "flex", alignItems: "center", gap: 7, fontSize: "0.7rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.14em", color: "#F3F4F6" }}>
+                  <Dot size={5} /> {img.cap}
+                </div>
+                <div className="font-mono" style={{ fontSize: "0.5625rem", color: "rgba(255,255,255,0.45)", marginTop: 4 }}>{img.credit}</div>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginTop: "1rem" }}>
+          <div style={{ border: "1px solid rgba(0,230,118,0.2)", borderRadius: 12, padding: "1.1rem", background: "rgba(0,230,118,0.03)" }}>
+            <div className="font-mono" style={{ fontSize: "0.625rem", color: "#00E676", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 8 }}>+ Usar</div>
+            <p style={{ margin: 0, fontSize: "0.8rem", color: "#9CA3AF", lineHeight: 1.6 }}>Documental, pessoas reais em contexto BR, dessaturado, luz natural, atmosfera séria, territorial.</p>
+          </div>
+          <div style={{ border: "1px solid rgba(255,23,68,0.2)", borderRadius: 12, padding: "1.1rem", background: "rgba(255,23,68,0.03)" }}>
+            <div className="font-mono" style={{ fontSize: "0.625rem", color: "#FF1744", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 8 }}>x Evitar</div>
+            <p style={{ margin: 0, fontSize: "0.8rem", color: "#9CA3AF", lineHeight: 1.6 }}>Stock corporativo, aperto de mãos genérico, fundo branco infinito, bandeira literal, mockup de IA brilhante.</p>
+          </div>
+        </div>
+      </Section>
+
       <Section id="metodo" eyebrow="Camada 2 · O Método" title="Audite, não acredite."
         intro="Cada etapa gera evidência. O fluxo abaixo não descreve a operação — ele é a operação, animada dos mesmos tokens. Prova antes de promessa.">
         <SectionGlow color="#FFD600" position="50% 50%" opacity={0.04} />

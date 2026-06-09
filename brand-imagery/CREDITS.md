@@ -1,17 +1,17 @@
 # Créditos de Imagem
 
-> Toda imagem de terceiros DEVE ser listada aqui com fonte + licença + link.
 > Imagens geradas por fal.ai não exigem atribuição (são da marca).
+> Imagens de terceiros DEVEM constar aqui com fonte + licença + autor + URL.
 
-## Geradas (fal.ai) — sem atribuição necessária
-- hero-*, atmosphere-* — geradas com prompts travados (ver brand-imagery/PROMPTS.md)
+## Reais — camada de autenticidade territorial (Wikimedia Commons)
 
-## Reais (camada de autenticidade territorial)
-> Fontes recomendadas e suas regras:
-> - **Agência Brasil (EBC)** — CC-BY 3.0 BR — atribuição obrigatória: "Foto: [autor]/Agência Brasil"
-> - **Wikimedia Commons** — verificar licença por arquivo (PD ou CC-BY/CC-BY-SA)
->
-> Formato de entrada (preencher ao adicionar):
-> | Arquivo | Fonte | Autor | Licença | URL |
-> |---------|-------|-------|---------|-----|
-> | (ex) territorio-campinas.jpg | Agência Brasil | Fulano/EBC | CC-BY 3.0 BR | https://... |
+| Arquivo | Cena | Autor | Licença | Fonte |
+|---------|------|-------|---------|-------|
+| `public/imagery/territorio-campinas.jpg` | Praça Largo da Catedral, centro de Campinas (HUB-piloto) | Natália C. Terêncio | CC BY-SA 4.0 | Wikimedia Commons |
+| `public/imagery/campus-praia-vermelha.jpg` | Câmpus da Praia Vermelha, UFRJ | Estudante do IE-UFRJ | CC0 (domínio público) | Wikimedia Commons |
+
+**Atribuição em uso (CC BY-SA):** exibir "Foto: Natália C. Terêncio / Wikimedia Commons · CC BY-SA 4.0" onde a imagem de Campinas aparecer.
+CC0 não exige atribuição (mas mantemos por transparência).
+
+## Geradas (fal.ai) — pendente (saldo a recarregar)
+- hero-empresa, hero-jovem, hero-prefeitura, hero-universidade, atmosphere-territorio, atmosphere-esg (ver brand-imagery/PROMPTS.md)
