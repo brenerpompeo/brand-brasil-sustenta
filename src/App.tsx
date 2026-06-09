@@ -1,0 +1,268 @@
+import tokens from "./data/tokens.json";
+import { Section, Eyebrow, CopyChip } from "./components/primitives";
+import { Logo } from "./components/Logo";
+import { ODSBadge } from "./components/ODSBadge";
+
+const NAV = [
+  { id: "fundacao", label: "Fundação" },
+  { id: "logo", label: "Logo" },
+  { id: "cores", label: "Cores" },
+  { id: "tipografia", label: "Tipografia" },
+  { id: "componentes", label: "Componentes" },
+  { id: "voz", label: "Voz" },
+  { id: "governanca", label: "Governança" },
+];
+
+function Nav() {
+  return (
+    <header style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(5,5,5,0.85)", backdropFilter: "blur(12px)", borderBottom: "1px solid var(--color-border)" }}>
+      <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0.9rem 1.5rem", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}>
+        <Logo size={1} />
+        <nav style={{ display: "flex", gap: "1.25rem", flexWrap: "wrap" }}>
+          {NAV.map((n) => (
+            <a key={n.id} href={`#${n.id}`} className="font-mono" style={{ color: "#9CA3AF", textDecoration: "none", fontSize: "0.6875rem", textTransform: "uppercase", letterSpacing: "0.12em" }}>
+              {n.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </header>
+  );
+}
+
+function Hero() {
+  return (
+    <section style={{ padding: "6rem 0 4rem", position: "relative", overflow: "hidden" }}>
+      <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(ellipse at 70% 0%, rgba(0,230,118,0.06) 0%, transparent 55%)" }} />
+      <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 1.5rem", position: "relative" }}>
+        <Eyebrow color="#00E676">Brand System · v{tokens._meta.version}</Eyebrow>
+        <h1 className="font-display" style={{ fontSize: "clamp(3rem, 9vw, 7rem)", fontWeight: 900, lineHeight: 0.9, margin: "1rem 0", color: "#F3F4F6" }}>
+          Sistema de marca<br />que <span style={{ color: "#00E676" }}>opera.</span>
+        </h1>
+        <p style={{ color: "#9CA3AF", fontSize: "1.125rem", maxWidth: 600, lineHeight: 1.6 }}>
+          Guia vivo do Brasil Sustenta — tokens, identidade, componentes, voz e governança.
+          Não é PDF: renderiza dos mesmos tokens que o produto usa. {tokens._meta.direction}.
+        </p>
+        <div style={{ marginTop: "2rem", display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+          {tokens.color.persona.map((c) => (
+            <span key={c.name} className="font-mono" style={{ display: "inline-flex", alignItems: "center", gap: 8, border: "1px solid var(--color-border-strong)", borderRadius: 9999, padding: "0.4rem 0.9rem", fontSize: "0.75rem", color: "#9CA3AF" }}>
+              <span style={{ width: 10, height: 10, borderRadius: 9999, background: c.hex }} /> {c.persona}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ColorRow({ items }: { items: { name: string; hex?: string; value?: string; label: string; use?: string; persona?: string }[] }) {
+  return (
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: "1rem" }}>
+      {items.map((c) => {
+        const v = c.hex ?? c.value ?? "";
+        return (
+          <div key={c.name} style={{ border: "1px solid var(--color-border)", borderRadius: 16, overflow: "hidden", background: "#0D0E0E" }}>
+            <div style={{ height: 84, background: v, borderBottom: "1px solid var(--color-border)" }} />
+            <div style={{ padding: "0.9rem" }}>
+              <div style={{ fontWeight: 700, fontSize: "0.9rem", color: "#F3F4F6" }}>{c.label}</div>
+              {c.persona && <div className="font-mono" style={{ fontSize: "0.625rem", color: "#00E676", textTransform: "uppercase", letterSpacing: "0.1em", marginTop: 2 }}>{c.persona}</div>}
+              {c.use && <div style={{ fontSize: "0.75rem", color: "#9CA3AF", marginTop: 4, lineHeight: 1.4 }}>{c.use}</div>}
+              <div style={{ display: "flex", gap: 6, marginTop: 10, flexWrap: "wrap" }}>
+                <CopyChip value={v} />
+                <CopyChip value={`var(${c.name.startsWith("--") ? c.name : tokenVar(c.name)})`} label="var" />
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function tokenVar(name: string) {
+  const all = [...tokens.color.base, ...tokens.color.persona, ...tokens.color.status, ...tokens.color.border];
+  return all.find((x) => x.name === name)?.var ?? `--color-${name}`;
+}
+
+export default function App() {
+  return (
+    <div>
+      <Nav />
+      <Hero />
+
+      {/* FUNDAÇÃO */}
+      <Section id="fundacao" eyebrow="Camada 1 · Fundação Estratégica"
+        title={<>O porquê antes<br />de qualquer pixel.</>}
+        intro="Transformar a Agenda 2030 de manifesto em operação. ESG como entrega medível — brief, sprint, evidência, relatório auditável.">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "1rem" }}>
+          {[
+            { t: "Proposta única", b: "Desafios ESG → squads universitários com matching por IA, presença territorial e entregas mensuráveis." },
+            { t: "Território de marca", b: "Operação ESG real com presença territorial. Não somos consultoria, job board nem ONG." },
+            { t: "Arquitetura", b: "Master brand + produtos endossados: Suzely, HUB Local, Programa Municipal ODS, University Partner." },
+          ].map((x) => (
+            <div key={x.t} style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
+              <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#F3F4F6", margin: "0 0 0.5rem" }}>{x.t}</h3>
+              <p style={{ fontSize: "0.9rem", color: "#9CA3AF", lineHeight: 1.55, margin: 0 }}>{x.b}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* LOGO */}
+      <Section id="logo" eyebrow="Camada 2 · Logo" title="A assinatura."
+        intro="Antonio Black, empilhada, ponto final verde bandeira. Único elemento colorido.">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+          <div style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "3rem", background: "#050505", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Logo size={2.5} />
+          </div>
+          <div style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "3rem", background: "#F3F4F6", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <span className="font-display" style={{ display: "flex", flexDirection: "column", lineHeight: 0.88, fontSize: "2.5rem", fontWeight: 900 }}>
+              <span style={{ color: "#050505" }}>BRASIL</span>
+              <span style={{ color: "#050505" }}>SUSTENTA<span style={{ color: "#00E676" }}>.</span></span>
+            </span>
+          </div>
+        </div>
+        <div style={{ marginTop: "1.5rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+          <div style={{ border: "1px solid rgba(0,230,118,0.2)", borderRadius: 12, padding: "1.25rem", background: "rgba(0,230,118,0.04)" }}>
+            <div className="font-mono" style={{ fontSize: "0.625rem", color: "#00E676", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 8 }}>✓ Sempre</div>
+            <ul style={{ margin: 0, paddingLeft: "1.1rem", color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.7 }}>
+              <li>Empilhado (BRASIL em cima)</li><li>Ponto final verde #00E676</li><li>Fonte Antonio</li><li>Respiro ≥ 1× altura do logo</li>
+            </ul>
+          </div>
+          <div style={{ border: "1px solid rgba(255,23,68,0.2)", borderRadius: 12, padding: "1.25rem", background: "rgba(255,23,68,0.04)" }}>
+            <div className="font-mono" style={{ fontSize: "0.625rem", color: "#FF1744", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 8 }}>✕ Nunca</div>
+            <ul style={{ margin: 0, paddingLeft: "1.1rem", color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.7 }}>
+              <li>Horizontal em um bloco</li><li>Fonte diferente de Antonio</li><li>Ponto em outra cor</li><li>Sombra / contorno / gradiente</li>
+            </ul>
+          </div>
+        </div>
+      </Section>
+
+      {/* CORES */}
+      <Section id="cores" eyebrow="Camada 2 · Cores" title="Semânticas por persona."
+        intro="Cada cor de persona domina uma superfície. Cores vivas são acento, nunca fundo de bloco grande. Clique para copiar.">
+        <Eyebrow>Persona</Eyebrow>
+        <div style={{ marginTop: 12, marginBottom: 28 }}><ColorRow items={tokens.color.persona} /></div>
+        <Eyebrow>Base</Eyebrow>
+        <div style={{ marginTop: 12, marginBottom: 28 }}><ColorRow items={tokens.color.base} /></div>
+        <Eyebrow>Status</Eyebrow>
+        <div style={{ marginTop: 12 }}><ColorRow items={tokens.color.status} /></div>
+      </Section>
+
+      {/* TIPOGRAFIA */}
+      <Section id="tipografia" eyebrow="Camada 2 · Tipografia" title="Editorial monumentalista."
+        intro="Antonio (display) · Outfit (corpo) · Geist Mono (scores). Máx 2 famílias por peça; mono só para números.">
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+          {tokens.typography.scale.map((t) => (
+            <div key={t.level} style={{ borderBottom: "1px solid var(--color-border)", padding: "1.25rem 0", display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
+              <span style={{
+                fontFamily: t.family === "Antonio" ? "var(--font-display)" : t.family === "Geist Mono" ? "var(--font-mono)" : "var(--font-body)",
+                fontSize: `min(${t.size}, 12vw)`, fontWeight: parseInt(t.weight) || 700,
+                letterSpacing: t.tracking, textTransform: t.transform === "UPPERCASE" ? "uppercase" : "none",
+                color: "#F3F4F6", lineHeight: 1,
+              }}>
+                {t.level}
+              </span>
+              <span className="font-mono" style={{ fontSize: "0.7rem", color: "#9CA3AF" }}>
+                {t.family} · {t.weight} · {t.size} · {t.tracking}
+              </span>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* COMPONENTES */}
+      <Section id="componentes" eyebrow="Camada 3 · Componentes" title="Vivos, não screenshots."
+        intro="Renderizados dos mesmos tokens do produto. ODS Badges com cor oficial ONU, botões pílula, cards hairline.">
+        <Eyebrow>ODS Badges (18)</Eyebrow>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.85rem", marginTop: 14, marginBottom: 32 }}>
+          {tokens.ods.map((o) => <ODSBadge key={o.n} n={o.n} hex={o.hex} label={o.label} />)}
+        </div>
+        <Eyebrow>Botões</Eyebrow>
+        <div style={{ display: "flex", gap: "0.85rem", marginTop: 14, marginBottom: 32, flexWrap: "wrap" }}>
+          <button style={{ background: "linear-gradient(135deg,#00E676,#00FF87)", color: "#050505", border: "none", borderRadius: 9999, padding: "0.8rem 1.75rem", fontWeight: 700, cursor: "pointer", fontFamily: "var(--font-body)" }}>Contratar Squad</button>
+          <button style={{ background: "rgba(255,255,255,0.04)", color: "#F3F4F6", border: "1px solid var(--color-border-strong)", borderRadius: 9999, padding: "0.8rem 1.75rem", fontWeight: 700, cursor: "pointer", fontFamily: "var(--font-body)" }}>Ver metodologia</button>
+          <button style={{ background: "#2979FF", color: "#fff", border: "none", borderRadius: 9999, padding: "0.8rem 1.75rem", fontWeight: 700, cursor: "pointer", fontFamily: "var(--font-body)" }}>Agendar reunião</button>
+        </div>
+        <Eyebrow>Fit Score Card</Eyebrow>
+        <div style={{ marginTop: 14, maxWidth: 360, border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
+          <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 16 }}>
+            <span className="font-mono" style={{ fontSize: "3rem", fontWeight: 700, color: "#FFD600", lineHeight: 1 }}>87</span>
+            <span className="font-mono" style={{ color: "#4B5563", fontSize: "0.85rem" }}>/100</span>
+          </div>
+          {[["Skills", 82, "#00E676"], ["ODS", 91, "#FFD600"], ["Contexto", 74, "#2979FF"]].map(([l, v, c]) => (
+            <div key={l as string} style={{ marginBottom: 10 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.7rem", marginBottom: 4 }}>
+                <span className="font-mono" style={{ color: "#9CA3AF", textTransform: "uppercase", letterSpacing: "0.1em" }}>{l as string}</span>
+                <span className="font-mono" style={{ color: c as string }}>{v as number}</span>
+              </div>
+              <div style={{ height: 6, background: "rgba(255,255,255,0.08)", borderRadius: 9999 }}>
+                <div style={{ width: `${v}%`, height: "100%", background: c as string, borderRadius: 9999 }} />
+              </div>
+            </div>
+          ))}
+        </div>
+        <p className="font-mono" style={{ fontSize: "0.7rem", color: "#4B5563", marginTop: 24 }}>
+          Componentes-fonte vivem em ../brasil-sustenta/apps/web/src/components/ — este guia espelha o DS v6.
+        </p>
+      </Section>
+
+      {/* VOZ */}
+      <Section id="voz" eyebrow="Camada 4 · Tom de Voz" title="Fala como quem criou a categoria."
+        intro="Direto, concreto, categórico, anti-greenwashing, territorial.">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+          <div style={{ border: "1px solid rgba(255,23,68,0.2)", borderRadius: 16, padding: "1.5rem", background: "rgba(255,23,68,0.03)" }}>
+            <div className="font-mono" style={{ fontSize: "0.625rem", color: "#FF1744", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 12 }}>✕ Nunca dizer</div>
+            {["startup de impacto", "nossa plataforma de IA", "conectamos talentos e empresas", "acreditamos num mundo melhor", "ecossistema de sustentabilidade"].map((s) => (
+              <div key={s} style={{ color: "#9CA3AF", fontSize: "0.85rem", padding: "0.35rem 0", textDecoration: "line-through", textDecorationColor: "rgba(255,23,68,0.5)" }}>{s}</div>
+            ))}
+          </div>
+          <div style={{ border: "1px solid rgba(0,230,118,0.2)", borderRadius: 16, padding: "1.5rem", background: "rgba(0,230,118,0.03)" }}>
+            <div className="font-mono" style={{ fontSize: "0.625rem", color: "#00E676", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 12 }}>✓ Sempre dizer</div>
+            {["squad ESG com matching por IA", "Fit Score explicável", "brief → shortlist → squad → relatório", "presença territorial em [cidade]", "entrega auditável"].map((s) => (
+              <div key={s} style={{ color: "#F3F4F6", fontSize: "0.85rem", padding: "0.35rem 0" }}>{s}</div>
+            ))}
+          </div>
+        </div>
+        <div style={{ marginTop: "1.5rem", border: "1px solid var(--color-border)", borderRadius: 16, padding: "2rem", background: "#0D0E0E", textAlign: "center" }}>
+          <Eyebrow>Frase de compra</Eyebrow>
+          <p className="font-display" style={{ fontSize: "clamp(1.25rem,3vw,1.9rem)", fontWeight: 700, color: "#F3F4F6", margin: "0.75rem 0 0", lineHeight: 1.15, textTransform: "none", letterSpacing: "-0.02em" }}>
+            Transformamos desafios ESG em squads universitários com matching por IA, presença territorial e entregas mensuráveis.
+          </p>
+        </div>
+      </Section>
+
+      {/* GOVERNANÇA */}
+      <Section id="governanca" eyebrow="Camada 6 · Governança" title="Quem decide. Como muda."
+        intro="Tokens são fonte única. Estratégia/voz/governança vivem no Vault (Obsidian). Este guia renderiza dos tokens — zero drift.">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px,1fr))", gap: "1rem" }}>
+          {[
+            { l: "🔴 Inegociável", c: "#FF1744", b: "Logo, nome, frase de compra, cores de persona, anti-greenwashing. Só Brand Owner via ADR." },
+            { l: "🟡 Adaptável", c: "#FFD600", b: "Escala tipográfica, novos componentes, layout, copy por canal. Steward propõe → Owner co-aprova." },
+            { l: "🟢 Livre", c: "#00E676", b: "Combinar tokens existentes, conteúdo de página, posts no tom. Executor, sem aprovação." },
+          ].map((x) => (
+            <div key={x.l} style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
+              <div style={{ fontWeight: 700, color: x.c, marginBottom: 8, fontSize: "0.95rem" }}>{x.l}</div>
+              <p style={{ fontSize: "0.85rem", color: "#9CA3AF", lineHeight: 1.55, margin: 0 }}>{x.b}</p>
+            </div>
+          ))}
+        </div>
+        <div style={{ marginTop: "1.5rem", border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
+          <Eyebrow color="#00E676">Fonte da verdade</Eyebrow>
+          <p style={{ fontSize: "0.9rem", color: "#9CA3AF", lineHeight: 1.6, margin: "0.5rem 0 0" }}>
+            Tokens: <span className="font-mono" style={{ color: "#F3F4F6" }}>src/data/tokens.json</span> (este repo) · sincronizado com{" "}
+            <span className="font-mono" style={{ color: "#F3F4F6" }}>../brasil-sustenta/apps/web/src/index.css</span> (produto).<br />
+            Estratégia, voz e governança completas: Brand CMS no Obsidian → <span className="font-mono" style={{ color: "#F3F4F6" }}>20-Areas/20.02-Brasil-Sustenta-Venture/Brand/</span>
+          </p>
+        </div>
+      </Section>
+
+      <footer style={{ borderTop: "1px solid var(--color-border)", padding: "3rem 1.5rem", textAlign: "center" }}>
+        <Logo size={1.1} />
+        <p className="font-mono" style={{ color: "#4B5563", fontSize: "0.7rem", marginTop: "1rem", textTransform: "uppercase", letterSpacing: "0.15em" }}>
+          Brand System v{tokens._meta.version} · Snapshot {tokens._meta.snapshot} · Agenda 2030 · ODS
+        </p>
+      </footer>
+    </div>
+  );
+}
