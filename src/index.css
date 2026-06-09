@@ -1,33 +1,8 @@
 @import "tailwindcss";
-
-@theme {
-  --font-display: "Antonio", Impact, sans-serif;
-  --font-body: "Outfit", system-ui, sans-serif;
-  --font-mono: "Geist Mono", "SF Mono", monospace;
-
-  --color-paper: #050505;
-  --color-paper-2: #0D0E0E;
-  --color-paper-3: #141617;
-  --color-ink: #F3F4F6;
-  --color-ink-3: #9CA3AF;
-  --color-ink-5: #4B5563;
-
-  --color-leaf: #00E676;
-  --color-atlantic: #2979FF;
-  --color-sun: #FFD600;
-  --color-clay: #FF1744;
-  --color-orange: #FF9100;
-
-  --color-border: rgba(255, 255, 255, 0.04);
-  --color-border-strong: rgba(255, 255, 255, 0.1);
-
-  --radius-pill: 9999px;
-}
+@import "./generated/tokens.css";
 
 * { box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
-
 body {
   margin: 0;
   background: var(--color-paper);
@@ -35,17 +10,13 @@ body {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
 }
-
 ::selection { background: rgba(0, 230, 118, 0.2); color: #00E676; }
-
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: #0D0E0E; }
 ::-webkit-scrollbar-thumb { background: #2a2d2e; border-radius: 9999px; }
 ::-webkit-scrollbar-thumb:hover { background: #4B5563; }
-
-.font-display { font-family: var(--font-display); letter-spacing: -0.04em; text-transform: uppercase; }
+.font-display { font-family: var(--font-impact); letter-spacing: -0.04em; text-transform: uppercase; }
 .font-mono { font-family: var(--font-mono); }
-
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }

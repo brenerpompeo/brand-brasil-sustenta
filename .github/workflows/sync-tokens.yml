@@ -1,0 +1,46 @@
+# Sincroniza tokens de marca → repo do produto (brasil-sustenta) via PR.
+# Dispara quando tokens.json muda no main. Abre PR no produto com o CSS gerado.
+#
+# Requer secret: PRODUCT_REPO_TOKEN (PAT com escopo repo no brasil-sustenta).
+# Sem o secret, o job de PR é pulado (a geração local continua funcionando).
+name: sync-tokens
+
+on:
+  push:
+    branches: [main]
+    paths: ["src/data/tokens.json"]
+  workflow_dispatch:
+
+jobs:
+  build-and-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+
+      - name: Gerar tokens
+        run: node scripts/build-tokens.mjs
+
+      - name: Abrir PR no produto (se token configurado)
+        if: ${{ secrets.PRODUCT_REPO_TOKEN != '' }}
+        env:
+          GH_TOKEN: ${{ secrets.PRODUCT_REPO_TOKEN }}
+          PRODUCT_REPO: brenerpompeo/brasil-sustenta   # ajustar p/ o remote real
+          TARGET_PATH: apps/web/src/brand-tokens.generated.css
+        run: |
+          git clone "https://x-access-token:${GH_TOKEN}@github.com/${PRODUCT_REPO}.git" product
+          mkdir -p "product/$(dirname "$TARGET_PATH")"
+          cp dist-tokens/brand-tokens.css "product/$TARGET_PATH"
+          cd product
+          BR="brand/tokens-sync-$(date +%Y%m%d%H%M%S)"
+          git config user.name "brand-sync-bot"
+          git config user.email "noreply@brasilsustenta.com"
+          git checkout -b "$BR"
+          if git diff --quiet; then echo "Sem mudanças nos tokens."; exit 0; fi
+          git add "$TARGET_PATH"
+          git commit -m "chore(brand): sync design tokens do brand-brasil-sustenta"
+          git push origin "$BR"
+          gh pr create --title "Brand: sync de design tokens" \
+            --body "Tokens atualizados em brand-brasil-sustenta/src/data/tokens.json. Revisar antes de mergear. Importar \`brand-tokens.generated.css\` no index.css se ainda não importado." \
+            --head "$BR" --base main
