@@ -6,4 +6,3 @@ dist-ssr
 .vercel
 *.log
 src/generated/
-dist-tokens/

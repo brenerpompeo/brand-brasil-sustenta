@@ -1,0 +1,25 @@
+/* AUTO-GERADO de src/data/tokens.json — NÃO editar à mão. */
+/* Fonte: Brasil Sustenta — Design Tokens v6.0 · 2026-06-09 */
+@theme {
+  --font-impact: Antonio, Impact, sans-serif;
+  --font-body: Outfit, system-ui, sans-serif;
+  --font-mono: Geist Mono, SF Mono, monospace;
+  --color-paper: #050505;
+  --color-paper-2: #0D0E0E;
+  --color-paper-3: #141617;
+  --color-ink: #F3F4F6;
+  --color-ink-3: #9CA3AF;
+  --color-ink-5: #4B5563;
+  --color-leaf: #00E676;
+  --color-atlantic: #2979FF;
+  --color-sun: #FFD600;
+  --color-clay: #FF1744;
+  --color-orange: #FF9100;
+  --color-border: rgba(255,255,255,0.04);
+  --color-border-strong: rgba(255,255,255,0.1);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+}

@@ -1,0 +1,15 @@
+{
+  "--color-paper": "#050505",
+  "--color-paper-2": "#0D0E0E",
+  "--color-paper-3": "#141617",
+  "--color-ink": "#F3F4F6",
+  "--color-ink-3": "#9CA3AF",
+  "--color-ink-5": "#4B5563",
+  "--color-leaf": "#00E676",
+  "--color-atlantic": "#2979FF",
+  "--color-sun": "#FFD600",
+  "--color-clay": "#FF1744",
+  "--color-orange": "#FF9100",
+  "--color-border": "rgba(255,255,255,0.04)",
+  "--color-border-strong": "rgba(255,255,255,0.1)"
+}

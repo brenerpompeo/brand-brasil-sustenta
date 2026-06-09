@@ -39,6 +39,10 @@ writeFileSync(join(root, "src/generated/tokens.css"), css);
 mkdirSync(join(root, "dist-tokens"), { recursive: true });
 writeFileSync(join(root, "dist-tokens/brand-tokens.css"), css);
 
+// Artefato COMMITAVEL — consumido pelo produto via raw.githubusercontent
+mkdirSync(join(root, "tokens"), { recursive: true });
+writeFileSync(join(root, "tokens/brand-tokens.css"), css);
+
 // Também emite JSON plano (chave→hex) para Figma Tokens / outros consumidores
 const flat = {};
 for (const group of ["base", "persona", "status"]) for (const c of tokens.color[group]) flat[c.var] = c.hex ?? c.value;
