@@ -1,0 +1,29 @@
+# Dispara sync INSTANTÂNEO no produto quando tokens.json muda no main.
+# Envia repository_dispatch → brasil-sustenta (que escuta 'brand-tokens-updated').
+# Requer secret PRODUCT_DISPATCH_TOKEN (PAT fine-grained: contents+metadata no brasil-sustenta).
+name: dispatch-product
+
+on:
+  push:
+    branches: [main]
+    paths: ["src/data/tokens.json", "tokens/brand-tokens.css"]
+  workflow_dispatch:
+
+jobs:
+  notify-product:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Disparar pull-brand-tokens no produto
+        env:
+          TOKEN: ${{ secrets.PRODUCT_DISPATCH_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::warning::PRODUCT_DISPATCH_TOKEN ausente — sync instantâneo inativo (cai no schedule semanal)."
+            exit 0
+          fi
+          curl -fsSL -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $TOKEN" \
+            https://api.github.com/repos/brenerpompeo/brasil-sustenta/dispatches \
+            -d '{"event_type":"brand-tokens-updated"}'
+          echo "✓ repository_dispatch enviado ao produto"
