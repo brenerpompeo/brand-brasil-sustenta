@@ -111,11 +111,11 @@ function Hero() {
           style={{ fontSize: "clamp(3.5rem, 8vw, 7.5rem)", fontWeight: 900, lineHeight: 0.85, margin: "1.5rem 0", color: "#F3F4F6", letterSpacing: "-0.04em" }}
         >
           IMPACTO REAL.<br />
-          <span style={{ background: "linear-gradient(90deg, #00E676, #2979FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>ZERO BULLSHIT.</span>
+          <span style={{ background: "linear-gradient(90deg, #00E676, #2979FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>QUEM SUSTENTA É NÓIS.</span>
         </motion.h1>
 
         <motion.p variants={fadeUp} transition={{ duration: 0.8, ease: EASE }} style={{ color: "#9CA3AF", fontSize: "1.25rem", maxWidth: 640, lineHeight: 1.6, margin: "0 auto 2.5rem" }}>
-          O design system oficial do Brasil Sustenta. Menos slides institucionais, mais código rodando, tom pragmático e narrativa de valor compartilhado para a Geração Z.
+          O design system oficial do Brasil Sustenta. Menos slides institucionais, mais código rodando, tom pragmático e narrativa de valor compartilhado para a Geração Z e territórios.
         </motion.p>
 
         <motion.div variants={fadeUp} transition={{ duration: 0.8, ease: EASE }} style={{ display: "flex", justifyContent: "center", gap: "0.75rem", flexWrap: "wrap" }}>
@@ -160,7 +160,7 @@ function ColorRow({ items }: { items: { name: string; hex?: string; value?: stri
             </div>
             <div style={{ padding: "1.25rem" }}>
               <div style={{ fontWeight: 700, fontSize: "1rem", color: "#F3F4F6" }}>{c.label}</div>
-              {c.persona && <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#00E676", textTransform: "uppercase", letterSpacing: "0.1em", marginTop: 4 }}>{c.persona}</div>}
+              {c.persona && <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#00E676", textTransform: "uppercase", letterSpacing: "0.15em", marginTop: 4 }}>{c.persona}</div>}
               {c.use && <div style={{ fontSize: "0.8rem", color: "#9CA3AF", marginTop: 6, lineHeight: 1.5 }}>{c.use}</div>}
               <div style={{ display: "flex", gap: 6, marginTop: 14, flexWrap: "wrap" }}>
                 <CopyChip value={v} />
@@ -179,10 +179,10 @@ function ManifestoSection() {
   const [activeTab, setActiveTab] = useState(0);
   const cards = [
     {
-      title: "ESG sem Maquiagem",
-      tag: "COMPLIANCE REAL",
-      body: "A Geração Z não tolera greenwashing. O mercado financeiro exige relatórios tangíveis. Nós não geramos PDFs bonitos com intenções vagas: nós rastreamos horas de extensão, desafios territoriais e conformidade ODS com dados auditáveis e matching preditivo por IA.",
-      highlight: "O dado prova. A promessa não.",
+      title: "Quem sustenta é nóis",
+      tag: "SOBERANIA POPULAR",
+      body: "A Faria Lima desenha o slide conceitual, mas quem realmente resolve o trampo de sustentabilidade na calçada e no território é a juventude universitária e a comunidade local. A nossa narrativa não pede licença, ela assume a autoria da transição ecológica.",
+      highlight: "Menos slides, mais calçada limpa e corre remunerado.",
       color: "#00E676"
     },
     {
@@ -227,7 +227,7 @@ function ManifestoSection() {
         ))}
       </div>
       
-      <div style={{ border: "1px solid var(--color-border)", borderRadius: 24, padding: "2.5rem", background: "#0D0E0E", display: "flex", flexDirection: "column", justifyContent: "space-between", position: "relative", overflow: "hidden" }}>
+      <div style={{ border: "1px solid var(--color-border)", borderRadius: 24, padding: "2.5rem", background: "#0D0E0E", display: "flex", flexDirection: "column", justifyInset: "space-between", position: "relative", overflow: "hidden" }}>
         <SectionGlow color={cards[activeTab].color} position="90% 90%" opacity={0.06} size="45%" />
         <AnimatePresence mode="wait">
           <motion.div
@@ -236,7 +236,7 @@ function ManifestoSection() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.45, ease: EASE }}
-            style={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", zIndex: 2 }}
+            style={{ height: "100%", display: "flex", flexDirection: "column", justifyInset: "space-between", zIndex: 2 }}
           >
             <div>
               <span className="font-mono" style={{ fontSize: "0.75rem", color: cards[activeTab].color, letterSpacing: "0.2em" }}>
@@ -268,20 +268,25 @@ function ToneTranslator() {
       why: "Evitamos termos vazios como 'conectar ecossistemas' ou 'amanhã sustentável'. Nós damos o entregável real de imediato."
     },
     {
-      before: "Acreditamos na sinergia holística entre governos e a academia para alavancar os objetivos ODS de forma transversal.",
-      after: "Colocamos o seu município no mapa das Cidades ODS 2030, gerando horas de extensão para as IES locais e ROI real para as marcas parceiras.",
-      why: "Geração Z é pragmática e quer ver o que ganha (horas de extensão, compliance ODS, ROI). Não quer ver declarações de intenções ideais."
+      before: "Pretendemos capitanear iniciativas de inclusão comunitária voltadas a jovens em vulnerabilidade sob as diretrizes do pacto global.",
+      after: "A Faria Lima desenha o slide. Quem sustenta o território e resolve o trampo é a juventude universitária local. Quem sustenta é nóis.",
+      why: "Deixamos de lado o tom paternalista de 'jovens em vulnerabilidade' e focamos no orgulho e na competência profissional de quem realmente faz o corre acontecer na comunidade."
     },
     {
       before: "Desenvolvemos algoritmos avançados de Inteligência Artificial para catalisar as tomadas de decisões sob métricas ESG.",
       after: "A Suzely calcula o Match Score baseada em skills reais, alinhamento ODS e proximidade territorial. Você vê exatamente o porquê de cada match.",
       why: "Não usamos a palavra 'IA' como buzzword mágica sem rosto. Damos nome ao motor (Suzely), mostramos o score explicável (Fit Score) e seus fatores."
+    },
+    {
+      before: "Promovemos a capacitação e networking horizontal direcionados ao empreendedorismo sustentável de impacto regional.",
+      after: "Mandar a letra e fechar junto no corre de negócios. Parceria que dá portfólio forte pro jovem e progresso pro nosso território.",
+      why: "Tom de resenha inspirado em Podpah: desmistifica jargões de negócios e aproxima de forma profissional, horizontal e pé no chão."
     }
   ];
 
   return (
     <div style={{ border: "1px solid var(--color-border)", borderRadius: 24, overflow: "hidden", background: "#0D0E0E", marginTop: "2rem" }}>
-      <div style={{ padding: "1.5rem 2rem", borderBottom: "1px solid var(--color-border)", background: "#060606", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <div style={{ padding: "1.5rem 2rem", borderBottom: "1px solid var(--color-border)", background: "#060606", display: "flex", justifyInset: "space-between", alignItems: "center" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <Dot color="#FF1744" size={7} />
           <span className="font-mono" style={{ fontSize: "0.75rem", color: "#F3F4F6", letterSpacing: "0.15em", textTransform: "uppercase" }}>Filtro Anti-Corporativismo (Greenwash Defeat)</span>
@@ -304,7 +309,7 @@ function ToneTranslator() {
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", divideX: "1px solid var(--color-border)" }}>
         {/* Lado Esquerdo: O Clichê */}
-        <div style={{ padding: "2.5rem 2rem", borderRight: "1px solid var(--color-border)", background: "rgba(255,23,68,0.01)", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+        <div style={{ padding: "2.5rem 2rem", borderRight: "1px solid var(--color-border)", background: "rgba(255,23,68,0.01)", display: "flex", flexDirection: "column", justifyInset: "space-between" }}>
           <div>
             <span className="font-mono" style={{ fontSize: "0.625rem", color: "#FF1744", letterSpacing: "0.15em" }}>[ X ] CORPORATIVÊS CORPORATIVO / CLICHÊ</span>
             <p style={{ color: "#9CA3AF", fontSize: "1.1rem", marginTop: "1.5rem", lineHeight: 1.6, textDecoration: "line-through", textDecorationColor: "rgba(255,23,68,0.3)" }}>
@@ -317,7 +322,7 @@ function ToneTranslator() {
         </div>
         
         {/* Lado Direito: A Solução */}
-        <div style={{ padding: "2.5rem 2rem", background: "rgba(0,230,118,0.01)", display: "flex", flexDirection: "column", justifyContent: "space-between", position: "relative" }}>
+        <div style={{ padding: "2.5rem 2rem", background: "rgba(0,230,118,0.01)", display: "flex", flexDirection: "column", justifyInset: "space-between", position: "relative" }}>
           <SectionGlow color="#00E676" position="90% 10%" opacity={0.04} size="35%" />
           <div style={{ zIndex: 2 }}>
             <span className="font-mono" style={{ fontSize: "0.625rem", color: "#00E676", letterSpacing: "0.15em" }}>[ ✓ ] LINGUAGEM BRASIL SUSTENTA</span>
@@ -371,7 +376,7 @@ function GradientShowcase() {
       {grads.map((g) => (
         <div key={g.name} className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, overflow: "hidden", background: "#0D0E0E", display: "flex", flexDirection: "column" }}>
           <div style={{ height: 120, background: g.css, borderBottom: "1px solid var(--color-border)", display: "flex", alignItems: "center", justifyContent: "center" }} />
-          <div style={{ padding: "1.25rem", flexGrow: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+          <div style={{ padding: "1.25rem", flexGrow: 1, display: "flex", flexDirection: "column", justifyInset: "space-between" }}>
             <div>
               <div style={{ fontWeight: 700, fontSize: "1rem", color: "#F3F4F6" }}>{g.name}</div>
               <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#9CA3AF", marginTop: 4 }}>{g.persona}</div>
@@ -389,13 +394,13 @@ function GradientShowcase() {
 
 /** Componente: Playground de Tipografia */
 function TypographyPlayground() {
-  const [text, setText] = useState("BRASIL SUSTENTA.");
+  const [text, setText] = useState("QUEM SUSTENTA É NÓIS.");
   const [size, setSize] = useState(4.5);
   const [font, setFont] = useState("display");
 
   return (
     <div style={{ border: "1px solid var(--color-border)", borderRadius: 24, overflow: "hidden", background: "#0D0E0E", marginTop: "2rem" }}>
-      <div style={{ padding: "1.5rem 2rem", borderBottom: "1px solid var(--color-border)", background: "#060606", display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: "1rem", alignItems: "center" }}>
+      <div style={{ padding: "1.5rem 2rem", borderBottom: "1px solid var(--color-border)", background: "#060606", display: "flex", flexWrap: "wrap", justifyInset: "space-between", gap: "1rem", alignItems: "center" }}>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", alignItems: "center" }}>
           <span className="font-mono" style={{ fontSize: "0.75rem", color: "#F3F4F6", letterSpacing: "0.1em" }}>FONTE:</span>
           {["display", "body", "mono"].map((f) => (
@@ -450,7 +455,7 @@ function TypographyPlayground() {
         />
       </div>
       
-      <div style={{ padding: "1.25rem 2rem", borderTop: "1px solid var(--color-border)", background: "#0D0E0E", display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
+      <div style={{ padding: "1.25rem 2rem", borderTop: "1px solid var(--color-border)", background: "#0D0E0E", display: "flex", justifyInset: "space-between", flexWrap: "wrap", gap: "1rem" }}>
         <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#9CA3AF" }}>
           CSS: <span style={{ color: "#00E676" }}>font-family: {font === "display" ? "var(--font-display)" : font === "mono" ? "var(--font-mono)" : "var(--font-body)"}; font-size: {size}rem;</span>
         </div>
@@ -484,7 +489,7 @@ function PhotoSlider() {
 
   return (
     <div style={{ border: "1px solid var(--color-border)", borderRadius: 24, overflow: "hidden", background: "#0D0E0E", marginTop: "2rem" }}>
-      <div style={{ padding: "1rem 1.5rem", borderBottom: "1px solid var(--color-border)", background: "#060606", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
+      <div style={{ padding: "1rem 1.5rem", borderBottom: "1px solid var(--color-border)", background: "#060606", display: "flex", justifyInset: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
         <div className="font-mono" style={{ fontSize: "0.75rem", color: "#F3F4F6", display: "flex", alignItems: "center", gap: 8 }}>
           <Dot color="#2979FF" /> FILTRO FOTOGRÁFICO DE MARCA (DESSATURADO + GRÃO + GLOW)
         </div>
@@ -681,7 +686,7 @@ export default function App() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.25rem", position: "relative" }}>
           {[
             { t: "O Que Fazemos", b: "Mapeamos os desafios ESG reais de empresas e os dividimos em sprints com squads universitários multidisciplinares via matching por IA." },
-            { t: "Para Quem", b: "Marcas focadas em ROI socioambient (B2B), prefeituras buscando inovação urbana (B2G) e universidades credenciando extensão acadêmica." },
+            { t: "Para Quem", b: "Marcas focadas em ROI socioambiental (B2B), prefeituras buscando inovação urbana (B2G) e universidades credenciando extensão acadêmica." },
             { t: "Como Monetizamos", b: "Contratos de HUBs regionais, tickets recorrentes de IES (University Partner) e parcerias corporativas de impacto auditável." },
           ].map((x) => (
             <div key={x.t} className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.75rem", background: "#0D0E0E" }}>
@@ -715,7 +720,7 @@ export default function App() {
               <span style={{ color: "#F3F4F6" }}>SUSTENTA<span style={{ color: "#F3F4F6" }}>.</span></span>
             </span>
           </LogoCard>
-          <LogoCard label="Ícone" sub='Reduzido · \"BS.\"' bg="#050505">
+          <LogoCard label="Ícone" sub='Reduzido · "BS."' bg="#050505">
             <span className="font-display" style={{ display: "inline-flex", alignItems: "baseline", fontSize: "3.2rem", fontWeight: 900, color: "#F3F4F6", lineHeight: 1 }}>
               BS<Dot size={10} style={{ marginLeft: 3 }} />
             </span>
@@ -777,7 +782,7 @@ export default function App() {
       </Section>
 
       {/* TOM DE VOZ — Tradutor anti-greenwashing */}
-      <Section id="tom" eyebrow="Camada 4 · Tom de Voz" title="A voz pragmática." intro="A Geração Z reconhece chavões corporativos a quilômetros de distância. Nosso tom é sempre direto ao ponto, ativo, irônico contra o greenwashing, com terminologias reais baseadas em evidências e dados de matching.">
+      <Section id="tom" eyebrow="Camada 4 · Tom de Voz" title="A voz pragmática e do corre." intro="A Geração Z reconhece chavões corporativos a quilômetros de distância. Falamos com orgulho territorial e linguagem de progresso real inspirada em marcas como KondZilla e Podpah: pé no chão, de igual pra igual, profissional e com a força da nossa juventude.">
         <ToneTranslator />
       </Section>
 
@@ -867,7 +872,7 @@ export default function App() {
       <footer style={{ borderTop: "1px solid var(--color-border)", padding: "4rem 1.5rem", textAlign: "center" }}>
         <Logo size={1.0} />
         <p className="font-mono" style={{ color: "#4B5563", fontSize: "0.6875rem", marginTop: "1.5rem", textTransform: "uppercase", letterSpacing: "0.2em" }}>
-          Brasil Sustenta Venture v{tokens._meta.version} · Snapshot {tokens._meta.snapshot} · Shared Value
+          Brasil Sustenta Venture v{tokens._meta.version} · Snapshot {tokens._meta.snapshot} · Quem Sustenta é Nóis
         </p>
       </footer>
       </div>
