@@ -181,8 +181,8 @@ function ManifestoSection() {
     {
       title: "Quem sustenta é nóis",
       tag: "SOBERANIA POPULAR",
-      body: "A Faria Lima desenha o slide conceitual, mas quem realmente resolve o trampo de sustentabilidade na calçada e no território é a juventude universitária e a comunidade local. A nossa narrativa não pede licença, ela assume a autoria da transição ecológica.",
-      highlight: "Menos slides, mais calçada limpa e corre remunerado.",
+      body: "O mercado corporativo desenha as diretrizes no slide. A juventude universitária e a comunidade aplicam a transição prática no território. Nossa voz não pede licença: ela assume a autoria e o rigor da execução de ponta a ponta.",
+      highlight: "Menos discursos conceituais, mais engenharia de impacto em campo.",
       color: "#00E676"
     },
     {
@@ -268,9 +268,9 @@ function ToneTranslator() {
       why: "Evitamos termos vazios como 'conectar ecossistemas' ou 'amanhã sustentável'. Nós damos o entregável real de imediato."
     },
     {
-      before: "Pretendemos capitanear initiatives de inclusão comunitária voltadas a jovens em vulnerabilidade sob as diretrizes do pacto global.",
-      after: "A Faria Lima desenha o slide. Quem sustenta o território e resolve o trampo é a juventude universitária local. Quem sustenta é nóis.",
-      why: "Deixamos de lado o tom paternalista de 'jovens em vulnerabilidade' e focamos no orgulho e na competência profissional de quem realmente faz o corre acontecer na comunidade."
+      before: "Pretendemos capitanear iniciativas de inclusão comunitária voltadas a jovens em vulnerabilidade sob as diretrizes do pacto global.",
+      after: "O mercado corporativo desenha a tese de impacto. A juventude universitária local executa a intervenção e audita o resultado na prática. Quem sustenta é nóis.",
+      why: "Substituímos o paternalismo assistencialista pela atitude soberana e profissional do ecossistema estudantil que lidera a transição local de igual para igual."
     },
     {
       before: "Desenvolvemos algoritmos avançados de Inteligência Artificial para catalisar as tomadas de decisões sob métricas ESG.",
@@ -782,7 +782,7 @@ export default function App() {
       </Section>
 
       {/* TOM DE VOZ — Tradutor anti-greenwashing */}
-      <Section id="tom" eyebrow="Camada 4 · Tom de Voz" title="A voz pragmática e do corre." intro="Falamos com orgulho territorial e inquietude criativa inspirada na atitude da Wieden+Kennedy e dos Kennedys: provocativo, focado na verdade do impacto, de igual pra igual, profissional e com a força da nossa juventude acadêmica.">
+      <Section id="tom" eyebrow="Camada 4 · Tom de Voz" title="Inconformismo e rigor real." intro="Falamos com soberania territorial e atitude intelectual inspirada na Wieden+Kennedy e no programa The Kennedys: provocativo, guiado pela evidência científica e desenhado para gerar valor econômico real na comunidade.">
         <ToneTranslator />
       </Section>
 
