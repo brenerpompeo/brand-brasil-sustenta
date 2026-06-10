@@ -307,7 +307,7 @@ function ToneTranslator() {
           ))}
         </div>
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", divideX: "1px solid var(--color-border)" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
         {/* Lado Esquerdo: O Clichê */}
         <div style={{ padding: "2.5rem 2rem", borderRight: "1px solid var(--color-border)", background: "rgba(255,23,68,0.01)", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           <div>
@@ -376,7 +376,7 @@ function GradientShowcase() {
       {grads.map((g) => (
         <div key={g.name} className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, overflow: "hidden", background: "#0D0E0E", display: "flex", flexDirection: "column" }}>
           <div style={{ height: 120, background: g.css, borderBottom: "1px solid var(--color-border)", display: "flex", alignItems: "center", justifyContent: "center" }} />
-          <div style={{ padding: "1.25rem", flexGrow: 1, display: "flex", flexDirection: "column", justifyInset: "space-between" }}>
+          <div style={{ padding: "1.25rem", flexGrow: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
             <div>
               <div style={{ fontWeight: 700, fontSize: "1rem", color: "#F3F4F6" }}>{g.name}</div>
               <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#9CA3AF", marginTop: 4 }}>{g.persona}</div>
@@ -400,7 +400,7 @@ function TypographyPlayground() {
 
   return (
     <div style={{ border: "1px solid var(--color-border)", borderRadius: 24, overflow: "hidden", background: "#0D0E0E", marginTop: "2rem" }}>
-      <div style={{ padding: "1.5rem 2rem", borderBottom: "1px solid var(--color-border)", background: "#060606", display: "flex", flexWrap: "wrap", justifyInset: "space-between", gap: "1rem", alignItems: "center" }}>
+      <div style={{ padding: "1.5rem 2rem", borderBottom: "1px solid var(--color-border)", background: "#060606", display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: "1rem", alignItems: "center" }}>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", alignItems: "center" }}>
           <span className="font-mono" style={{ fontSize: "0.75rem", color: "#F3F4F6", letterSpacing: "0.1em" }}>FONTE:</span>
           {["display", "body", "mono"].map((f) => (
@@ -455,7 +455,7 @@ function TypographyPlayground() {
         />
       </div>
       
-      <div style={{ padding: "1.25rem 2rem", borderTop: "1px solid var(--color-border)", background: "#0D0E0E", display: "flex", justifyInset: "space-between", flexWrap: "wrap", gap: "1rem" }}>
+      <div style={{ padding: "1.25rem 2rem", borderTop: "1px solid var(--color-border)", background: "#0D0E0E", display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
         <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#9CA3AF" }}>
           CSS: <span style={{ color: "#00E676" }}>font-family: {font === "display" ? "var(--font-display)" : font === "mono" ? "var(--font-mono)" : "var(--font-body)"}; font-size: {size}rem;</span>
         </div>
@@ -489,12 +489,12 @@ function PhotoSlider() {
 
   return (
     <div style={{ border: "1px solid var(--color-border)", borderRadius: 24, overflow: "hidden", background: "#0D0E0E", marginTop: "2rem" }}>
-      <div style={{ padding: "1rem 1.5rem", borderBottom: "1px solid var(--color-border)", background: "#060606", display: "flex", justifyInset: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
+      <div style={{ padding: "1rem 1.5rem", borderBottom: "1px solid var(--color-border)", background: "#060606", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
         <div className="font-mono" style={{ fontSize: "0.75rem", color: "#F3F4F6", display: "flex", alignItems: "center", gap: 8 }}>
           <Dot color="#2979FF" /> FILTRO FOTOGRÁFICO DE MARCA (DESSATURADO + GRÃO + GLOW)
         </div>
         <div style={{ display: "flex", gap: "0.5rem" }}>
-          {images.map((img, idx) => (
+          {images.map((_img, idx) => (
             <button
               key={idx}
               onClick={() => setActiveImg(idx)}
@@ -569,7 +569,7 @@ function PhotoSlider() {
         
         {/* Efeito visual da linha divisória */}
         <div style={{ position: "absolute", left: `calc(${sliderPos}% - 1px)`, top: 0, bottom: 0, width: 2, background: "#00E676", pointerEvents: "none", boxShadow: "0 0 10px #00E676" }} />
-        <div style={{ position: "absolute", left: `calc(${sliderPos}% - 12px)`, top: "calc(50% - 12px)", width: 24, height: 24, borderRadius: 9999, background: "#00E676", pointerEvents: "none", border: "2px solid #fff", display: "flex", alignItems: "center", justifyInset: "center", fontSize: 10, color: "#050505", fontWeight: 700 }}>
+        <div style={{ position: "absolute", left: `calc(${sliderPos}% - 12px)`, top: "calc(50% - 12px)", width: 24, height: 24, borderRadius: 9999, background: "#00E676", pointerEvents: "none", border: "2px solid #fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, color: "#050505", fontWeight: 700 }}>
           ↔
         </div>
       </div>
