@@ -115,7 +115,7 @@ function Hero() {
         </motion.h1>
 
         <motion.p variants={fadeUp} transition={{ duration: 0.8, ease: EASE }} style={{ color: "#9CA3AF", fontSize: "1.25rem", maxWidth: 640, lineHeight: 1.6, margin: "0 auto 2.5rem" }}>
-          O design system oficial do Brasil Sustenta. Menos slides institucionais, mais código rodando, tom pragmático e narrativa de valor compartilhado para a Geração Z e territórios.
+          O design system oficial do Brasil Sustenta. Menos slides institucionais, mais código rodando, tom provocativo e narrativa de valor compartilhado sob a ótica da inovação territorial.
         </motion.p>
 
         <motion.div variants={fadeUp} transition={{ duration: 0.8, ease: EASE }} style={{ display: "flex", justifyContent: "center", gap: "0.75rem", flexWrap: "wrap" }}>
@@ -193,10 +193,10 @@ function ManifestoSection() {
       color: "#2979FF"
     },
     {
-      title: "Território & Soberania",
-      tag: "PRESENÇA LOCAL",
-      body: "A nuvem é abstrata, a realidade acontece na calçada. O Brasil Sustenta ancora sua operação em HUBs locais físicos, engajando universidades e prefeituras em ecossistemas de inovação regional. Soberania territorial com tecnologia global.",
-      highlight: "A transformação é física e auditável.",
+      title: "Os Kennedys do Impacto",
+      tag: "INQUIETAÇÃO CRIATIVA",
+      body: "Nossos squads universitários operam briefs reais sob pressão sob a filosofia de W+K. Entrar no território sem preconceitos corporativos ('Walk in Stupid') e testar rápido em ambiente controlado ('Fail Harder') para entregar a verdade do impacto de baixo para cima.",
+      highlight: "Rebeldes acadêmicos gerando soluções sob briefs reais.",
       color: "#FFD600"
     }
   ];
@@ -227,7 +227,7 @@ function ManifestoSection() {
         ))}
       </div>
       
-      <div style={{ border: "1px solid var(--color-border)", borderRadius: 24, padding: "2.5rem", background: "#0D0E0E", display: "flex", flexDirection: "column", justifyInset: "space-between", position: "relative", overflow: "hidden" }}>
+      <div style={{ border: "1px solid var(--color-border)", borderRadius: 24, padding: "2.5rem", background: "#0D0E0E", display: "flex", flexDirection: "column", justifyContent: "space-between", position: "relative", overflow: "hidden" }}>
         <SectionGlow color={cards[activeTab].color} position="90% 90%" opacity={0.06} size="45%" />
         <AnimatePresence mode="wait">
           <motion.div
@@ -236,7 +236,7 @@ function ManifestoSection() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.45, ease: EASE }}
-            style={{ height: "100%", display: "flex", flexDirection: "column", justifyInset: "space-between", zIndex: 2 }}
+            style={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", zIndex: 2 }}
           >
             <div>
               <span className="font-mono" style={{ fontSize: "0.75rem", color: cards[activeTab].color, letterSpacing: "0.2em" }}>
@@ -268,7 +268,7 @@ function ToneTranslator() {
       why: "Evitamos termos vazios como 'conectar ecossistemas' ou 'amanhã sustentável'. Nós damos o entregável real de imediato."
     },
     {
-      before: "Pretendemos capitanear iniciativas de inclusão comunitária voltadas a jovens em vulnerabilidade sob as diretrizes do pacto global.",
+      before: "Pretendemos capitanear initiatives de inclusão comunitária voltadas a jovens em vulnerabilidade sob as diretrizes do pacto global.",
       after: "A Faria Lima desenha o slide. Quem sustenta o território e resolve o trampo é a juventude universitária local. Quem sustenta é nóis.",
       why: "Deixamos de lado o tom paternalista de 'jovens em vulnerabilidade' e focamos no orgulho e na competência profissional de quem realmente faz o corre acontecer na comunidade."
     },
@@ -279,14 +279,14 @@ function ToneTranslator() {
     },
     {
       before: "Promovemos a capacitação e networking horizontal direcionados ao empreendedorismo sustentável de impacto regional.",
-      after: "Mandar a letra e fechar junto no corre de negócios. Parceria que dá portfólio forte pro jovem e progresso pro nosso território.",
-      why: "Tom de resenha inspirado em Podpah: desmistifica jargões de negócios e aproxima de forma profissional, horizontal e pé no chão."
+      after: "Briefing real, sprint de impacto e progresso compartilhado. Unimos a inquietação criativa da juventude a negócios de valor real.",
+      why: "Tom inspirado em W+K/Kennedys: desmistifica jargões corporativos e aproxima a academia do mercado de forma profissional, intelectual e direta."
     }
   ];
 
   return (
     <div style={{ border: "1px solid var(--color-border)", borderRadius: 24, overflow: "hidden", background: "#0D0E0E", marginTop: "2rem" }}>
-      <div style={{ padding: "1.5rem 2rem", borderBottom: "1px solid var(--color-border)", background: "#060606", display: "flex", justifyInset: "space-between", alignItems: "center" }}>
+      <div style={{ padding: "1.5rem 2rem", borderBottom: "1px solid var(--color-border)", background: "#060606", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <Dot color="#FF1744" size={7} />
           <span className="font-mono" style={{ fontSize: "0.75rem", color: "#F3F4F6", letterSpacing: "0.15em", textTransform: "uppercase" }}>Filtro Anti-Corporativismo (Greenwash Defeat)</span>
@@ -309,7 +309,7 @@ function ToneTranslator() {
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", divideX: "1px solid var(--color-border)" }}>
         {/* Lado Esquerdo: O Clichê */}
-        <div style={{ padding: "2.5rem 2rem", borderRight: "1px solid var(--color-border)", background: "rgba(255,23,68,0.01)", display: "flex", flexDirection: "column", justifyInset: "space-between" }}>
+        <div style={{ padding: "2.5rem 2rem", borderRight: "1px solid var(--color-border)", background: "rgba(255,23,68,0.01)", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           <div>
             <span className="font-mono" style={{ fontSize: "0.625rem", color: "#FF1744", letterSpacing: "0.15em" }}>[ X ] CORPORATIVÊS CORPORATIVO / CLICHÊ</span>
             <p style={{ color: "#9CA3AF", fontSize: "1.1rem", marginTop: "1.5rem", lineHeight: 1.6, textDecoration: "line-through", textDecorationColor: "rgba(255,23,68,0.3)" }}>
@@ -322,7 +322,7 @@ function ToneTranslator() {
         </div>
         
         {/* Lado Direito: A Solução */}
-        <div style={{ padding: "2.5rem 2rem", background: "rgba(0,230,118,0.01)", display: "flex", flexDirection: "column", justifyInset: "space-between", position: "relative" }}>
+        <div style={{ padding: "2.5rem 2rem", background: "rgba(0,230,118,0.01)", display: "flex", flexDirection: "column", justifyContent: "space-between", position: "relative" }}>
           <SectionGlow color="#00E676" position="90% 10%" opacity={0.04} size="35%" />
           <div style={{ zIndex: 2 }}>
             <span className="font-mono" style={{ fontSize: "0.625rem", color: "#00E676", letterSpacing: "0.15em" }}>[ ✓ ] LINGUAGEM BRASIL SUSTENTA</span>
@@ -782,7 +782,7 @@ export default function App() {
       </Section>
 
       {/* TOM DE VOZ — Tradutor anti-greenwashing */}
-      <Section id="tom" eyebrow="Camada 4 · Tom de Voz" title="A voz pragmática e do corre." intro="A Geração Z reconhece chavões corporativos a quilômetros de distância. Falamos com orgulho territorial e linguagem de progresso real inspirada em marcas como KondZilla e Podpah: pé no chão, de igual pra igual, profissional e com a força da nossa juventude.">
+      <Section id="tom" eyebrow="Camada 4 · Tom de Voz" title="A voz pragmática e do corre." intro="Falamos com orgulho territorial e inquietude criativa inspirada na atitude da Wieden+Kennedy e dos Kennedys: provocativo, focado na verdade do impacto, de igual pra igual, profissional e com a força da nossa juventude acadêmica.">
         <ToneTranslator />
       </Section>
 
