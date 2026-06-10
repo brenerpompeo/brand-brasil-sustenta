@@ -784,6 +784,18 @@ export default function App() {
       {/* TOM DE VOZ — Tradutor anti-greenwashing */}
       <Section id="tom" eyebrow="Camada 4 · Tom de Voz" title="Inconformismo e rigor real." intro="Falamos com soberania territorial e atitude intelectual inspirada na Wieden+Kennedy e no programa The Kennedys: provocativo, guiado pela evidência científica e desenhado para gerar valor econômico real na comunidade.">
         <ToneTranslator />
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.25rem", marginTop: "1.5rem" }}>
+          <div className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
+            <div className="font-mono" style={{ fontSize: "0.625rem", color: "#FFD600", letterSpacing: "0.15em", textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><Dot color="#FFD600" size={5} /> Registro brado · alma</div>
+            <div style={{ fontWeight: 700, fontSize: "1.05rem", color: "#F3F4F6", margin: "0.6rem 0" }}>"Quem sustenta é nóis."</div>
+            <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#9CA3AF", lineHeight: 1.6 }}>Manifesto · juventude · social · brand film · rodapé. Periférico, 1ª pessoa do plural, provocativo. A assinatura emocional da marca.</div>
+          </div>
+          <div className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
+            <div className="font-mono" style={{ fontSize: "0.625rem", color: "#00E676", letterSpacing: "0.15em", textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><Dot color="#00E676" size={5} /> Registro operacional · B2B/B2G</div>
+            <div style={{ fontWeight: 700, fontSize: "1.05rem", color: "#F3F4F6", margin: "0.6rem 0" }}>"Seu desafio ESG vira squad, sprint e relatório."</div>
+            <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#9CA3AF", lineHeight: 1.6 }}>Hero B2B · proposta · prefeitura · relatório. Dados, entregável, prova &gt; promessa. Sem gíria — a credibilidade vem do número. O brado entra só como assinatura discreta.</div>
+          </div>
+        </div>
       </Section>
 
       {/* FOTOGRAFIA — Slider interativo */}
