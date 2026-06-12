@@ -811,6 +811,34 @@ export default function App() {
 
       {/* COMPONENTES */}
       <Section id="componentes" eyebrow="Camada 7 · Componentes" title="Primitivos interativos." intro="Espelho de nossos componentes principais exportados de apps/web/src/components/. Hairlines, botões pílulas e fit scores explicados.">
+        {/* Liquid Glass — demo viva do material (specular + tint + interactive) */}
+        <div style={{ position: "relative", marginBottom: "2rem", borderRadius: 16, overflow: "hidden", padding: "2.5rem", background: "radial-gradient(circle at 30% 40%, rgba(0,230,118,0.16) 0%, transparent 55%), radial-gradient(circle at 75% 70%, rgba(41,121,255,0.13) 0%, transparent 55%), #060606" }}>
+          <div className="font-mono" style={{ fontSize: "0.625rem", color: "#9CA3AF", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1.25rem", display: "flex", alignItems: "center", gap: 6 }}>
+            <Dot color="#00E676" size={5} /> LIQUID GLASS · MATERIAL DE CONVERSÃO (iOS 26 → WEB)
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1.25rem" }}>
+            {[
+              { name: ".liquid-glass", desc: "regular · blur 24px + specular highlight", tint: "255,255,255" },
+              { name: "--leaf --interactive", desc: "tint verde + hover lift + glow", tint: "0,230,118" },
+              { name: "--thin", desc: "blur 12px · painéis secundários", tint: "255,255,255" },
+            ].map((g, i) => (
+              <div key={g.name} style={{
+                position: "relative", borderRadius: 14, padding: "1.4rem",
+                background: `linear-gradient(180deg, rgba(${g.tint},0.05) 0%, transparent 60%), rgba(13,14,14,${i === 2 ? 0.6 : 0.72})`,
+                backdropFilter: `blur(${i === 2 ? 12 : 24}px) saturate(140%)`,
+                WebkitBackdropFilter: `blur(${i === 2 ? 12 : 24}px) saturate(140%)`,
+                border: "1px solid rgba(255,255,255,0.09)",
+                boxShadow: "inset 0 1px 1px rgba(255,255,255,0.12), inset 0 -1px 1px rgba(0,0,0,0.25), 0 12px 40px rgba(0,0,0,0.35)",
+              }}>
+                <div className="font-mono" style={{ fontSize: "0.7rem", fontWeight: 700, color: "#F3F4F6" }}>{g.name}</div>
+                <div className="font-mono" style={{ fontSize: "0.625rem", color: "#9CA3AF", marginTop: 6, lineHeight: 1.5 }}>{g.desc}</div>
+              </div>
+            ))}
+          </div>
+          <div className="font-mono" style={{ fontSize: "0.6rem", color: "#6B7280", marginTop: "1.25rem", lineHeight: 1.6 }}>
+            Regras: uso criterioso (só superfícies de conversão) · luz atrás do vidro · animação compositor-only · WCAG AA. Doc: Brand camada 3 §3.3b.
+          </div>
+        </div>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
           {/* Coluna 1: Botoes */}
           <div className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
