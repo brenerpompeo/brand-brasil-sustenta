@@ -67,3 +67,40 @@ button:focus-visible {
 .neon-pulse {
   animation: neon-glow-pulse 4s infinite ease-in-out;
 }
+
+/* ============================================================
+ * MOBILE-FIRST RESPONSIVO
+ * Inline styles não fazem media query — grids e nav viram classes.
+ * ============================================================ */
+
+/* Nav: 1 linha com scroll horizontal no mobile; wrap normal no desktop */
+.bs-nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  max-width: 100%;
+}
+.bs-nav::-webkit-scrollbar { display: none; }
+.bs-nav a { flex-shrink: 0; }
+@media (min-width: 900px) {
+  .bs-nav { flex-wrap: wrap; overflow-x: visible; }
+}
+
+/* Grids: 1 coluna no mobile, colunas plenas a partir de 768px */
+.g-2, .g-2-wide, .g-6 { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 768px) {
+  .g-2 { grid-template-columns: 1fr 1fr; }
+  .g-2-wide { grid-template-columns: 1fr 1.5fr; }
+  .g-6 { grid-template-columns: repeat(6, 1fr); }
+}
+@media (max-width: 767px) {
+  .g-6 { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Hard-stop contra overflow horizontal */
+html, body { overflow-x: hidden; }
+img, svg, video { max-width: 100%; height: auto; }

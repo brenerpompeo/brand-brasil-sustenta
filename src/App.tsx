@@ -52,7 +52,7 @@ function Nav() {
     <header style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(5,5,5,0.85)", backdropFilter: "blur(12px)", borderBottom: "1px solid var(--color-border)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0.9rem 1.5rem", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}>
         <Logo size={0.9} />
-        <nav style={{ display: "flex", gap: "1rem", flexWrap: "wrap", alignItems: "center" }}>
+        <nav className="bs-nav">
           {NAV.map((n) => {
             const isActive = active === n.id;
             return (
@@ -202,7 +202,7 @@ function ManifestoSection() {
   ];
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "2.5rem", marginTop: "2rem", alignItems: "stretch" }}>
+    <div className="g-2-wide" style={{ gap: "2.5rem", marginTop: "2rem", alignItems: "stretch" }}>
       <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
         {cards.map((c, i) => (
           <button
@@ -307,7 +307,7 @@ function ToneTranslator() {
           ))}
         </div>
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+      <div className="g-2">
         {/* Lado Esquerdo: O Clichê */}
         <div style={{ padding: "2.5rem 2rem", borderRight: "1px solid var(--color-border)", background: "rgba(255,23,68,0.01)", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           <div>
@@ -609,7 +609,7 @@ function ODSInteractiveGrid() {
 
   return (
     <div style={{ marginTop: "2rem" }}>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: "0.75rem" }}>
+      <div className="g-6" style={{ gap: "0.75rem" }}>
         {odsGoals.map((g) => {
           const isSelected = selectedODS === g.n;
           return (
@@ -726,7 +726,7 @@ export default function App() {
             </span>
           </LogoCard>
         </div>
-        <div style={{ marginTop: "1.5rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+        <div className="g-2" style={{ marginTop: "1.5rem", gap: "1rem" }}>
           <div style={{ border: "1px solid rgba(0,230,118,0.2)", borderRadius: 12, padding: "1.25rem", background: "rgba(0,230,118,0.04)" }}>
             <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#00E676", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 8 }}>✓ Regras de Uso</div>
             <ul style={{ margin: 0, paddingLeft: "1.1rem", color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.7 }}>
@@ -839,7 +839,7 @@ export default function App() {
             Regras: uso criterioso (só superfícies de conversão) · luz atrás do vidro · animação compositor-only · WCAG AA. Doc: Brand camada 3 §3.3b.
           </div>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
+        <div className="g-2" style={{ gap: "2rem" }}>
           {/* Coluna 1: Botoes */}
           <div className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
             <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#00E676" }}>BOTÕES COM GRADIENTE</span>
