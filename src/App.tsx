@@ -48,11 +48,19 @@ function useActiveSection(ids: string[]) {
 
 function Nav() {
   const active = useActiveSection(NAV.map((n) => n.id));
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleLinkClick = () => {
+    setIsOpen(false);
+  };
+
   return (
     <header style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(5,5,5,0.85)", backdropFilter: "blur(12px)", borderBottom: "1px solid var(--color-border)" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0.9rem 1.5rem", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}>
         <Logo size={0.9} />
-        <nav className="bs-nav">
+        
+        {/* Menu Desktop */}
+        <nav className="hidden md:flex" style={{ gap: "1.2rem", alignItems: "center" }}>
           {NAV.map((n) => {
             const isActive = active === n.id;
             return (
@@ -69,7 +77,132 @@ function Nav() {
             );
           })}
         </nav>
+
+        {/* Botão Hambúrguer Mobile (Touch Target: 44px) */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex md:hidden"
+          aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
+          style={{
+            cursor: "pointer",
+            width: 44,
+            height: 44,
+            borderRadius: 8,
+            border: "1px solid var(--color-border)",
+            backgroundColor: "rgba(255,255,255,0.02)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            position: "relative",
+            zIndex: 60
+          }}
+        >
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            {/* Linha superior */}
+            <motion.path
+              d="M3 4.5H15"
+              stroke={isOpen ? "#00E676" : "#F3F4F6"}
+              strokeWidth="2"
+              strokeLinecap="square"
+              animate={isOpen ? { rotate: 45, y: 3.5 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              style={{ originX: "9px", originY: "4.5px" }}
+            />
+            {/* Linha do meio */}
+            <motion.path
+              d="M3 9H15"
+              stroke={isOpen ? "#00E676" : "#F3F4F6"}
+              strokeWidth="2"
+              strokeLinecap="square"
+              animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
+              transition={{ duration: 0.15 }}
+            />
+            {/* Linha inferior */}
+            <motion.path
+              d="M3 13.5H15"
+              stroke={isOpen ? "#00E676" : "#F3F4F6"}
+              strokeWidth="2"
+              strokeLinecap="square"
+              animate={isOpen ? { rotate: -45, y: -3.5 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              style={{ originX: "9px", originY: "13.5px" }}
+            />
+          </svg>
+        </button>
       </div>
+
+      {/* Super Menu / Gaveta Mobile */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.35, ease: EASE }}
+            style={{
+              position: "absolute",
+              top: "100%",
+              left: 0,
+              right: 0,
+              background: "rgba(5, 5, 5, 0.98)",
+              backdropFilter: "blur(20px)",
+              borderBottom: "1px solid var(--color-border)",
+              zIndex: 49,
+              overflow: "hidden"
+            }}
+          >
+            <div style={{ padding: "1.5rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1rem", borderBottom: "1px solid var(--color-border-strong)", paddingBottom: "0.5rem" }}>
+                <span className="font-mono" style={{ fontSize: "0.55rem", color: "#9CA3AF", letterSpacing: "0.2em" }}>Navegação de Marca</span>
+                <span className="font-mono" style={{ fontSize: "0.55rem", color: "#00E676", display: "flex", alignItems: "center", gap: 4 }}>
+                  <Dot size={5} /> V2.0
+                </span>
+              </div>
+              
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
+                {NAV.map((n, idx) => {
+                  const isActive = active === n.id;
+                  return (
+                    <motion.a
+                      key={n.id}
+                      href={`#${n.id}`}
+                      onClick={handleLinkClick}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: idx * 0.03 }}
+                      className="font-mono bs-card"
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 8,
+                        padding: "0.8rem 1rem",
+                        borderRadius: 8,
+                        background: isActive ? "rgba(0, 230, 118, 0.05)" : "rgba(255, 255, 255, 0.01)",
+                        border: isActive ? "1px solid #00E676" : "1px solid var(--color-border)",
+                        color: isActive ? "#00E676" : "#F3F4F6",
+                        textDecoration: "none",
+                        fontSize: "0.7rem",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                        minHeight: 44
+                      }}
+                    >
+                      {isActive ? <Dot size={6} color="#00E676" /> : <span style={{ width: 6, height: 6, borderRadius: 9999, background: "#4B5563" }} />}
+                      {n.label}
+                    </motion.a>
+                  );
+                })}
+              </div>
+
+              <div style={{ marginTop: "1.5rem", borderTop: "1px solid var(--color-border)", paddingTop: "1rem", textAlign: "center" }}>
+                <p className="font-display" style={{ fontSize: "1.2rem", fontWeight: 900, letterSpacing: "-0.02em", color: "#F3F4F6", margin: 0 }}>
+                  IMPACTO REAL. <span style={{ color: "#00E676" }}>QUEM SUSTENTA É NÓIS.</span>
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
@@ -202,7 +335,7 @@ function ManifestoSection() {
   ];
 
   return (
-    <div className="g-2-wide" style={{ gap: "2.5rem", marginTop: "2rem", alignItems: "stretch" }}>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "2.5rem", marginTop: "2rem", alignItems: "stretch" }}>
       <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
         {cards.map((c, i) => (
           <button
@@ -307,7 +440,7 @@ function ToneTranslator() {
           ))}
         </div>
       </div>
-      <div className="g-2">
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
         {/* Lado Esquerdo: O Clichê */}
         <div style={{ padding: "2.5rem 2rem", borderRight: "1px solid var(--color-border)", background: "rgba(255,23,68,0.01)", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
           <div>
@@ -494,7 +627,7 @@ function PhotoSlider() {
           <Dot color="#2979FF" /> FILTRO FOTOGRÁFICO DE MARCA (DESSATURADO + GRÃO + GLOW)
         </div>
         <div style={{ display: "flex", gap: "0.5rem" }}>
-          {images.map((_img, idx) => (
+          {images.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setActiveImg(idx)}
@@ -609,7 +742,7 @@ function ODSInteractiveGrid() {
 
   return (
     <div style={{ marginTop: "2rem" }}>
-      <div className="g-6" style={{ gap: "0.75rem" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: "0.75rem" }}>
         {odsGoals.map((g) => {
           const isSelected = selectedODS === g.n;
           return (
@@ -726,7 +859,7 @@ export default function App() {
             </span>
           </LogoCard>
         </div>
-        <div className="g-2" style={{ marginTop: "1.5rem", gap: "1rem" }}>
+        <div style={{ marginTop: "1.5rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
           <div style={{ border: "1px solid rgba(0,230,118,0.2)", borderRadius: 12, padding: "1.25rem", background: "rgba(0,230,118,0.04)" }}>
             <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#00E676", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 8 }}>✓ Regras de Uso</div>
             <ul style={{ margin: 0, paddingLeft: "1.1rem", color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.7 }}>
@@ -784,18 +917,6 @@ export default function App() {
       {/* TOM DE VOZ — Tradutor anti-greenwashing */}
       <Section id="tom" eyebrow="Camada 4 · Tom de Voz" title="Inconformismo e rigor real." intro="Falamos com soberania territorial e atitude intelectual inspirada na Wieden+Kennedy e no programa The Kennedys: provocativo, guiado pela evidência científica e desenhado para gerar valor econômico real na comunidade.">
         <ToneTranslator />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.25rem", marginTop: "1.5rem" }}>
-          <div className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
-            <div className="font-mono" style={{ fontSize: "0.625rem", color: "#FFD600", letterSpacing: "0.15em", textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><Dot color="#FFD600" size={5} /> Registro brado · alma</div>
-            <div style={{ fontWeight: 700, fontSize: "1.05rem", color: "#F3F4F6", margin: "0.6rem 0" }}>"Quem sustenta é nóis."</div>
-            <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#9CA3AF", lineHeight: 1.6 }}>Manifesto · juventude · social · brand film · rodapé. Periférico, 1ª pessoa do plural, provocativo. A assinatura emocional da marca.</div>
-          </div>
-          <div className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
-            <div className="font-mono" style={{ fontSize: "0.625rem", color: "#00E676", letterSpacing: "0.15em", textTransform: "uppercase", display: "flex", alignItems: "center", gap: 6 }}><Dot color="#00E676" size={5} /> Registro operacional · B2B/B2G</div>
-            <div style={{ fontWeight: 700, fontSize: "1.05rem", color: "#F3F4F6", margin: "0.6rem 0" }}>"Seu desafio ESG vira squad, sprint e relatório."</div>
-            <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#9CA3AF", lineHeight: 1.6 }}>Hero B2B · proposta · prefeitura · relatório. Dados, entregável, prova &gt; promessa. Sem gíria — a credibilidade vem do número. O brado entra só como assinatura discreta.</div>
-          </div>
-        </div>
       </Section>
 
       {/* FOTOGRAFIA — Slider interativo */}
@@ -811,35 +932,7 @@ export default function App() {
 
       {/* COMPONENTES */}
       <Section id="componentes" eyebrow="Camada 7 · Componentes" title="Primitivos interativos." intro="Espelho de nossos componentes principais exportados de apps/web/src/components/. Hairlines, botões pílulas e fit scores explicados.">
-        {/* Liquid Glass — demo viva do material (specular + tint + interactive) */}
-        <div style={{ position: "relative", marginBottom: "2rem", borderRadius: 16, overflow: "hidden", padding: "2.5rem", background: "radial-gradient(circle at 30% 40%, rgba(0,230,118,0.16) 0%, transparent 55%), radial-gradient(circle at 75% 70%, rgba(41,121,255,0.13) 0%, transparent 55%), #060606" }}>
-          <div className="font-mono" style={{ fontSize: "0.625rem", color: "#9CA3AF", letterSpacing: "0.15em", textTransform: "uppercase", marginBottom: "1.25rem", display: "flex", alignItems: "center", gap: 6 }}>
-            <Dot color="#00E676" size={5} /> LIQUID GLASS · MATERIAL DE CONVERSÃO (iOS 26 → WEB)
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1.25rem" }}>
-            {[
-              { name: ".liquid-glass", desc: "regular · blur 24px + specular highlight", tint: "255,255,255" },
-              { name: "--leaf --interactive", desc: "tint verde + hover lift + glow", tint: "0,230,118" },
-              { name: "--thin", desc: "blur 12px · painéis secundários", tint: "255,255,255" },
-            ].map((g, i) => (
-              <div key={g.name} style={{
-                position: "relative", borderRadius: 14, padding: "1.4rem",
-                background: `linear-gradient(180deg, rgba(${g.tint},0.05) 0%, transparent 60%), rgba(13,14,14,${i === 2 ? 0.6 : 0.72})`,
-                backdropFilter: `blur(${i === 2 ? 12 : 24}px) saturate(140%)`,
-                WebkitBackdropFilter: `blur(${i === 2 ? 12 : 24}px) saturate(140%)`,
-                border: "1px solid rgba(255,255,255,0.09)",
-                boxShadow: "inset 0 1px 1px rgba(255,255,255,0.12), inset 0 -1px 1px rgba(0,0,0,0.25), 0 12px 40px rgba(0,0,0,0.35)",
-              }}>
-                <div className="font-mono" style={{ fontSize: "0.7rem", fontWeight: 700, color: "#F3F4F6" }}>{g.name}</div>
-                <div className="font-mono" style={{ fontSize: "0.625rem", color: "#9CA3AF", marginTop: 6, lineHeight: 1.5 }}>{g.desc}</div>
-              </div>
-            ))}
-          </div>
-          <div className="font-mono" style={{ fontSize: "0.6rem", color: "#6B7280", marginTop: "1.25rem", lineHeight: 1.6 }}>
-            Regras: uso criterioso (só superfícies de conversão) · luz atrás do vidro · animação compositor-only · WCAG AA. Doc: Brand camada 3 §3.3b.
-          </div>
-        </div>
-        <div className="g-2" style={{ gap: "2rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
           {/* Coluna 1: Botoes */}
           <div className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
             <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#00E676" }}>BOTÕES COM GRADIENTE</span>
