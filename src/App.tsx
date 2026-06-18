@@ -826,6 +826,23 @@ export default function App() {
             </div>
           ))}
         </div>
+
+        <div style={{ marginTop: "2.5rem", borderTop: "1px solid var(--color-border)", paddingTop: "2rem" }}>
+          <Eyebrow>As Verticais de Squads de Impacto</Eyebrow>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.25rem", marginTop: "1rem" }}>
+            {[
+              { title: "Tech & Data (Código Real)", color: "#2979FF", desc: "Automatizações, georeferenciamento urbano, engenharia de dados e matching de competências com IA. Onde a ciência de dados encontra a transformação local.", tag: "SQUADS DE ENGENHARIA" },
+              { title: "Criatividade & Voz (Design Brutal)", color: "#FFD600", desc: "Identidades visuais de impacto, copywriting Gen Z de calçada, relatórios interativos e UX/UI. Traduzindo complexidade socioambiental em atração estética.", tag: "SQUADS DE DESIGN" },
+              { title: "ESG & Território (Ação na Calçada)", color: "#00E676", desc: "Mapeamento social nos HUBs locais, compliance de metas ODS da ONU e coleta e validação empírica das evidências em campo.", tag: "SQUADS DE ESG/IMPACTO" }
+            ].map((v) => (
+              <div key={v.title} className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
+                <span className="font-mono" style={{ fontSize: "0.625rem", color: v.color, letterSpacing: "0.15em", textTransform: "uppercase" }}>{v.tag}</span>
+                <h4 className="font-display" style={{ fontSize: "1.25rem", color: "#F3F4F6", margin: "0.5rem 0 0.75rem" }}>{v.title}</h4>
+                <p style={{ fontSize: "0.85rem", color: "#9CA3AF", lineHeight: 1.6, margin: 0 }}>{v.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </Section>
 
       {/* MANIFESTO — cartazes Gen Z de shared value */}
@@ -926,11 +943,49 @@ export default function App() {
       {/* TOM DE VOZ — Tradutor anti-greenwashing */}
       <Section id="tom" eyebrow="Camada 4 · Tom de Voz" title="Inconformismo e rigor real." intro="Falamos com soberania territorial e atitude intelectual inspirada na Wieden+Kennedy e no programa The Kennedys: provocativo, guiado pela evidência científica e desenhado para gerar valor econômico real na comunidade.">
         <ToneTranslator />
+
+        <div style={{ marginTop: "2rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
+          <div className="bs-card" style={{ border: "1px solid rgba(0, 230, 118, 0.2)", borderRadius: 16, padding: "1.5rem", background: "rgba(0, 230, 118, 0.02)" }}>
+            <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#00E676" }}>✓ O QUE DIZER (RIGOR E ATITUDE)</span>
+            <ul style={{ color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.7, margin: "1rem 0 0", paddingLeft: "1.2rem" }}>
+              <li>Ancorar soluções em <span style={{ color: "#F3F4F6" }}>evidências quantificáveis</span> (ODS, Fit Scores).</li>
+              <li>Falar da base criativa e universitária com <span style={{ color: "#F3F4F6" }}>protagonismo e autoria</span>.</li>
+              <li>Usar a verdade nua e crua do território ("direto na calçada", "corre real").</li>
+              <li>Slogans de inconformismo: <span style={{ color: "#F3F4F6" }}>"Walk in Stupid"</span> (entrar sem viés) e <span style={{ color: "#F3F4F6" }}>"Fail Harder"</span> (tentar sob risco calculado).</li>
+            </ul>
+          </div>
+          <div className="bs-card" style={{ border: "1px solid rgba(255, 23, 68, 0.2)", borderRadius: 16, padding: "1.5rem", background: "rgba(255, 23, 68, 0.02)" }}>
+            <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#FF1744" }}>✕ O QUE EVITAR (FALTA DE EVIDÊNCIA / CLICHÊ)</span>
+            <ul style={{ color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.7, margin: "1rem 0 0", paddingLeft: "1.2rem" }}>
+              <li>Termos abstratos e paternalistas: <span style={{ color: "#F3F4F6" }}>"capacitar jovens carentes"</span>, <span style={{ color: "#F3F4F6" }}>"ajudar o próximo"</span>.</li>
+              <li>Clichês corporativos vazios: <span style={{ color: "#F3F4F6" }}>"sinergia inovadora"</span>, <span style={{ color: "#F3F4F6" }}>"ecossistema disruptivo"</span>.</li>
+              <li>Fórmulas de greenwashing: <span style={{ color: "#F3F4F6" }}>"construir um amanhã verde"</span>, <span style={{ color: "#F3F4F6" }}>"salvar o planeta"</span>.</li>
+              <li>Paternalismo institucional tradicional que anule a voz ativa da comunidade.</li>
+            </ul>
+          </div>
+        </div>
       </Section>
 
       {/* FOTOGRAFIA — Slider interativo */}
       <Section id="fotografia" eyebrow="Camada 5 · Fotografia" title="Realidade documental." intro="Pessoas reais, estudantes no campus, bairros e cidades brasileiras. Baixo contraste de saturação, granulação orgânica e overlays escuros que permitem excelente legibilidade de texto sob a imagem.">
         <PhotoSlider />
+
+        <div style={{ marginTop: "1.5rem", border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.25rem", background: "#060606" }}>
+          <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#2979FF", marginBottom: 10 }}>[ CSS TOKENS PARA FOTOGRAFIA ]</div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "1.5rem", alignItems: "center" }}>
+            <p style={{ color: "#9CA3AF", fontSize: "0.8rem", lineHeight: 1.5, margin: 0 }}>
+              Todas as fotografias de pessoas ou do território devem ser dessaturadas para neutralizar cores estranhas ao design system e receber overlays sutis dos nossos gradientes semânticos (Leaf ou Atlantic) para fixar a assinatura visual da marca.
+            </p>
+            <pre style={{ margin: 0, padding: "1rem", background: "#050505", borderRadius: 8, border: "1px solid var(--color-border-strong)", fontSize: "0.7rem", color: "#00E676", overflowX: "auto", fontFamily: "var(--font-mono)" }}>
+{`.photo-brand-filter {
+  filter: grayscale(1) contrast(0.95) brightness(0.8);
+  /* Overlay Leaf/Atlantic */
+  background: radial-gradient(circle at 10% 20%, rgba(0, 230, 118, 0.12) 0%, transparent 60%),
+              radial-gradient(circle at 90% 80%, rgba(41, 121, 255, 0.12) 0%, transparent 60%);
+}`}
+            </pre>
+          </div>
+        </div>
       </Section>
 
       {/* O MÉTODO — fluxo operacional */}
@@ -1008,6 +1063,33 @@ export default function App() {
         </div>
         <div style={{ marginTop: "1.5rem", border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
           <EaseDemo />
+        </div>
+
+        <div style={{ marginTop: "2rem", borderTop: "1px solid var(--color-border)", paddingTop: "1.5rem" }}>
+          <Eyebrow>Template de Proposta de Mudança (ADR)</Eyebrow>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "1.5rem", marginTop: "1rem" }}>
+            <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              <p style={{ color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.6, margin: 0 }}>
+                Qualquer modificação estrutural na identidade de marca (ex: propor novos gradientes, introduzir fontes alternativas ou alterar lockups de logo) precisa seguir o fluxo formal de open-source do ecossistema. Use este padrão de ADR em formato markdown e envie um Pull Request para revisão da diretoria criativa (CPO).
+              </p>
+            </div>
+            <pre style={{ margin: 0, padding: "1.25rem", background: "#050505", borderRadius: 12, border: "1px solid var(--color-border-strong)", fontSize: "0.7rem", color: "#F3F4F6", overflowX: "auto", fontFamily: "var(--font-mono)", lineHeight: 1.5 }}>
+{`# ADR-002: [Título da Proposta de Mudança]
+Status: Proposto | Data: 2026-06-18
+Autor: @seu_github
+
+## 1. Contexto e Motivação
+[Descreva o problema ou a oportunidade encontrada no manual da marca]
+
+## 2. Decisão Proposta
+[Apresente a alteração visual ou de código de forma clara]
+
+## 3. Impacto Operacional
+- Visual: [Como afeta as landings]
+- Técnico: [Novos tokens de CSS gerados]
+- Narrativa: [Alinhamento com "Quem sustenta é nóis"]`}
+            </pre>
+          </div>
         </div>
       </Section>
 
