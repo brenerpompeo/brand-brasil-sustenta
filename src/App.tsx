@@ -305,7 +305,7 @@ function ColorRow({ items }: { items: { name: string; hex?: string; value?: stri
   );
 }
 
-/** Componente: Manifesto Interativo Brutalista */
+/** Componente: Manifesto Interativo Premium */
 function ManifestoSection() {
   const [activeTab, setActiveTab] = useState(0);
   const cards = [
@@ -324,10 +324,10 @@ function ManifestoSection() {
       color: "#2979FF"
     },
     {
-      title: "Os Kennedys do Impacto",
-      tag: "INQUIETAÇÃO CRIATIVA",
-      body: "Nossos squads universitários operam briefs reais sob pressão sob a filosofia de W+K. Entrar no território sem preconceitos corporativos ('Walk in Stupid') e testar rápido em ambiente controlado ('Fail Harder') para entregar a verdade do impacto de baixo para cima.",
-      highlight: "Rebeldes acadêmicos gerando soluções sob briefs reais.",
+      title: "Inovação Descentralizada",
+      tag: "ATITUDE & RIGOR",
+      body: "Nossos squads universitários operam briefs de marcas reais sob pressão comercial e acadêmica. Entramos no território livres de preconceitos corporativos tradicionais para testar hipóteses rápido em ambiente controlado e entregar a verdade do impacto de baixo para cima.",
+      highlight: "Energia acadêmica orientada por governança de mercado.",
       color: "#FFD600"
     }
   ];
@@ -411,7 +411,7 @@ function ToneTranslator() {
     {
       before: "Promovemos a capacitação e networking horizontal direcionados ao empreendedorismo sustentável de impacto regional.",
       after: "Briefing real, sprint de impacto e progresso compartilhado. Unimos a inquietação criativa da juventude a negócios de valor real.",
-      why: "Tom inspirado em W+K/Kennedys: desmistifica jargões corporativos e aproxima a academia do mercado de forma profissional, intelectual e direta."
+      why: "Tom focado em desmistificar jargões corporativos e aproximar a base criativa da academia do board corporativo de forma profissional, intelectual e direta."
     }
   ];
 
@@ -832,75 +832,88 @@ export default function App() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.25rem", marginTop: "1rem" }}>
             {[
               { 
-                title: "Tech & Data (Código Real)", 
+                title: "Tech & Data (Código Real & IA)", 
                 color: "#2979FF", 
-                desc: "Automatizações, engenharia de dados e matching de competências com IA.", 
                 tag: "SQUADS DE ENGENHARIA",
+                what: "Construção de MVPs de alta performance, arquiteturas de dados territoriais com georreferenciamento e motores de matching alimentados por inteligência artificial explicável.",
+                how: "Através de sprints de 6 semanas no modelo de governança da Tríade. Usamos TypeScript, React, Next.js, tRPC e bancos de dados vetoriais (pgvector no Supabase) para ligar problemas de campo a soluções digitais rápidas e robustas, focando em acessibilidade digital (WCAG) nas periferias.",
                 deliverables: [
-                  "MVPs de software responsivo",
-                  "Dashboards de inteligência de dados ESG",
-                  "Georreferenciamento urbano de impacto",
-                  "Integração do Fit Score ODS da Suzely"
+                  "MVPs de software web e mobile funcionais",
+                  "Dashboards dinâmicos de dados ESG e relatórios",
+                  "Georreferenciamento de ativos comunitários",
+                  "Integração do Fit Score ODS da Suzely (APIs)",
+                  "Sistemas de rastreabilidade de dados na blockchain"
                 ]
               },
               { 
-                title: "Criatividade & Voz (Design Brutal)", 
+                title: "Criatividade, Voz & Mídia (Design & Comunicação)", 
                 color: "#FFD600", 
-                desc: "Identidades visuais de impacto, copywriting Gen Z de calçada, relatórios interativos e UX/UI.", 
-                tag: "SQUADS DE DESIGN",
+                tag: "SQUADS DE DESIGN & MÍDIA",
+                what: "Identidades visuais de impacto, interfaces UX/UI premium de alta fidelidade, copywriting corporativo de calçada, gravação audiovisual documental de campo, fotografia territorial e gestão estratégica de mídias sociais.",
+                how: "Por meio de imersão direta nas calçadas parceiras para extrair a verdade empírica. Aplicamos o design system Neon Pátria (estética escura e limpa com contrastes semânticos neon) e copywriting provocativo que atrai a juventude universitária e gera conversão comercial.",
                 deliverables: [
-                  "Branding e guias estéticos de causa",
-                  "Tom de voz e copy anti-greenwashing",
-                  "UX/UI para portais e plataformas",
-                  "Design de relatórios de impacto anuais"
+                  "Branding completo (identidade visual, guias estáticos)",
+                  "UI/UX Wireframes de alta fidelidade e protótipos",
+                  "Linha editorial e copywriting anti-greenwashing",
+                  "Produção de mídias (peças de áudio/vídeo curtas)",
+                  "Fotografia documental e banco de imagem exclusivo",
+                  "Estratégia e posts para mídias sociais da causa"
                 ]
               },
               { 
                 title: "ESG & Território (Ação na Calçada)", 
                 color: "#00E676", 
-                desc: "Mapeamento social nos HUBs locais e conformidade com metas ODS.", 
-                tag: "SQUADS DE ESG/IMPACTO",
+                tag: "SQUADS DE ESG & IMPACTO",
+                what: "Mapeamento socioeconômico e territorial em profundidade nos HUBs locais, diagnósticos qualitativos de vulnerabilidade e articulação de embaixadores universitários com a comunidade.",
+                how: "Fazemos escuta horizontal e levantamento de dados primários in loco, cruzando as dores e ativos locais com as metas da Agenda ODS. Estruturamos a ponte que conecta o retorno das empresas à resolução de problemas crônicos no território.",
                 deliverables: [
-                  "Mapeamento social e de vulnerabilidade",
-                  "Conformidade com metas ODS da ONU",
-                  "Coleta e auditoria empírica local",
-                  "Evidências estruturadas de impacto"
+                  "Mapeamento social e de vulnerabilidade regional",
+                  "Planejamento de conformidade com metas ODS",
+                  "Painéis de escuta de lideranças da comunidade",
+                  "Coleta e validação física de dados locais",
+                  "Relatórios empíricos de impacto e ativos"
                 ]
               },
               { 
-                title: "PR & Eventos (Presença & Ativação)", 
+                title: "PR, Eventos & Ativação (Presença Territorial)", 
                 color: "#FF1744", 
-                desc: "Ativações de impacto no território, intervenções urbanas e eventos nos HUBs.", 
                 tag: "SQUADS DE PR & ATIVAÇÃO",
+                what: "Relacionamento com imprensa regional, organização de fóruns, feiras e ativações físicas no território, intervenções urbanas de marca e produção de eventos nos HUBs comunitários.",
+                how: "Coordenamos ações físicas de impacto com embaixadores universitários e coletivos locais. Promovemos assessoria de imprensa focada em pautas legítimas de transformação social, gerando mídia espontânea e engajamento orgânico de causa.",
                 deliverables: [
-                  "Intervenções físicas de marca (OOH)",
-                  "Relacionamento com imprensa regional",
-                  "Lançamentos presenciais nos HUBs",
-                  "Cobertura digital em tempo real"
+                  "Kits e estratégias de Assessoria de Imprensa",
+                  "Projetos executivos de intervenções urbanas (OOH)",
+                  "Eventos presenciais de impacto nos HUBs locais",
+                  "Cobertura digital em tempo real das ações",
+                  "Parcerias de co-branding com marcas de calçada"
                 ]
               },
               { 
-                title: "Compliance & Finanças (ESG Audit)", 
+                title: "Compliance, Finanças & Métricas (ESG Audit)", 
                 color: "#FF9100", 
-                desc: "Auditoria jurídica de evidências locais e conformidade com padrões globais B2B.", 
-                tag: "SQUADS DE COMPLIANCE & MÉTRICAS",
+                tag: "SQUADS DE COMPLIANCE & FINANÇAS",
+                what: "Modelagem de ROI de Shared Value, auditoria jurídica de evidências locais de impacto, conformidade técnica com regulação nacional e internacional e relatórios corporativos.",
+                how: "Mapeamos e auditamos cada centavo investido e cada ação de campo segundo frameworks globais (GRI, SASB, CVM 193). Estruturamos os dados coletados de forma segura, rastreável e auditável por Big Four.",
                 deliverables: [
-                  "Adequação a padrões (GRI, SASB, CVM 193)",
-                  "Modelagem de ROI de Shared Value",
-                  "Mapeamento de carbono e compensações",
-                  "Relatórios auditáveis para Big Four"
+                  "Matrizes de Materialidade e conformidade de mercado",
+                  "Modelagem e relatórios de ROI de Shared Value",
+                  "Dossiês de conformidade e auditorias estruturadas",
+                  "Relatórios integrados para investidores e Boards",
+                  "Mapeamento e conformidade de créditos sociais"
                 ]
               },
               { 
-                title: "GovTech & Urbanismo (Inovação Pública)", 
+                title: "GovTech, Urbanismo & Cidades (Inovação Pública)", 
                 color: "#2979FF", 
-                desc: "Infraestrutura urbana verde, mobilidade ativa e articulação de HUBs regionais.", 
                 tag: "SQUADS DE GOVTECH & CIDADES",
+                what: "Infraestrutura urbana verde, mobilidade ativa, soluções de saneamento descentralizado e digitalização de serviços públicos governamentais locais (B2G).",
+                how: "Unimos o urbanismo acadêmico com a inteligência empírica das periferias. Através de co-criação com gestores públicos, prefeituras e a comunidade, criamos soluções escaláveis, sustentáveis e de baixíssima pegada de carbono.",
                 deliverables: [
-                  "Desenho de mobilidade urbana ativa",
-                  "Projetos de infraestrutura verde local",
-                  "Digitalização de serviços públicos B2G",
-                  "Saneamento descentralizado territorial"
+                  "Desenho urbano de mobilidade ativa periférica",
+                  "Projetos de transição ecológica e infraestrutura verde",
+                  "Desenvolvimento de plataformas GovTech (B2G)",
+                  "Estudos de saneamento ecológico descentralizado",
+                  "Planos diretores locais de HUBs de impacto"
                 ]
               }
             ].map((v) => (
@@ -908,8 +921,18 @@ export default function App() {
                 <div>
                   <span className="font-mono" style={{ fontSize: "0.625rem", color: v.color, letterSpacing: "0.15em", textTransform: "uppercase" }}>{v.tag}</span>
                   <h4 className="font-display" style={{ fontSize: "1.3rem", color: "#F3F4F6", margin: "0.5rem 0 0.75rem", lineHeight: 1.1 }}>{v.title}</h4>
-                  <p style={{ fontSize: "0.85rem", color: "#9CA3AF", lineHeight: 1.5, margin: "0 0 1.5rem" }}>{v.desc}</p>
+                  
+                  <div style={{ marginBottom: "1rem" }}>
+                    <span className="font-mono" style={{ fontSize: "0.55rem", color: v.color, letterSpacing: "0.15em", textTransform: "uppercase", display: "block", marginBottom: 4 }}>O que é feito:</span>
+                    <p style={{ fontSize: "0.82rem", color: "#9CA3AF", lineHeight: 1.5, margin: 0 }}>{v.what}</p>
+                  </div>
+                  
+                  <div style={{ marginBottom: "1.5rem" }}>
+                    <span className="font-mono" style={{ fontSize: "0.55rem", color: v.color, letterSpacing: "0.15em", textTransform: "uppercase", display: "block", marginBottom: 4 }}>Como é feito:</span>
+                    <p style={{ fontSize: "0.82rem", color: "#9CA3AF", lineHeight: 1.5, margin: 0 }}>{v.how}</p>
+                  </div>
                 </div>
+                
                 <div style={{ borderTop: "1px solid var(--color-border-strong)", paddingTop: "1rem" }}>
                   <span className="font-mono" style={{ fontSize: "0.55rem", color: "#4B5563", letterSpacing: "0.1em", textTransform: "uppercase", display: "block", marginBottom: 8 }}>O que prestamos (Entregáveis):</span>
                   <ul className="font-mono" style={{ margin: 0, paddingLeft: 0, listStyle: "none", color: "#F3F4F6", fontSize: "0.7rem", display: "flex", flexDirection: "column", gap: 6 }}>
@@ -932,7 +955,7 @@ export default function App() {
       </Section>
 
       {/* LOGO — 4 lockups */}
-      <Section id="logo" eyebrow="Camada 2 · Logo" title="A assinatura visual." intro="A logo do Brasil Sustenta é empilhada, utilizando a fonte Antonio Black e finalizada com o ponto final verde amazônia tech. É minimalista, monumentalista e inalterável.">
+      <Section id="logo" eyebrow="Camada 2 · Logo" title="A assinatura visual." intro="A logo do Brasil Sustenta é empilhada, utilizando a fonte Antonio Black e finalizada com o ponto final verde amazônia tech. É minimalista, geométrica, de forte presença visual e inalterável.">
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1.25rem" }}>
           <LogoCard label="Principal" sub="Empilhado · fundo escuro" bg="#050505">
             <Logo size={2.2} />
@@ -1022,7 +1045,7 @@ export default function App() {
       </Section>
 
       {/* TOM DE VOZ — Tradutor anti-greenwashing */}
-      <Section id="tom" eyebrow="Camada 4 · Tom de Voz" title="Inconformismo e rigor real." intro="Falamos com soberania territorial e atitude intelectual inspirada na Wieden+Kennedy e no programa The Kennedys: provocativo, guiado pela evidência científica e desenhado para gerar valor econômico real na comunidade.">
+      <Section id="tom" eyebrow="Camada 4 · Tom de Voz" title="Inconformismo e rigor real." intro="Falamos com soberania territorial e atitude pragmática: provocativo, focado em negócios, guiado por evidências científicas e desenhado para gerar valor econômico legítimo na comunidade de baixo para cima.">
         <ToneTranslator />
 
         <div style={{ marginTop: "2rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
@@ -1032,7 +1055,7 @@ export default function App() {
               <li>Ancorar soluções em <span style={{ color: "#F3F4F6" }}>evidências quantificáveis</span> (ODS, Fit Scores).</li>
               <li>Falar da base criativa e universitária com <span style={{ color: "#F3F4F6" }}>protagonismo e autoria</span>.</li>
               <li>Usar a verdade nua e crua do território ("direto na calçada", "corre real").</li>
-              <li>Slogans de inconformismo: <span style={{ color: "#F3F4F6" }}>"Walk in Stupid"</span> (entrar sem viés) e <span style={{ color: "#F3F4F6" }}>"Fail Harder"</span> (tentar sob risco calculado).</li>
+              <li>Princípios operacionais: <span style={{ color: "#F3F4F6" }}>"Entrar Sem Viés"</span> (ouvir antes de projetar) e <span style={{ color: "#F3F4F6" }}>"Execução Rápida"</span> (sprints com risco calculado).</li>
             </ul>
           </div>
           <div className="bs-card" style={{ border: "1px solid rgba(255, 23, 68, 0.2)", borderRadius: 16, padding: "1.5rem", background: "rgba(255, 23, 68, 0.02)" }}>
@@ -1047,16 +1070,16 @@ export default function App() {
         </div>
 
         <div style={{ marginTop: "1.5rem", border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#060606" }}>
-          <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#FFD600", marginBottom: 10 }}>[ MENTALIDADE W+K: WALK IN STUPID, FAIL HARDER ]</div>
+          <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#FFD600", marginBottom: 10 }}>[ ATITUDE COMERCIAL: A VERDADE DO IMPACTO ]</div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "1.5rem" }}>
             <p style={{ color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.6, margin: 0 }}>
-              Operamos na atitude dos **Kennedys**: inconformistas que entram nos territórios despidos de jargões corporativos tradicionais para encontrar a verdade pura dos desafios locais. A experimentação é livre de burocracias, mas regida pelo rigor da evidência científica. Falhamos rápido sob risco controlado para extrair inovação real.
+              Nossa atitude comercial rejeita o greenwashing e a teoria inócua das consultorias tradicionais. Entramos no território desprovidos de jargões de slides para encontrar a verdade prática das necessidades locais. Operamos de forma científica e com governança corporativa blindada, testando hipóteses em campo de maneira ágil.
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-              <div className="font-mono" style={{ fontSize: "0.75rem", color: "#F3F4F6", textTransform: "uppercase" }}>As duas regras inegociáveis de redação comercial:</div>
+              <div className="font-mono" style={{ fontSize: "0.75rem", color: "#F3F4F6", textTransform: "uppercase" }}>Os dois pilares inegociáveis de redação comercial:</div>
               <ul style={{ margin: 0, paddingLeft: "1.1rem", color: "#9CA3AF", fontSize: "0.8rem", lineHeight: 1.6 }}>
-                <li><strong style={{ color: "#FFD600" }}>Walk in Stupid:</strong> Nunca venda respostas prontas no slide de onboarding. Diga: *"Entramos no território para ouvir a comunidade e projetar a partir dos fatos, não de suposições."*</li>
-                <li><strong style={{ color: "#FFD600" }}>Fail Harder:</strong> Assuma o risco técnico controlado. Diga: *"Validamos ideias em sprints de 6 semanas. Testamos hipóteses rápidas e corrigimos a rota de imediato com dados de calçada."*</li>
+                <li><strong style={{ color: "#FFD600" }}>Entrar Sem Viés (Desaprendizado de Slide):</strong> Nunca venda respostas prontas no slide de onboarding. Diga: *"Entramos no território para ouvir a comunidade e projetar a partir dos fatos locais, não de suposições corporativas."*</li>
+                <li><strong style={{ color: "#FFD600" }}>Execução de Campo Rápida (Sprints de Evidência):</strong> Valide rápido sob risco controlado. Diga: *"Construímos e testamos soluções em campo através de sprints de 6 semanas, corrigindo a rota de imediato a partir de dados reais da calçada."*</li>
               </ul>
             </div>
           </div>
