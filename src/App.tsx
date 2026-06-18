@@ -835,7 +835,7 @@ export default function App() {
 
       {/* LOGO — 4 lockups */}
       <Section id="logo" eyebrow="Camada 2 · Logo" title="A assinatura visual." intro="A logo do Brasil Sustenta é empilhada, utilizando a fonte Antonio Black e finalizada com o ponto final verde amazônia tech. É minimalista, monumentalista e inalterável.">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "1.25rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1.25rem" }}>
           <LogoCard label="Principal" sub="Empilhado · fundo escuro" bg="#050505">
             <Logo size={2.2} />
           </LogoCard>
@@ -855,6 +855,17 @@ export default function App() {
             <span className="font-display" style={{ display: "inline-flex", alignItems: "baseline", fontSize: "3.2rem", fontWeight: 900, color: "#F3F4F6", lineHeight: 1 }}>
               BS<Dot size={10} style={{ marginLeft: 3 }} />
             </span>
+          </LogoCard>
+          <LogoCard label="Favicon" sub="Aba de navegador · ícone de app" bg="#050505">
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+              <div style={{ width: 64, height: 64, background: "#050505", border: "1px solid var(--color-border-strong)", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 20px rgba(0, 230, 118, 0.15)" }}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" style={{ width: 32, height: 32 }}>
+                  <rect width="32" height="32" fill="#050505"/>
+                  <circle cx="16" cy="20" r="5" fill="#00E676"/>
+                </svg>
+              </div>
+              <CopyChip value='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#050505"/><circle cx="16" cy="20" r="5" fill="#00E676"/></svg>' label="Copiar SVG" />
+            </div>
           </LogoCard>
         </div>
         <div style={{ marginTop: "1.5rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
