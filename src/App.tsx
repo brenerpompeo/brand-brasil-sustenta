@@ -605,16 +605,22 @@ function PhotoSlider() {
 
   const images = [
     {
-      raw: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=1200",
-      treated: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=1200", // a mesma imagem mas com overlay css de marca
-      title: "Trabalho em Equipe · Campinas HUB",
-      desc: "Universitários trabalhando no sprint real de sustentabilidade territorial."
+      raw: "/imagery/territorio-campinas.jpg",
+      treated: "/imagery/territorio-campinas.jpg",
+      title: "Trabalho em Campo · Território Campinas",
+      desc: "Ação prática de levantamento e diagnóstico socioambiental na calçada periférica de Campinas."
     },
     {
-      raw: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1200",
-      treated: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1200",
-      title: "COP30 Mobilização Jovem",
-      desc: "Lideranças regionais articulando as 169 metas da agenda socioambiental."
+      raw: "/imagery/juventude-cop30.jpg",
+      treated: "/imagery/juventude-cop30.jpg",
+      title: "Articulação COP30 · Juventude do Impacto",
+      desc: "Lideranças e embaixadores universitários da Brasil Sustenta organizando ações e metas ODS."
+    },
+    {
+      raw: "/imagery/campus-praia-vermelha.jpg",
+      treated: "/imagery/campus-praia-vermelha.jpg",
+      title: "Vivência Universitária · Campus Praia Vermelha UFRJ",
+      desc: "Integração acadêmica onde nascem os projetos e squads de engenharia de dados territoriais."
     }
   ];
 
