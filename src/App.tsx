@@ -833,7 +833,8 @@ export default function App() {
             {[
               { title: "Tech & Data (Código Real)", color: "#2979FF", desc: "Automatizações, georeferenciamento urbano, engenharia de dados e matching de competências com IA. Onde a ciência de dados encontra a transformação local.", tag: "SQUADS DE ENGENHARIA" },
               { title: "Criatividade & Voz (Design Brutal)", color: "#FFD600", desc: "Identidades visuais de impacto, copywriting Gen Z de calçada, relatórios interativos e UX/UI. Traduzindo complexidade socioambiental em atração estética.", tag: "SQUADS DE DESIGN" },
-              { title: "ESG & Território (Ação na Calçada)", color: "#00E676", desc: "Mapeamento social nos HUBs locais, compliance de metas ODS da ONU e coleta e validação empírica das evidências em campo.", tag: "SQUADS DE ESG/IMPACTO" }
+              { title: "ESG & Território (Ação na Calçada)", color: "#00E676", desc: "Mapeamento social nos HUBs locais, compliance de metas ODS da ONU e coleta e validação empírica das evidências em campo.", tag: "SQUADS DE ESG/IMPACTO" },
+              { title: "PR & Eventos (Presença & Ativação)", color: "#FF1744", desc: "Ativações de impacto no território, intervenções urbanas de marca, relacionamento com a imprensa e eventos nos HUBs. A tese ESG transformada em manifesto físico e ocupação comunitária.", tag: "SQUADS DE PR & ATIVAÇÃO" }
             ].map((v) => (
               <div key={v.title} className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
                 <span className="font-mono" style={{ fontSize: "0.625rem", color: v.color, letterSpacing: "0.15em", textTransform: "uppercase" }}>{v.tag}</span>
