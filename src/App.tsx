@@ -60,7 +60,7 @@ function Nav() {
         <Logo size={0.9} />
         
         {/* Menu Desktop */}
-        <nav className="hidden md:flex" style={{ gap: "1.2rem", alignItems: "center" }}>
+        <nav className="hidden lg:flex" style={{ gap: "1.2rem", alignItems: "center" }}>
           {NAV.map((n) => {
             const isActive = active === n.id;
             return (
@@ -81,7 +81,7 @@ function Nav() {
         {/* Botão Hambúrguer Mobile (Touch Target: 44px) */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex md:hidden"
+          className="flex lg:hidden items-center justify-center"
           aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
           style={{
             cursor: "pointer",
@@ -90,9 +90,6 @@ function Nav() {
             borderRadius: 8,
             border: "1px solid var(--color-border)",
             backgroundColor: "rgba(255,255,255,0.02)",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
             position: "relative",
             zIndex: 60
           }}
@@ -139,6 +136,7 @@ function Nav() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: EASE }}
+            className="block lg:hidden"
             style={{
               position: "absolute",
               top: "100%",
