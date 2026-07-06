@@ -213,7 +213,7 @@ function Hero() {
   };
   return (
     <section style={{ padding: "8rem 0 5rem", position: "relative", overflow: "hidden" }}>
-      <SectionGlow color="#00E676" position="50% 30%" opacity={0.07} size="60%" />
+      <SectionGlow color="#00FF41" position="50% 30%" opacity={0.07} size="60%" />
       {!reduced && (
         <motion.div
           aria-hidden
@@ -230,7 +230,7 @@ function Hero() {
         style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem", position: "relative", textAlign: "center" }}
       >
         <motion.div variants={fadeUp} transition={{ duration: 0.6, ease: EASE }}>
-          <p className="font-mono" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: "0.6875rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.25em", color: "#00E676" }}>
+          <p className="font-mono" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: "0.6875rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.25em", color: "#00FF41" }}>
             <Dot /> SOVEREIGN BRAND GUIDE · V{tokens._meta.version}
           </p>
         </motion.div>
@@ -242,7 +242,7 @@ function Hero() {
           style={{ fontSize: "clamp(3.5rem, 8vw, 7.5rem)", fontWeight: 900, lineHeight: 0.85, margin: "1.5rem 0", color: "#F3F4F6", letterSpacing: "-0.04em" }}
         >
           IMPACTO REAL.<br />
-          <span style={{ background: "linear-gradient(90deg, #00E676, #2979FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>QUEM SUSTENTA É NÓIS.</span>
+          <span style={{ background: "linear-gradient(90deg, #00FF41, #FFC700, #0055FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>QUEM SUSTENTA É NÓIS.</span>
         </motion.h1>
 
         <motion.p variants={fadeUp} transition={{ duration: 0.8, ease: EASE }} style={{ color: "#9CA3AF", fontSize: "1.25rem", maxWidth: 640, lineHeight: 1.6, margin: "0 auto 2.5rem" }}>
@@ -314,21 +314,28 @@ function ManifestoSection() {
       tag: "SOBERANIA POPULAR",
       body: "O mercado corporativo desenha as diretrizes no slide. A juventude universitária e a comunidade aplicam a transição prática no território. Nossa voz não pede licença: ela assume a autoria e o rigor da execução de ponta a ponta.",
       highlight: "Menos discursos conceituais, mais engenharia de impacto em campo.",
-      color: "#00E676"
+      color: "#00FF41"
     },
     {
       title: "Shared Value na Veia",
       tag: "ROI + IMPACTO",
       body: "Lucro e impacto socioambiental não são antagônicos. São motores síncronos. Projetos reais geram valor econômico legítimo para as marcas participantes enquanto resolvem problemas urgentes nos territórios. Lucro financia impacto; impacto valida o lucro.",
       highlight: "Não é caridade, é categoria de negócios.",
-      color: "#2979FF"
+      color: "#0055FF"
     },
     {
-      title: "Inovação Descentralizada",
-      tag: "ATITUDE & RIGOR",
-      body: "Nossos squads universitários operam briefs de marcas reais sob pressão comercial e acadêmica. Entramos no território livres de preconceitos corporativos tradicionais para testar hipóteses rápido em ambiente controlado e entregar a verdade do impacto de baixo para cima.",
-      highlight: "Energia acadêmica orientada por governança de mercado.",
-      color: "#FFD600"
+      title: "Voluntariado de Impacto",
+      tag: "CAUSA SOCIAL & MENTORIA",
+      body: "Conectamos jovens voluntários em causas e diagnósticos territoriais locais (funil de entrada), enquanto colaboradores seniores das empresas B2B atuam voluntariamente como mentores de negócios. Fortalece o 'S' do ESG e desenvolve a juventude.",
+      highlight: "Engajamento comunitário prático + Mentoria corporativa.",
+      color: "#E040FB"
+    },
+    {
+      title: "O Match Definitivo (Talent Pool)",
+      tag: "EMPREGABILIDADE & IMPACTO",
+      body: "Não apenas treinamos talentos; aceleramos a colocação definitiva de jovens periféricos e criativos no mercado corporativo. As marcas parceiras que financiam os squads ganham acesso à nossa vitrine de talentos, recrutando profissionais auditados in loco pela Tríade. É a liquidação do greenwashing e do racismo de slide.",
+      highlight: "Dados reais de campo gerando contratações reais.",
+      color: "#FFC700"
     }
   ];
 
@@ -411,7 +418,7 @@ function ToneTranslator() {
     {
       before: "Promovemos a capacitação e networking horizontal direcionados ao empreendedorismo sustentável de impacto regional.",
       after: "Briefing real, sprint de impacto e progresso compartilhado. Unimos a inquietação criativa da juventude a negócios de valor real.",
-      why: "Tom focado em desmistificar jargões corporativos e aproximar a base criativa da academia do board corporativo de forma profissional, intelectual e direta."
+      why: "Atitude comercial 'calçada-high-end' (v7): desmistifica jargões acadêmicos e aproxima as partes de forma profissional, viva e direta."
     }
   ];
 
@@ -824,6 +831,7 @@ export default function App() {
           {[
             { t: "Modelo Embedded (Súper Teammates)", b: "Não entregamos relatórios teóricos e sumimos. Alocamos squads de impacto integrados ao seu fluxo, sob a governança da Tríade (Embaixador + Coordenador + Empresa)." },
             { t: "Engine Suzely (Fit Explicável)", b: "O matching de competências, disponibilidade e relevância ODS territorial é calculado via Inteligência Artificial baseada em dados reais das calçadas parceiras." },
+            { t: "Talent Pool & Voluntariado v7", b: "Os squads atuam como funil prático de talentos e de voluntariado de mentoria corporativa (ESG Social). O RH assina a Suzely para contratar os jovens pré-avaliados em campo (Placement SaaS)." },
             { t: "Compliance & ROI Síncronos", b: "Lucro e impacto andam juntos. A entrega técnica atende às exigências de inovação da marca e gera as métricas ODS auditadas exigidas pela regulação de mercado." },
           ].map((x) => (
             <div key={x.t} className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.75rem", background: "#0D0E0E" }}>
@@ -978,30 +986,47 @@ export default function App() {
               <span style={{ color: "#F3F4F6" }}>SUSTENTA<span style={{ color: "#F3F4F6" }}>.</span></span>
             </span>
           </LogoCard>
-          <LogoCard label="Ícone" sub='Reduzido · "BS."' bg="#050505">
-            <span className="font-display" style={{ display: "inline-flex", alignItems: "baseline", fontSize: "3.2rem", fontWeight: 900, color: "#F3F4F6", lineHeight: 1 }}>
-              BS<Dot size={10} style={{ marginLeft: 3 }} />
-            </span>
+          <LogoCard label="Novo Símbolo v7 (Match-Net)" sub="Monograma geométrico bioluminescente" bg="#030303">
+            <div style={{ position: "relative", width: 70, height: 70, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
+                <path d="M25 20H55C70 20 70 38 55 38C70 38 70 56 55 56H25V20Z" stroke="url(#paint0_linear_v7_original)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M25 56C25 70 38 80 50 80C65 80 75 70 75 56" stroke="url(#paint1_linear_v7_original)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="4 4"/>
+                <circle cx="55" cy="38" r="6" fill="#00FF41" />
+                <circle cx="50" cy="80" r="6" fill="#FFC700" />
+                <circle cx="75" cy="56" r="6" fill="#0055FF" />
+                <defs>
+                  <linearGradient id="paint0_linear_v7_original" x1="25" y1="20" x2="70" y2="56" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#00FF41"/>
+                    <stop offset="0.5" stopColor="#FFC700"/>
+                    <stop offset="1" stopColor="#0055FF"/>
+                  </linearGradient>
+                  <linearGradient id="paint1_linear_v7_original" x1="25" y1="56" x2="75" y2="80" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#FFC700"/>
+                    <stop offset="1" stopColor="#0055FF"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
           </LogoCard>
-          <LogoCard label="Favicon" sub="Aba de navegador · ícone de app" bg="#050505">
+          <LogoCard label="Favicon v7" sub="Aba de navegador · ícone de app" bg="#050505">
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
-              <div style={{ width: 64, height: 64, background: "#050505", border: "1px solid var(--color-border-strong)", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 20px rgba(0, 230, 118, 0.15)" }}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" style={{ width: 32, height: 32 }}>
-                  <rect width="32" height="32" fill="#050505"/>
-                  <circle cx="16" cy="20" r="5" fill="#00E676"/>
+              <div style={{ width: 64, height: 64, background: "#030303", border: "1px solid var(--color-border-strong)", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 20px rgba(0, 255, 65, 0.15)" }}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" style={{ width: 36, height: 36 }}>
+                  <path d="M25 20H55C70 20 70 38 55 38C70 38 70 56 55 56H25V20Z" stroke="#00FF41" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
+                  <circle cx="55" cy="38" r="8" fill="#FFC700" />
                 </svg>
               </div>
-              <CopyChip value='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" fill="#050505"/><circle cx="16" cy="20" r="5" fill="#00E676"/></svg>' label="Copiar SVG" />
+              <CopyChip value='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M25 20H55C70 20 70 38 55 38C70 38 70 56 55 56H25V20Z" stroke="#00FF41" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/><circle cx="55" cy="38" r="8" fill="#FFC700"/></svg>' label="Copiar SVG" />
             </div>
           </LogoCard>
         </div>
         <div style={{ marginTop: "1.5rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-          <div style={{ border: "1px solid rgba(0,230,118,0.2)", borderRadius: 12, padding: "1.25rem", background: "rgba(0,230,118,0.04)" }}>
-            <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#00E676", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 8 }}>✓ Regras de Uso</div>
+          <div style={{ border: "1px solid rgba(0,255,65,0.2)", borderRadius: 12, padding: "1.25rem", background: "rgba(0,255,65,0.04)" }}>
+            <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#00FF41", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 8 }}>✓ Regras de Uso</div>
             <ul style={{ margin: 0, paddingLeft: "1.1rem", color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.7 }}>
               <li>BRASIL sempre empilhado sobre SUSTENTA.</li>
-              <li>Ponto final sempre na cor Leaf (#00E676).</li>
-              <li>Fonte Antonio sempre com peso Black (900).</li>
+              <li>Símbolo Match-Net v7 sempre renderizado em alta definição SVG.</li>
+              <li>Cores semânticas do símbolo correspondem ao degradê verde-amarelo-azul.</li>
             </ul>
           </div>
           <div style={{ border: "1px solid rgba(255,23,68,0.2)", borderRadius: 12, padding: "1.25rem", background: "rgba(255,23,68,0.04)" }}>
@@ -1122,29 +1147,34 @@ export default function App() {
 
       {/* COMPONENTES */}
       <Section id="componentes" eyebrow="Camada 7 · Componentes" title="Primitivos interativos." intro="Espelho de nossos componentes principais exportados de apps/web/src/components/. Hairlines, botões pílulas e fit scores explicados.">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
-          {/* Coluna 1: Botoes */}
-          <div className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
-            <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#00E676" }}>BOTÕES COM GRADIENTE</span>
-            <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginTop: "1.5rem" }}>
-              <button style={{ background: "linear-gradient(135deg,#00E676,#2979FF)", color: "#050505", border: "none", borderRadius: 9999, padding: "0.9rem 1.75rem", fontWeight: 700, cursor: "pointer", fontFamily: "var(--font-body)", fontSize: "0.9rem", boxShadow: "0 0 16px rgba(0,230,118,0.35)", transition: "all 0.2s" }}>
-                Ativar Squad ESG (Gradiente Principal)
+        <div className="bento-grid" style={{ marginTop: "2rem" }}>
+          {/* Coluna 1: Botoes (Bento span 2 colunas) */}
+          <div className="glass-card bento-2col" style={{ padding: "2rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+            <div>
+              <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#00FF41", letterSpacing: "0.15em", textTransform: "uppercase" }}>✓ Botões Encorpados v7 (Touch Target > 44px)</span>
+              <p style={{ color: "#9CA3AF", fontSize: "0.85rem", margin: "0.5rem 0 1.5rem", lineHeight: 1.5 }}>
+                Botões pílula táteis otimizados para uso mobile sob o polegar, com transições aceleradas e gradientes bioluminescentes da Pátria Cyber-Glow.
+              </p>
+            </div>
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", alignItems: "center" }}>
+              <button className="btn-v7 btn-v7-primary bg-gradient-v7-glow">
+                Ativar Squad ESG
               </button>
-              <button style={{ background: "rgba(255,255,255,0.02)", color: "#F3F4F6", border: "1px solid var(--color-border-strong)", borderRadius: 9999, padding: "0.9rem 1.75rem", fontWeight: 700, cursor: "pointer", fontFamily: "var(--font-body)", fontSize: "0.9rem", transition: "all 0.2s" }}>
+              <button className="btn-v7 btn-v7-secondary">
                 Ver Casos de Sucesso
               </button>
-              <button style={{ background: "linear-gradient(135deg,#FFD600,#00E676)", color: "#050505", border: "none", borderRadius: 9999, padding: "0.9rem 1.75rem", fontWeight: 700, cursor: "pointer", fontFamily: "var(--font-body)", fontSize: "0.9rem", transition: "all 0.2s" }}>
-                Inscrever Campus Universitário
+              <button className="btn-v7" style={{ background: "#FFC700", color: "#030303" }}>
+                Inscrever Campus
               </button>
             </div>
           </div>
           
           {/* Coluna 2: Fit Score Card */}
-          <div className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+          <div className="glass-card" style={{ padding: "2rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
             <div>
-              <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#FFD600" }}>EXPLICAÇÃO DO FIT SCORE</span>
+              <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#FFC700", letterSpacing: "0.15em", textTransform: "uppercase" }}>EXPLICAÇÃO DO FIT SCORE</span>
               <div style={{ display: "flex", alignItems: "baseline", gap: 8, margin: "1.5rem 0 1rem" }}>
-                <span className="font-mono" style={{ fontSize: "3.5rem", fontWeight: 700, color: "#FFD600", lineHeight: 1 }}>87</span>
+                <span className="font-mono" style={{ fontSize: "3.5rem", fontWeight: 700, color: "#FFC700", lineHeight: 1 }}>87</span>
                 <span className="font-mono" style={{ color: "#4B5563", fontSize: "0.9rem" }}>/100</span>
               </div>
               <p style={{ color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.5, margin: "0 0 1.25rem" }}>
@@ -1152,7 +1182,7 @@ export default function App() {
               </p>
             </div>
             <div>
-              {[["Skills Técnicas", 82, "#00E676"], ["Objetivos ODS", 91, "#FFD600"], ["Contexto Territorial", 74, "#2979FF"]].map(([l, v, c]) => (
+              {[["Skills Técnicas", 82, "#00FF41"], ["Objetivos ODS", 91, "#FFC700"], ["Contexto Territorial", 74, "#0055FF"]].map(([l, v, c]) => (
                 <div key={l as string} style={{ marginBottom: 10 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.7rem", marginBottom: 4 }}>
                     <span className="font-mono" style={{ color: "#F3F4F6", textTransform: "uppercase" }}>{l as string}</span>
