@@ -1157,13 +1157,13 @@ export default function App() {
               </p>
             </div>
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", alignItems: "center" }}>
-              <button className="btn-v7 btn-v7-primary bg-gradient-v7-glow">
+              <button className="btn-v7 btn-v7-primary">
                 Ativar Squad ESG
               </button>
               <button className="btn-v7 btn-v7-secondary">
                 Ver Casos de Sucesso
               </button>
-              <button className="btn-v7" style={{ background: "#FFC700", color: "#030303" }}>
+              <button className="btn-v7 btn-v7-solar">
                 Inscrever Campus
               </button>
             </div>
