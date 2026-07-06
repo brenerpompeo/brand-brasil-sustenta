@@ -69,7 +69,7 @@ function Nav() {
                 href={`#${n.id}`}
                 data-active={isActive}
                 className="font-mono bs-nav-link"
-                style={{ display: "inline-flex", alignItems: "center", gap: 5, color: isActive ? "#00E676" : "#9CA3AF", textDecoration: "none", fontSize: "0.625rem", textTransform: "uppercase", letterSpacing: "0.1em" }}
+                style={{ display: "inline-flex", alignItems: "center", gap: 5, color: isActive ? "#00FF41" : "#9CA3AF", textDecoration: "none", fontSize: "0.625rem", textTransform: "uppercase", letterSpacing: "0.1em" }}
               >
                 {isActive && <Dot size={4} />}
                 {n.label}
@@ -98,7 +98,7 @@ function Nav() {
             {/* Linha superior */}
             <motion.path
               d="M3 4.5H15"
-              stroke={isOpen ? "#00E676" : "#F3F4F6"}
+              stroke={isOpen ? "#00FF41" : "#F3F4F6"}
               strokeWidth="2"
               strokeLinecap="square"
               animate={isOpen ? { rotate: 45, y: 3.5 } : { rotate: 0, y: 0 }}
@@ -108,7 +108,7 @@ function Nav() {
             {/* Linha do meio */}
             <motion.path
               d="M3 9H15"
-              stroke={isOpen ? "#00E676" : "#F3F4F6"}
+              stroke={isOpen ? "#00FF41" : "#F3F4F6"}
               strokeWidth="2"
               strokeLinecap="square"
               animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
@@ -117,7 +117,7 @@ function Nav() {
             {/* Linha inferior */}
             <motion.path
               d="M3 13.5H15"
-              stroke={isOpen ? "#00E676" : "#F3F4F6"}
+              stroke={isOpen ? "#00FF41" : "#F3F4F6"}
               strokeWidth="2"
               strokeLinecap="square"
               animate={isOpen ? { rotate: -45, y: -3.5 } : { rotate: 0, y: 0 }}
@@ -152,7 +152,7 @@ function Nav() {
             <div style={{ padding: "1.5rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1rem", borderBottom: "1px solid var(--color-border-strong)", paddingBottom: "0.5rem" }}>
                 <span className="font-mono" style={{ fontSize: "0.55rem", color: "#9CA3AF", letterSpacing: "0.2em" }}>Navegação de Marca</span>
-                <span className="font-mono" style={{ fontSize: "0.55rem", color: "#00E676", display: "flex", alignItems: "center", gap: 4 }}>
+                <span className="font-mono" style={{ fontSize: "0.55rem", color: "#00FF41", display: "flex", alignItems: "center", gap: 4 }}>
                   <Dot size={5} /> V2.0
                 </span>
               </div>
@@ -175,9 +175,9 @@ function Nav() {
                         gap: 8,
                         padding: "0.8rem 1rem",
                         borderRadius: 8,
-                        background: isActive ? "rgba(0, 230, 118, 0.05)" : "rgba(255, 255, 255, 0.01)",
-                        border: isActive ? "1px solid #00E676" : "1px solid var(--color-border)",
-                        color: isActive ? "#00E676" : "#F3F4F6",
+                        background: isActive ? "rgba(0, 255, 65, 0.05)" : "rgba(255, 255, 255, 0.01)",
+                        border: isActive ? "1px solid #00FF41" : "1px solid var(--color-border)",
+                        color: isActive ? "#00FF41" : "#F3F4F6",
                         textDecoration: "none",
                         fontSize: "0.7rem",
                         textTransform: "uppercase",
@@ -185,7 +185,7 @@ function Nav() {
                         minHeight: 44
                       }}
                     >
-                      {isActive ? <Dot size={6} color="#00E676" /> : <span style={{ width: 6, height: 6, borderRadius: 9999, background: "#4B5563" }} />}
+                      {isActive ? <Dot size={6} color="#00FF41" /> : <span style={{ width: 6, height: 6, borderRadius: 9999, background: "#4B5563" }} />}
                       {n.label}
                     </motion.a>
                   );
@@ -194,7 +194,7 @@ function Nav() {
 
               <div style={{ marginTop: "1.5rem", borderTop: "1px solid var(--color-border)", paddingTop: "1rem", textAlign: "center" }}>
                 <p className="font-display" style={{ fontSize: "1.2rem", fontWeight: 900, letterSpacing: "-0.02em", color: "#F3F4F6", margin: 0 }}>
-                  IMPACTO REAL. <span style={{ color: "#00E676" }}>QUEM SUSTENTA É NÓIS.</span>
+                  IMPACTO REAL. <span style={{ color: "#00FF41" }}>QUEM SUSTENTA É NÓIS.</span>
                 </p>
               </div>
             </div>
@@ -208,8 +208,8 @@ function Nav() {
 function Hero() {
   const reduced = useReducedMotion();
   const fadeUp = {
-    hidden: { opacity: 0, y: reduced ? 0 : 20 },
-    show: { opacity: 1, y: 0 },
+    hidden: { opacity: 0, y: reduced ? 0 : 35, filter: "blur(8px)" },
+    show: { opacity: 1, y: 0, filter: "blur(0px)" },
   };
   return (
     <section style={{ padding: "8rem 0 5rem", position: "relative", overflow: "hidden" }}>
@@ -220,16 +220,16 @@ function Hero() {
           initial={{ opacity: 0.03 }}
           animate={{ opacity: [0.03, 0.08, 0.03] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(circle at 50% 50%, rgba(41,121,255,0.4) 0%, transparent 40%)" }}
+          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(circle at 50% 50%, rgba(0,85,255,0.4) 0%, transparent 40%)" }}
         />
       )}
       <motion.div
         initial="hidden"
         animate="show"
-        transition={{ staggerChildren: reduced ? 0 : 0.08, delayChildren: 0.05 }}
+        transition={{ staggerChildren: reduced ? 0 : 0.12, delayChildren: 0.1 }}
         style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem", position: "relative", textAlign: "center" }}
       >
-        <motion.div variants={fadeUp} transition={{ duration: 0.6, ease: EASE }}>
+        <motion.div variants={fadeUp} transition={{ duration: 0.8, ease: EASE }}>
           <p className="font-mono" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: "0.6875rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.25em", color: "#00FF41" }}>
             <Dot /> SOVEREIGN BRAND GUIDE · V{tokens._meta.version}
           </p>
@@ -237,19 +237,19 @@ function Hero() {
         
         <motion.h1 
           variants={fadeUp} 
-          transition={{ duration: 0.8, ease: EASE }} 
+          transition={{ duration: 1.3, ease: EASE }} 
           className="font-display" 
           style={{ fontSize: "clamp(3.5rem, 8vw, 7.5rem)", fontWeight: 900, lineHeight: 0.85, margin: "1.5rem 0", color: "#F3F4F6", letterSpacing: "-0.04em" }}
         >
           IMPACTO REAL.<br />
           <span style={{ background: "linear-gradient(90deg, #00FF41, #FFC700, #0055FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>QUEM SUSTENTA É NÓIS.</span>
         </motion.h1>
-
-        <motion.p variants={fadeUp} transition={{ duration: 0.8, ease: EASE }} style={{ color: "#9CA3AF", fontSize: "1.25rem", maxWidth: 640, lineHeight: 1.6, margin: "0 auto 2.5rem" }}>
+ 
+        <motion.p variants={fadeUp} transition={{ duration: 1.3, ease: EASE }} style={{ color: "#9CA3AF", fontSize: "1.25rem", maxWidth: 640, lineHeight: 1.6, margin: "0 auto 2.5rem" }}>
           O design system oficial do Brasil Sustenta. Menos slides institucionais, mais código rodando, tom provocativo e narrativa de valor compartilhado sob a ótica da inovação territorial.
         </motion.p>
-
-        <motion.div variants={fadeUp} transition={{ duration: 0.8, ease: EASE }} style={{ display: "flex", justifyContent: "center", gap: "0.75rem", flexWrap: "wrap" }}>
+ 
+        <motion.div variants={fadeUp} transition={{ duration: 1.3, ease: EASE }} style={{ display: "flex", justifyContent: "center", gap: "0.75rem", flexWrap: "wrap" }}>
           {tokens.color.persona.map((c) => (
             <span key={c.name} className="font-mono bs-card" style={{ display: "inline-flex", alignItems: "center", gap: 8, border: "1px solid var(--color-border-strong)", borderRadius: 9999, padding: "0.5rem 1.1rem", fontSize: "0.75rem", color: "#F3F4F6", background: "rgba(255,255,255,0.02)" }}>
               <span style={{ width: 10, height: 10, borderRadius: 9999, background: c.hex, boxShadow: `0 0 8px ${c.hex}` }} /> {c.persona}
@@ -291,7 +291,7 @@ function ColorRow({ items }: { items: { name: string; hex?: string; value?: stri
             </div>
             <div style={{ padding: "1.25rem" }}>
               <div style={{ fontWeight: 700, fontSize: "1rem", color: "#F3F4F6" }}>{c.label}</div>
-              {c.persona && <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#00E676", textTransform: "uppercase", letterSpacing: "0.15em", marginTop: 4 }}>{c.persona}</div>}
+              {c.persona && <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#00FF41", textTransform: "uppercase", letterSpacing: "0.15em", marginTop: 4 }}>{c.persona}</div>}
               {c.use && <div style={{ fontSize: "0.8rem", color: "#9CA3AF", marginTop: 6, lineHeight: 1.5 }}>{c.use}</div>}
               <div style={{ display: "flex", gap: 6, marginTop: 14, flexWrap: "wrap" }}>
                 <CopyChip value={v} />
@@ -435,8 +435,8 @@ function ToneTranslator() {
               key={idx}
               onClick={() => setActiveIdx(idx)}
               style={{
-                width: 28, height: 28, borderRadius: 9999, border: activeIdx === idx ? "1px solid #00E676" : "1px solid var(--color-border)",
-                background: activeIdx === idx ? "rgba(0,230,118,0.1)" : "transparent", color: activeIdx === idx ? "#00E676" : "#9CA3AF",
+                width: 28, height: 28, borderRadius: 9999, border: activeIdx === idx ? "1px solid #00FF41" : "1px solid var(--color-border)",
+                background: activeIdx === idx ? "rgba(0,255,65,0.1)" : "transparent", color: activeIdx === idx ? "#00FF41" : "#9CA3AF",
                 fontSize: "0.75rem", fontFamily: "var(--font-mono)", cursor: "pointer", transition: "all 0.2s"
               }}
             >
@@ -460,16 +460,16 @@ function ToneTranslator() {
         </div>
         
         {/* Lado Direito: A Solução */}
-        <div style={{ padding: "2.5rem 2rem", background: "rgba(0,230,118,0.01)", display: "flex", flexDirection: "column", justifyContent: "space-between", position: "relative" }}>
-          <SectionGlow color="#00E676" position="90% 10%" opacity={0.04} size="35%" />
+        <div style={{ padding: "2.5rem 2rem", background: "rgba(0,255,65,0.01)", display: "flex", flexDirection: "column", justifyContent: "space-between", position: "relative" }}>
+          <SectionGlow color="#00FF41" position="90% 10%" opacity={0.04} size="35%" />
           <div style={{ zIndex: 2 }}>
-            <span className="font-mono" style={{ fontSize: "0.625rem", color: "#00E676", letterSpacing: "0.15em" }}>[ ✓ ] LINGUAGEM BRASIL SUSTENTA</span>
+            <span className="font-mono" style={{ fontSize: "0.625rem", color: "#00FF41", letterSpacing: "0.15em" }}>[ ✓ ] LINGUAGEM BRASIL SUSTENTA</span>
             <p className="font-display" style={{ color: "#F3F4F6", fontSize: "1.5rem", marginTop: "1.2rem", lineHeight: 1.25, letterSpacing: "-0.01em" }}>
               "{translations[activeIdx].after}"
             </p>
           </div>
           <div style={{ marginTop: "2rem", borderTop: "1px solid var(--color-border)", paddingTop: "1rem", zIndex: 2 }}>
-            <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#00E676", textTransform: "uppercase" }}>Por que dizemos assim:</div>
+            <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#00FF41", textTransform: "uppercase" }}>Por que dizemos assim:</div>
             <p style={{ color: "#9CA3AF", fontSize: "0.85rem", marginTop: 4, lineHeight: 1.5 }}>
               {translations[activeIdx].why}
             </p>
@@ -484,28 +484,28 @@ function ToneTranslator() {
 function GradientShowcase() {
   const grads = [
     {
-      name: "Amazon-Atlantic Neon",
-      css: "linear-gradient(135deg, #00E676 0%, #2979FF 100%)",
-      tailwind: "bg-gradient-to-br from-[#00E676] to-[#2979FF]",
+      name: "Bioluminescent Cyber Glow",
+      css: "linear-gradient(135deg, #00FF41 0%, #0055FF 100%)",
+      tailwind: "bg-gradient-to-br from-[#00FF41] to-[#0055FF]",
       persona: "B2B corporativo com propósito de impacto"
     },
     {
-      name: "Solar-Amazon Energy",
-      css: "linear-gradient(135deg, #FFD600 0%, #00E676 100%)",
-      tailwind: "bg-gradient-to-br from-[#FFD600] to-[#00E676]",
-      persona: "Estudantes e tração de engajamento territorial"
+      name: "Solar Cyber-Glow",
+      css: "linear-gradient(135deg, #FFC700 0%, #00FF41 100%)",
+      tailwind: "bg-gradient-to-br from-[#FFC700] to-[#00FF41]",
+      persona: "Estudantes e tração de engajamento voluntário e squads"
     },
     {
-      name: "Atlantic-Solar Horizon",
-      css: "linear-gradient(135deg, #2979FF 0%, #FFD600 100%)",
-      tailwind: "bg-gradient-to-br from-[#2979FF] to-[#FFD600]",
+      name: "Atlantic Solar Horizon",
+      css: "linear-gradient(135deg, #0055FF 0%, #FFC700 100%)",
+      tailwind: "bg-gradient-to-br from-[#0055FF] to-[#FFC700]",
       persona: "Prefeituras e alinhamento ODS governamental"
     },
     {
-      name: "Obsidian Depth Aurora",
-      css: "radial-gradient(circle at 50% 50%, rgba(0, 230, 118, 0.15) 0%, rgba(5, 5, 5, 0) 70%)",
+      name: "Bioluminescent Depth Aurora",
+      css: "radial-gradient(circle at 50% 50%, rgba(0, 255, 65, 0.15) 0%, rgba(3, 3, 3, 0) 70%)",
       tailwind: "bg-[radial-gradient(circle_at_center,_var(--color-leaf-soft)_0%,_transparent_70%)]",
-      persona: "Glow de fundo para cards e blocos escuros"
+      persona: "Glow de fundo para cards, bento e blocos escuros"
     }
   ];
 
@@ -546,9 +546,9 @@ function TypographyPlayground() {
               key={f}
               onClick={() => setFont(f)}
               style={{
-                background: font === f ? "rgba(0,230,118,0.15)" : "transparent",
-                color: font === f ? "#00E676" : "#9CA3AF",
-                border: font === f ? "1px solid #00E676" : "1px solid var(--color-border)",
+                background: font === f ? "rgba(0,255,65,0.15)" : "transparent",
+                color: font === f ? "#00FF41" : "#9CA3AF",
+                border: font === f ? "1px solid #00FF41" : "1px solid var(--color-border)",
                 borderRadius: 9999, padding: "0.4rem 1rem", fontSize: "0.6875rem", fontFamily: "var(--font-mono)", cursor: "pointer", textTransform: "uppercase"
               }}
             >
@@ -565,7 +565,7 @@ function TypographyPlayground() {
             step="0.1"
             value={size}
             onChange={(e) => setSize(parseFloat(e.target.value))}
-            style={{ accentColor: "#00E676", width: 100 }}
+            style={{ accentColor: "#00FF41", width: 100 }}
           />
           <span className="font-mono" style={{ fontSize: "0.75rem", color: "#F3F4F6", width: 40, textAlign: "right" }}>{size}rem</span>
         </div>
@@ -595,7 +595,7 @@ function TypographyPlayground() {
       
       <div style={{ padding: "1.25rem 2rem", borderTop: "1px solid var(--color-border)", background: "#0D0E0E", display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
         <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#9CA3AF" }}>
-          CSS: <span style={{ color: "#00E676" }}>font-family: {font === "display" ? "var(--font-display)" : font === "mono" ? "var(--font-mono)" : "var(--font-body)"}; font-size: {size}rem;</span>
+          CSS: <span style={{ color: "#00FF41" }}>font-family: {font === "display" ? "var(--font-display)" : font === "mono" ? "var(--font-mono)" : "var(--font-body)"}; font-size: {size}rem;</span>
         </div>
         <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#4B5563" }}>
           Usar classe: {font === "display" ? "font-display" : font === "mono" ? "font-mono" : "corpo-regular"}
@@ -635,7 +635,7 @@ function PhotoSlider() {
     <div style={{ border: "1px solid var(--color-border)", borderRadius: 24, overflow: "hidden", background: "#0D0E0E", marginTop: "2rem" }}>
       <div style={{ padding: "1rem 1.5rem", borderBottom: "1px solid var(--color-border)", background: "#060606", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "1rem" }}>
         <div className="font-mono" style={{ fontSize: "0.75rem", color: "#F3F4F6", display: "flex", alignItems: "center", gap: 8 }}>
-          <Dot color="#2979FF" /> FILTRO FOTOGRÁFICO DE MARCA (DESSATURADO + GRÃO + GLOW)
+          <Dot color="#0055FF" /> FILTRO FOTOGRÁFICO DE MARCA (DESSATURADO + GRÃO + GLOW)
         </div>
         <div style={{ display: "flex", gap: "0.5rem" }}>
           {images.map((_, idx) => (
@@ -645,8 +645,8 @@ function PhotoSlider() {
               className="font-mono"
               style={{
                 background: activeImg === idx ? "rgba(41,121,255,0.15)" : "transparent",
-                color: activeImg === idx ? "#2979FF" : "#9CA3AF",
-                border: activeImg === idx ? "1px solid #2979FF" : "1px solid var(--color-border)",
+                color: activeImg === idx ? "#0055FF" : "#9CA3AF",
+                border: activeImg === idx ? "1px solid #0055FF" : "1px solid var(--color-border)",
                 borderRadius: 8, padding: "0.3rem 0.75rem", fontSize: "0.6875rem", cursor: "pointer"
               }}
             >
@@ -665,12 +665,12 @@ function PhotoSlider() {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            filter: "grayscale(1) contrast(0.95) brightness(0.8)"
+            filter: "grayscale(0.15) contrast(1.05) brightness(0.9)"
           }}
         />
         {/* Glow e Grão overlay na imagem tratada */}
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(circle at 10% 20%, rgba(0, 230, 118, 0.12) 0%, transparent 60%)" }} />
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(circle at 90% 80%, rgba(41, 121, 255, 0.12) 0%, transparent 60%)" }} />
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(circle at 10% 20%, rgba(0, 255, 65, 0.12) 0%, transparent 60%)" }} />
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(circle at 90% 80%, rgba(0, 85, 255, 0.12) 0%, transparent 60%)" }} />
         
         {/* Imagem Pura (Frente Cortada) */}
         <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: `${sliderPos}%`, overflow: "hidden", borderRight: "2px solid #fff" }}>
@@ -690,7 +690,7 @@ function PhotoSlider() {
         </div>
         
         {/* Tag do Lado Tratado */}
-        <div style={{ position: "absolute", left: `${Math.max(sliderPos + 2, 70)}%`, top: 10, background: "rgba(0,230,118,0.8)", padding: "0.25rem 0.5rem", borderRadius: 4, color: "#050505", fontSize: "0.625rem", fontFamily: "var(--font-mono)", fontWeight: 700, letterSpacing: "0.1em" }}>
+        <div style={{ position: "absolute", left: `${Math.max(sliderPos + 2, 70)}%`, top: 10, background: "rgba(0,255,65,0.8)", padding: "0.25rem 0.5rem", borderRadius: 4, color: "#050505", fontSize: "0.625rem", fontFamily: "var(--font-mono)", fontWeight: 700, letterSpacing: "0.1em" }}>
           TRATAMENTO BRAND DS
         </div>
         
@@ -712,8 +712,8 @@ function PhotoSlider() {
         />
         
         {/* Efeito visual da linha divisória */}
-        <div style={{ position: "absolute", left: `calc(${sliderPos}% - 1px)`, top: 0, bottom: 0, width: 2, background: "#00E676", pointerEvents: "none", boxShadow: "0 0 10px #00E676" }} />
-        <div style={{ position: "absolute", left: `calc(${sliderPos}% - 12px)`, top: "calc(50% - 12px)", width: 24, height: 24, borderRadius: 9999, background: "#00E676", pointerEvents: "none", border: "2px solid #fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, color: "#050505", fontWeight: 700 }}>
+        <div style={{ position: "absolute", left: `calc(${sliderPos}% - 1px)`, top: 0, bottom: 0, width: 2, background: "#00FF41", pointerEvents: "none", boxShadow: "0 0 10px #00FF41" }} />
+        <div style={{ position: "absolute", left: `calc(${sliderPos}% - 12px)`, top: "calc(50% - 12px)", width: 24, height: 24, borderRadius: 9999, background: "#00FF41", pointerEvents: "none", border: "2px solid #fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, color: "#050505", fontWeight: 700 }}>
           ↔
         </div>
       </div>
@@ -826,7 +826,7 @@ export default function App() {
 
       {/* O NEGÓCIO — a narrativa unificada de valor */}
       <Section id="negocio" eyebrow="Camada 1 · O Negócio / Playbook" title={<>Inovação territorial que gera ROI socioambiental real.</>} intro="Substituímos o greenwashing e a teoria inócua das consultorias de slides por squads integrados (embedded) e auditáveis no território. O Brasil Sustenta é o matching engine de talentos e o compliance prático das suas metas ESG. Unimos o brilhantismo universitário sob governança de mercado para entregar em semanas o que o seu RH/Sustentabilidade levaria meses para estruturar.">
-        <SectionGlow color="#00E676" position="10% 40%" opacity={0.06} />
+        <SectionGlow color="#00FF41" position="10% 40%" opacity={0.06} />
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.25rem", position: "relative" }}>
           {[
             { t: "Modelo Embedded (Súper Teammates)", b: "Não entregamos relatórios teóricos e sumimos. Alocamos squads de impacto integrados ao seu fluxo, sob a governança da Tríade (Embaixador + Coordenador + Empresa)." },
@@ -847,7 +847,7 @@ export default function App() {
             {[
               { 
                 title: "Tech & Data (Código Real & IA)", 
-                color: "#2979FF", 
+                color: "#0055FF", 
                 tag: "SQUADS DE ENGENHARIA",
                 what: "Construção de MVPs de alta performance, arquiteturas de dados territoriais com georreferenciamento e motores de matching alimentados por inteligência artificial explicável.",
                 how: "Através de sprints de 6 semanas no modelo de governança da Tríade. Usamos TypeScript, React, Next.js, tRPC e bancos de dados vetoriais (pgvector no Supabase) para ligar problemas de campo a soluções digitais rápidas e robustas, focando em acessibilidade digital (WCAG) nas periferias.",
@@ -861,7 +861,7 @@ export default function App() {
               },
               { 
                 title: "Criatividade, Voz & Mídia (Design & Comunicação)", 
-                color: "#FFD600", 
+                color: "#FFC700", 
                 tag: "SQUADS DE DESIGN & MÍDIA",
                 what: "Identidades visuais de impacto, interfaces UX/UI premium de alta fidelidade, copywriting corporativo de calçada, gravação audiovisual documental de campo, fotografia territorial e gestão estratégica de mídias sociais.",
                 how: "Por meio de imersão direta nas calçadas parceiras para extrair a verdade empírica. Aplicamos o design system Neon Pátria (estética escura e limpa com contrastes semânticos neon) e copywriting provocativo que atrai a juventude universitária e gera conversão comercial.",
@@ -876,7 +876,7 @@ export default function App() {
               },
               { 
                 title: "ESG & Território (Ação na Calçada)", 
-                color: "#00E676", 
+                color: "#00FF41", 
                 tag: "SQUADS DE ESG & IMPACTO",
                 what: "Mapeamento socioeconômico e territorial em profundidade nos HUBs locais, diagnósticos qualitativos de vulnerabilidade e articulação de embaixadores universitários com a comunidade.",
                 how: "Fazemos escuta horizontal e levantamento de dados primários in loco, cruzando as dores e ativos locais com as metas da Agenda ODS. Estruturamos a ponte que conecta o retorno das empresas à resolução de problemas crônicos no território.",
@@ -918,7 +918,7 @@ export default function App() {
               },
               { 
                 title: "GovTech, Urbanismo & Cidades (Inovação Pública)", 
-                color: "#2979FF", 
+                color: "#0055FF", 
                 tag: "SQUADS DE GOVTECH & CIDADES",
                 what: "Infraestrutura urbana verde, mobilidade ativa, soluções de saneamento descentralizado e digitalização de serviços públicos governamentais locais (B2G).",
                 how: "Unimos o urbanismo acadêmico com a inteligência empírica das periferias. Através de co-criação com gestores públicos, prefeituras e a comunidade, criamos soluções escaláveis, sustentáveis e de baixíssima pegada de carbono.",
@@ -977,7 +977,7 @@ export default function App() {
           <LogoCard label="Negativo" sub="Fundo claro" bg="#F3F4F6" labelColor="#4B5563">
             <span className="font-display" style={{ display: "flex", flexDirection: "column", lineHeight: 0.88, fontSize: "2.2rem", fontWeight: 900 }}>
               <span style={{ color: "#050505" }}>BRASIL</span>
-              <span style={{ color: "#050505" }}>SUSTENTA<span style={{ color: "#00E676" }}>.</span></span>
+              <span style={{ color: "#050505" }}>SUSTENTA<span style={{ color: "#00FF41" }}>.</span></span>
             </span>
           </LogoCard>
           <LogoCard label="Monocromático" sub="Tudo branco · sem ponto colorido" bg="#0D0E0E">
@@ -1080,8 +1080,8 @@ export default function App() {
         <ToneTranslator />
 
         <div style={{ marginTop: "2rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
-          <div className="bs-card" style={{ border: "1px solid rgba(0, 230, 118, 0.2)", borderRadius: 16, padding: "1.5rem", background: "rgba(0, 230, 118, 0.02)" }}>
-            <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#00E676" }}>✓ O QUE DIZER (RIGOR E ATITUDE)</span>
+          <div className="bs-card" style={{ border: "1px solid rgba(0, 255, 65, 0.2)", borderRadius: 16, padding: "1.5rem", background: "rgba(0, 255, 65, 0.02)" }}>
+            <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#00FF41" }}>✓ O QUE DIZER (RIGOR E ATITUDE)</span>
             <ul style={{ color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.7, margin: "1rem 0 0", paddingLeft: "1.2rem" }}>
               <li>Ancorar soluções em <span style={{ color: "#F3F4F6" }}>evidências quantificáveis</span> (ODS, Fit Scores).</li>
               <li>Falar da base criativa e universitária com <span style={{ color: "#F3F4F6" }}>protagonismo e autoria</span>.</li>
@@ -1101,7 +1101,7 @@ export default function App() {
         </div>
 
         <div style={{ marginTop: "1.5rem", border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#060606" }}>
-          <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#FFD600", marginBottom: 10 }}>[ ATITUDE COMERCIAL: A VERDADE DO IMPACTO ]</div>
+          <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#FFC700", marginBottom: 10 }}>[ ATITUDE COMERCIAL: A VERDADE DO IMPACTO ]</div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "1.5rem" }}>
             <p style={{ color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.6, margin: 0 }}>
               Nossa atitude comercial rejeita o greenwashing e a teoria inócua das consultorias tradicionais. Entramos no território desprovidos de jargões de slides para encontrar a verdade prática das necessidades locais. Operamos de forma científica e com governança corporativa blindada, testando hipóteses em campo de maneira ágil.
@@ -1109,8 +1109,8 @@ export default function App() {
             <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               <div className="font-mono" style={{ fontSize: "0.75rem", color: "#F3F4F6", textTransform: "uppercase" }}>Os dois pilares inegociáveis de redação comercial:</div>
               <ul style={{ margin: 0, paddingLeft: "1.1rem", color: "#9CA3AF", fontSize: "0.8rem", lineHeight: 1.6 }}>
-                <li><strong style={{ color: "#FFD600" }}>Entrar Sem Viés (Desaprendizado de Slide):</strong> Nunca venda respostas prontas no slide de onboarding. Diga: *"Entramos no território para ouvir a comunidade e projetar a partir dos fatos locais, não de suposições corporativas."*</li>
-                <li><strong style={{ color: "#FFD600" }}>Execução de Campo Rápida (Sprints de Evidência):</strong> Valide rápido sob risco controlado. Diga: *"Construímos e testamos soluções em campo através de sprints de 6 semanas, corrigindo a rota de imediato a partir de dados reais da calçada."*</li>
+                <li><strong style={{ color: "#FFC700" }}>Entrar Sem Viés (Desaprendizado de Slide):</strong> Nunca venda respostas prontas no slide de onboarding. Diga: *"Entramos no território para ouvir a comunidade e projetar a partir dos fatos locais, não de suposições corporativas."*</li>
+                <li><strong style={{ color: "#FFC700" }}>Execução de Campo Rápida (Sprints de Evidência):</strong> Valide rápido sob risco controlado. Diga: *"Construímos e testamos soluções em campo através de sprints de 6 semanas, corrigindo a rota de imediato a partir de dados reais da calçada."*</li>
               </ul>
             </div>
           </div>
@@ -1122,17 +1122,17 @@ export default function App() {
         <PhotoSlider />
 
         <div style={{ marginTop: "1.5rem", border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.25rem", background: "#060606" }}>
-          <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#2979FF", marginBottom: 10 }}>[ CSS TOKENS PARA FOTOGRAFIA ]</div>
+          <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#0055FF", marginBottom: 10 }}>[ CSS TOKENS PARA FOTOGRAFIA ]</div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "1.5rem", alignItems: "center" }}>
             <p style={{ color: "#9CA3AF", fontSize: "0.8rem", lineHeight: 1.5, margin: 0 }}>
               Todas as fotografias de pessoas ou do território devem ser dessaturadas para neutralizar cores estranhas ao design system e receber overlays sutis dos nossos gradientes semânticos (Leaf ou Atlantic) para fixar a assinatura visual da marca.
             </p>
-            <pre style={{ margin: 0, padding: "1rem", background: "#050505", borderRadius: 8, border: "1px solid var(--color-border-strong)", fontSize: "0.7rem", color: "#00E676", overflowX: "auto", fontFamily: "var(--font-mono)" }}>
+            <pre style={{ margin: 0, padding: "1rem", background: "#050505", borderRadius: 8, border: "1px solid var(--color-border-strong)", fontSize: "0.7rem", color: "#00FF41", overflowX: "auto", fontFamily: "var(--font-mono)" }}>
 {`.photo-brand-filter {
-  filter: grayscale(1) contrast(0.95) brightness(0.8);
+  filter: grayscale(0.15) contrast(1.05) brightness(0.9);
   /* Overlay Leaf/Atlantic */
-  background: radial-gradient(circle at 10% 20%, rgba(0, 230, 118, 0.12) 0%, transparent 60%),
-              radial-gradient(circle at 90% 80%, rgba(41, 121, 255, 0.12) 0%, transparent 60%);
+  background: radial-gradient(circle at 10% 20%, rgba(0, 255, 65, 0.12) 0%, transparent 60%),
+              radial-gradient(circle at 90% 80%, rgba(0, 85, 255, 0.12) 0%, transparent 60%);
 }`}
             </pre>
           </div>
@@ -1141,7 +1141,7 @@ export default function App() {
 
       {/* O MÉTODO — fluxo operacional */}
       <Section id="metodo" eyebrow="Camada 6 · O Método" title="O pipeline de valor." intro="Rastreabilidade do início ao fim. Cada squad passa por checkpoints bem definidos no sistema que geram evidência digital. Transparência operacional completa.">
-        <SectionGlow color="#2979FF" position="50% 50%" opacity={0.05} />
+        <SectionGlow color="#0055FF" position="50% 50%" opacity={0.05} />
         <FlowDemo />
       </Section>
 
@@ -1151,7 +1151,7 @@ export default function App() {
           {/* Coluna 1: Botoes (Bento span 2 colunas) */}
           <div className="glass-card bento-2col" style={{ padding: "2rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
             <div>
-              <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#00FF41", letterSpacing: "0.15em", textTransform: "uppercase" }}>✓ Botões Encorpados v7 (Touch Target > 44px)</span>
+              <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#00FF41", letterSpacing: "0.15em", textTransform: "uppercase" }}>✓ Botões Encorpados v7 (Touch Target &gt; 44px)</span>
               <p style={{ color: "#9CA3AF", fontSize: "0.85rem", margin: "0.5rem 0 1.5rem", lineHeight: 1.5 }}>
                 Botões pílula táteis otimizados para uso mobile sob o polegar, com transições aceleradas e gradientes bioluminescentes da Pátria Cyber-Glow.
               </p>
@@ -1208,8 +1208,8 @@ export default function App() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.25rem" }}>
           {[
             { l: "🔴 Inalterável (Soberano)", c: "#FF1744", b: "Logo oficial, nome, paleta semântica principal e tom de voz anti-greenwashing. Apenas o Brand Owner decide." },
-            { l: "🟡 Adaptável (Evolutivo)", c: "#FFD600", b: "Novos componentes do design system, gradientes secundários e escalas de texto. Propostas via PR de ADR." },
-            { l: "🟢 Livre (Execução)", c: "#00E676", b: "Uso combinado de tokens existentes para criar novas páginas, posts e ilustrações no tom de voz oficial." },
+            { l: "🟡 Adaptável (Evolutivo)", c: "#FFC700", b: "Novos componentes do design system, gradientes secundários e escalas de texto. Propostas via PR de ADR." },
+            { l: "🟢 Livre (Execução)", c: "#00FF41", b: "Uso combinado de tokens existentes para criar novas páginas, posts e ilustrações no tom de voz oficial." },
           ].map((x) => (
             <div key={x.l} className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
               <div className="font-mono" style={{ fontWeight: 700, color: x.c, marginBottom: 8, fontSize: "0.85rem" }}>{x.l}</div>
