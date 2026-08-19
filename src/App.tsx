@@ -9,18 +9,18 @@ import { FlowDemo } from "./components/FlowDemo";
 import { EaseDemo } from "./components/EaseDemo";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
+const cn = (...classes: (string | boolean | undefined | null | number)[]) => classes.filter(Boolean).join(" ");
 
 const NAV = [
-  { id: "negocio", label: "O Negócio" },
+  { id: "negocio", label: "Visão & Tese" },
   { id: "manifesto", label: "Manifesto" },
-  { id: "logo", label: "Logo" },
-  { id: "cores", label: "Cores & Gradientes" },
+  { id: "logo", label: "Logo & Identidade" },
+  { id: "cores", label: "Cores & Tokens" },
   { id: "tipografia", label: "Tipografia" },
   { id: "tom", label: "Tom de Voz" },
   { id: "fotografia", label: "Fotografia" },
-  { id: "metodo", label: "Método" },
   { id: "componentes", label: "Componentes" },
-  { id: "ods", label: "ODS Impacto" },
+  { id: "ods", label: "ODS & Território" },
   { id: "governanca", label: "Governança" },
 ];
 
@@ -55,147 +55,135 @@ function Nav() {
   };
 
   return (
-    <header style={{ position: "sticky", top: 0, zIndex: 50, background: "rgba(5,5,5,0.85)", backdropFilter: "blur(12px)", borderBottom: "1px solid var(--color-border)" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0.9rem 1.5rem", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}>
-        <Logo size={0.9} />
-        
-        {/* Menu Desktop */}
-        <nav className="hidden lg:flex" style={{ gap: "1.2rem", alignItems: "center" }}>
-          {NAV.map((n) => {
-            const isActive = active === n.id;
-            return (
-              <a
-                key={n.id}
-                href={`#${n.id}`}
-                data-active={isActive}
-                className="font-mono bs-nav-link"
-                style={{ display: "inline-flex", alignItems: "center", gap: 5, color: isActive ? "#00FF41" : "#9CA3AF", textDecoration: "none", fontSize: "0.625rem", textTransform: "uppercase", letterSpacing: "0.1em" }}
-              >
-                {isActive && <Dot size={4} />}
-                {n.label}
-              </a>
-            );
-          })}
-        </nav>
+    <header className="sticky top-3 z-50 px-4 transition-all duration-300 pointer-events-none">
+      <div className="max-w-6xl mx-auto pointer-events-auto">
+        <div className="relative flex items-center justify-between h-14 px-5 md:px-6 rounded-full bg-[#050505]/80 backdrop-blur-2xl border border-white/[0.08] shadow-[0_12px_32px_rgba(0,0,0,0.6)]">
+          {/* Logo Minimalista de Marca */}
+          <a href="#" className="flex items-center gap-2 select-none shrink-0 group" style={{ textDecoration: "none" }}>
+            <span className="font-display text-lg md:text-xl font-bold uppercase tracking-tight text-[#F3F4F6]">
+              BRASIL SUSTENTA<span className="text-[#00E676] ml-0.5">.</span>
+            </span>
+            <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-[#00E676] bg-[#00E676]/10 px-2 py-0.5 rounded-full border border-[#00E676]/20">
+              BRAND GUIDE
+            </span>
+          </a>
 
-        {/* Botão Hambúrguer Mobile (Touch Target: 44px) */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="flex lg:hidden items-center justify-center"
-          aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
-          style={{
-            cursor: "pointer",
-            width: 44,
-            height: 44,
-            borderRadius: 8,
-            border: "1px solid var(--color-border)",
-            backgroundColor: "rgba(255,255,255,0.02)",
-            position: "relative",
-            zIndex: 60
-          }}
-        >
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            {/* Linha superior */}
-            <motion.path
-              d="M3 4.5H15"
-              stroke={isOpen ? "#00FF41" : "#F3F4F6"}
-              strokeWidth="2"
-              strokeLinecap="square"
-              animate={isOpen ? { rotate: 45, y: 3.5 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.2, ease: "easeInOut" }}
-              style={{ originX: "9px", originY: "4.5px" }}
-            />
-            {/* Linha do meio */}
-            <motion.path
-              d="M3 9H15"
-              stroke={isOpen ? "#00FF41" : "#F3F4F6"}
-              strokeWidth="2"
-              strokeLinecap="square"
-              animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-              transition={{ duration: 0.15 }}
-            />
-            {/* Linha inferior */}
-            <motion.path
-              d="M3 13.5H15"
-              stroke={isOpen ? "#00FF41" : "#F3F4F6"}
-              strokeWidth="2"
-              strokeLinecap="square"
-              animate={isOpen ? { rotate: -45, y: -3.5 } : { rotate: 0, y: 0 }}
-              transition={{ duration: 0.2, ease: "easeInOut" }}
-              style={{ originX: "9px", originY: "13.5px" }}
-            />
-          </svg>
-        </button>
+          {/* Menu Desktop — Pílulas Flutuantes Refinadas */}
+          <nav className="hidden xl:flex items-center gap-1">
+            {NAV.map((n) => {
+              const isActive = active === n.id;
+              return (
+                <a
+                  key={n.id}
+                  href={`#${n.id}`}
+                  style={{ textDecoration: "none" }}
+                  className={cn(
+                    "px-3 py-1.5 rounded-full text-xs transition-all duration-200",
+                    isActive
+                      ? "text-white bg-white/[0.08] font-medium border border-white/[0.12] shadow-[0_0_12px_rgba(255,255,255,0.05)]"
+                      : "text-white/60 hover:text-white hover:bg-white/[0.03] border border-transparent font-normal"
+                  )}
+                >
+                  {n.label}
+                </a>
+              );
+            })}
+          </nav>
+
+          {/* Ação Direita: Botão Tokens v8.0 */}
+          <div className="hidden lg:flex items-center gap-3">
+            <a
+              href="#cores"
+              style={{ textDecoration: "none" }}
+              className="font-mono text-[11px] text-white/50 hover:text-white transition-colors px-2 py-1"
+            >
+              v8.0 High-End
+            </a>
+            <a
+              href="#componentes"
+              style={{ textDecoration: "none" }}
+              className="relative inline-flex items-center justify-center gap-1.5 px-4 h-8 rounded-full bg-white text-[#050505] text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:bg-[#00E676] active:scale-[0.98] shadow-[0_0_16px_rgba(255,255,255,0.08)] hover:shadow-[0_0_20px_rgba(0,230,118,0.25)]"
+            >
+              <span>Ver UI</span>
+              <span className="text-[10px]">→</span>
+            </a>
+          </div>
+
+          {/* Botão Mobile (Touch Target: 44px) */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="flex xl:hidden size-9 rounded-full bg-white/[0.04] border border-white/[0.08] items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
+            aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
+          >
+            <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+              <motion.path
+                d="M3 4.5H15"
+                stroke={isOpen ? "#00E676" : "#F3F4F6"}
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                animate={isOpen ? { rotate: 45, y: 3.5 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.2, ease: "easeInOut" }}
+                style={{ originX: "9px", originY: "4.5px" }}
+              />
+              <motion.path
+                d="M3 9H15"
+                stroke={isOpen ? "#00E676" : "#F3F4F6"}
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
+                transition={{ duration: 0.15 }}
+              />
+              <motion.path
+                d="M3 13.5H15"
+                stroke={isOpen ? "#00E676" : "#F3F4F6"}
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                animate={isOpen ? { rotate: -45, y: -3.5 } : { rotate: 0, y: 0 }}
+                transition={{ duration: 0.2, ease: "easeInOut" }}
+                style={{ originX: "9px", originY: "13.5px" }}
+              />
+            </svg>
+          </button>
+        </div>
       </div>
 
-      {/* Super Menu / Gaveta Mobile */}
+      {/* Gaveta Mobile — Editorial Minimalist */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.35, ease: EASE }}
-            className="block lg:hidden"
-            style={{
-              position: "absolute",
-              top: "100%",
-              left: 0,
-              right: 0,
-              background: "rgba(5, 5, 5, 0.98)",
-              backdropFilter: "blur(20px)",
-              borderBottom: "1px solid var(--color-border)",
-              zIndex: 49,
-              overflow: "hidden"
-            }}
+            initial={{ opacity: 0, y: -8, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.98 }}
+            transition={{ duration: 0.25, ease: EASE }}
+            className="block xl:hidden mt-2 max-w-6xl mx-auto"
           >
-            <div style={{ padding: "1.5rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1rem", borderBottom: "1px solid var(--color-border-strong)", paddingBottom: "0.5rem" }}>
-                <span className="font-mono" style={{ fontSize: "0.55rem", color: "#9CA3AF", letterSpacing: "0.2em" }}>Navegação de Marca</span>
-                <span className="font-mono" style={{ fontSize: "0.55rem", color: "#00FF41", display: "flex", alignItems: "center", gap: 4 }}>
-                  <Dot size={5} /> V2.0
-                </span>
+            <div className="rounded-3xl bg-[#0D0E0E]/98 backdrop-blur-3xl border border-white/[0.08] p-5 shadow-2xl">
+              <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/[0.06]">
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">Índice da Marca</span>
+                <span className="font-mono text-[10px] text-[#00E676] bg-[#00E676]/10 px-2 py-0.5 rounded-full">v8.0</span>
               </div>
               
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
-                {NAV.map((n, idx) => {
+              <div className="grid grid-cols-2 gap-1.5">
+                {NAV.map((n) => {
                   const isActive = active === n.id;
                   return (
-                    <motion.a
+                    <a
                       key={n.id}
                       href={`#${n.id}`}
                       onClick={handleLinkClick}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: idx * 0.03 }}
-                      className="font-mono bs-card"
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 8,
-                        padding: "0.8rem 1rem",
-                        borderRadius: 8,
-                        background: isActive ? "rgba(0, 255, 65, 0.05)" : "rgba(255, 255, 255, 0.01)",
-                        border: isActive ? "1px solid #00FF41" : "1px solid var(--color-border)",
-                        color: isActive ? "#00FF41" : "#F3F4F6",
-                        textDecoration: "none",
-                        fontSize: "0.7rem",
-                        textTransform: "uppercase",
-                        letterSpacing: "0.08em",
-                        minHeight: 44
-                      }}
+                      style={{ textDecoration: "none" }}
+                      className={cn(
+                        "flex items-center gap-2 p-2.5 rounded-xl text-xs transition-colors",
+                        isActive
+                          ? "bg-white/[0.08] text-[#00E676] font-medium border border-white/[0.08]"
+                          : "text-white/70 hover:text-white hover:bg-white/[0.03]"
+                      )}
                     >
-                      {isActive ? <Dot size={6} color="#00FF41" /> : <span style={{ width: 6, height: 6, borderRadius: 9999, background: "#4B5563" }} />}
-                      {n.label}
-                    </motion.a>
+                      <span className={cn("size-1.5 rounded-full", isActive ? "bg-[#00E676]" : "bg-neutral-600")} />
+                      <span>{n.label}</span>
+                    </a>
                   );
                 })}
-              </div>
-
-              <div style={{ marginTop: "1.5rem", borderTop: "1px solid var(--color-border)", paddingTop: "1rem", textAlign: "center" }}>
-                <p className="font-display" style={{ fontSize: "1.2rem", fontWeight: 900, letterSpacing: "-0.02em", color: "#F3F4F6", margin: 0 }}>
-                  IMPACTO REAL. <span style={{ color: "#00FF41" }}>QUEM SUSTENTA É NÓIS.</span>
-                </p>
               </div>
             </div>
           </motion.div>
