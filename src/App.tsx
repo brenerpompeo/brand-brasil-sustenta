@@ -294,54 +294,153 @@ function Nav() {
 
 function Hero() {
   const reduced = useReducedMotion();
+
   const fadeUp = {
-    hidden: { opacity: 0, y: reduced ? 0 : 35, filter: "blur(8px)" },
+    hidden: { opacity: 0, y: reduced ? 0 : 30, filter: "blur(8px)" },
     show: { opacity: 1, y: 0, filter: "blur(0px)" },
   };
+
   return (
-    <section style={{ padding: "8rem 0 5rem", position: "relative", overflow: "hidden" }}>
-      <SectionGlow color="#00FF41" position="50% 30%" opacity={0.07} size="60%" />
-      {!reduced && (
-        <motion.div
-          aria-hidden
-          initial={{ opacity: 0.03 }}
-          animate={{ opacity: [0.03, 0.08, 0.03] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          style={{ position: "absolute", inset: 0, pointerEvents: "none", background: "radial-gradient(circle at 50% 50%, rgba(0,85,255,0.4) 0%, transparent 40%)" }}
-        />
-      )}
+    <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden">
+      {/* Bioluminescência Atmosférica Suave */}
+      <SectionGlow color="#00E676" position="50% 20%" opacity={0.06} size="50%" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-10 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[radial-gradient(circle_at_center,_rgba(0,230,118,0.08)_0%,_rgba(41,121,255,0.04)_50%,_transparent_75%)] blur-3xl"
+      />
+
       <motion.div
         initial="hidden"
         animate="show"
-        transition={{ staggerChildren: reduced ? 0 : 0.12, delayChildren: 0.1 }}
-        style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem", position: "relative", textAlign: "center" }}
+        transition={{ staggerChildren: reduced ? 0 : 0.1, delayChildren: 0.1 }}
+        className="max-w-5xl mx-auto px-6 relative text-center"
       >
-        <motion.div variants={fadeUp} transition={{ duration: 0.8, ease: EASE }}>
-          <p className="font-mono" style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: "0.6875rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.25em", color: "#00FF41" }}>
-            <Dot /> SOVEREIGN BRAND GUIDE · V{tokens._meta.version}
-          </p>
-        </motion.div>
-        
-        <motion.h1 
-          variants={fadeUp} 
-          transition={{ duration: 1.3, ease: EASE }} 
-          className="font-display" 
-          style={{ fontSize: "clamp(3.5rem, 8vw, 7.5rem)", fontWeight: 900, lineHeight: 0.85, margin: "1.5rem 0", color: "#F3F4F6", letterSpacing: "-0.04em" }}
-        >
-          IMPACTO REAL.<br />
-          <span style={{ background: "linear-gradient(90deg, #00FF41, #FFC700, #0055FF)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>QUEM SUSTENTA É NÓIS.</span>
-        </motion.h1>
- 
-        <motion.p variants={fadeUp} transition={{ duration: 1.3, ease: EASE }} style={{ color: "#9CA3AF", fontSize: "1.25rem", maxWidth: 640, lineHeight: 1.6, margin: "0 auto 2.5rem" }}>
-          O design system oficial do Brasil Sustenta. Menos slides institucionais, mais código rodando, tom provocativo e narrativa de valor compartilhado sob a ótica da inovação territorial.
-        </motion.p>
- 
-        <motion.div variants={fadeUp} transition={{ duration: 1.3, ease: EASE }} style={{ display: "flex", justifyContent: "center", gap: "0.75rem", flexWrap: "wrap" }}>
-          {tokens.color.persona.map((c) => (
-            <span key={c.name} className="font-mono bs-card" style={{ display: "inline-flex", alignItems: "center", gap: 8, border: "1px solid var(--color-border-strong)", borderRadius: 9999, padding: "0.5rem 1.1rem", fontSize: "0.75rem", color: "#F3F4F6", background: "rgba(255,255,255,0.02)" }}>
-              <span style={{ width: 10, height: 10, borderRadius: 9999, background: c.hex, boxShadow: `0 0 8px ${c.hex}` }} /> {c.persona}
+        {/* Eyebrow Chip Minimalista */}
+        <motion.div variants={fadeUp} transition={{ duration: 0.7, ease: EASE }} className="flex justify-center mb-6">
+          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+            <span className="size-2 rounded-full bg-[#00E676] animate-pulse shadow-[0_0_8px_#00E676]" />
+            <span className="font-mono text-[11px] uppercase tracking-[0.20em] text-white/80 font-medium">
+              Obsidian V6 · Fonte Única de Marca
             </span>
-          ))}
+          </div>
+        </motion.div>
+
+        {/* Título Monumental Limpo (Sem Gradiente Arco-íris) */}
+        <motion.h1
+          variants={fadeUp}
+          transition={{ duration: 1.0, ease: EASE }}
+          className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-[6.5rem] font-black uppercase tracking-[-0.04em] leading-[0.90] text-[#F3F4F6] mb-6"
+        >
+          DESIGN SYSTEM<br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F3F4F6] via-[#E5E7EB] to-neutral-400">
+            ALTO LUXO PÁTRIA<span className="text-[#00E676]">.</span>
+          </span>
+        </motion.h1>
+
+        {/* Subtítulo Editorial Arejado */}
+        <motion.p
+          variants={fadeUp}
+          transition={{ duration: 1.0, ease: EASE }}
+          className="text-base sm:text-lg md:text-xl text-neutral-400 font-body font-light leading-[1.65] max-w-2xl mx-auto mb-10"
+        >
+          A arquitetura visual e os tokens definitivos do <strong className="text-white font-medium">Brasil Sustenta</strong>. 
+          Onde a precisão algorítmica da inteligência territorial encontra o minimalismo contemporâneo de alto luxo.
+        </motion.p>
+
+        {/* Ações Primárias em Cápsula */}
+        <motion.div
+          variants={fadeUp}
+          transition={{ duration: 1.0, ease: EASE }}
+          className="flex flex-wrap items-center justify-center gap-3.5 mb-16"
+        >
+          <a
+            href="#cores"
+            style={{ textDecoration: "none" }}
+            className="relative inline-flex items-center justify-center gap-2 px-8 h-12 rounded-full bg-white text-[#050505] text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:bg-[#00E676] active:scale-[0.98] shadow-[0_0_24px_rgba(255,255,255,0.15)] hover:shadow-[0_0_28px_rgba(0,230,118,0.35)]"
+          >
+            <span>Explorar Tokens & Cores</span>
+            <span className="text-sm">↓</span>
+          </a>
+
+          <a
+            href="#componentes"
+            style={{ textDecoration: "none" }}
+            className="inline-flex items-center justify-center gap-2 px-7 h-12 rounded-full bg-white/[0.04] text-white/90 hover:text-white border border-white/[0.08] hover:border-white/[0.18] hover:bg-white/[0.07] text-xs font-medium uppercase tracking-wider transition-all duration-300"
+          >
+            <span>Biblioteca UI</span>
+            <span className="text-sm text-white/50">→</span>
+          </a>
+        </motion.div>
+
+        {/* Bento Showcase Card Flutuante (Visual Preview) */}
+        <motion.div
+          variants={fadeUp}
+          transition={{ duration: 1.2, ease: EASE }}
+          className="relative rounded-3xl bg-[#0D0E0E]/80 backdrop-blur-2xl border border-white/[0.08] p-6 md:p-8 text-left shadow-[0_24px_60px_rgba(0,0,0,0.8)] overflow-hidden"
+        >
+          {/* Luz de fundo do Bento Card */}
+          <div className="pointer-events-none absolute -top-24 -right-24 size-64 rounded-full bg-[#00E676]/[0.06] blur-3xl" />
+
+          {/* Header do Bento Card */}
+          <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/[0.06] mb-6">
+            <div className="flex items-center gap-3">
+              <span className="size-2.5 rounded-full bg-[#00E676]" />
+              <span className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-white/80">
+                LIVESTACK · TOKENS V8.0
+              </span>
+            </div>
+            <div className="flex items-center gap-2 font-mono text-[11px] text-neutral-400">
+              <span className="text-neutral-600 font-light">SHA-256:</span>
+              <span className="text-white/70">8cfea8b...verified</span>
+            </div>
+          </div>
+
+          {/* 3 Colunas de Showcase */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Coluna 1: Paleta Pátria */}
+            <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.04]">
+              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500 block mb-3">
+                01 · ACENTOS CROMÁTICOS
+              </span>
+              <div className="flex items-center gap-2.5 mb-2">
+                <div className="size-6 rounded-full bg-[#00E676] shadow-[0_0_10px_rgba(0,230,118,0.4)]" title="Verde Amazônia #00E676" />
+                <div className="size-6 rounded-full bg-[#2979FF] shadow-[0_0_10px_rgba(41,121,255,0.4)]" title="Azul Atlântico #2979FF" />
+                <div className="size-6 rounded-full bg-[#FFD600] shadow-[0_0_10px_rgba(255,214,0,0.4)]" title="Amarelo Ouro Solar #FFD600" />
+              </div>
+              <p className="text-xs text-neutral-400 font-light leading-relaxed mt-2">
+                Acentos bioluminescentes cirúrgicos contidos em ≤5% da tela.
+              </p>
+            </div>
+
+            {/* Coluna 2: Hierarquia Tipográfica */}
+            <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.04]">
+              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500 block mb-2">
+                02 · TIPOGRAFIA
+              </span>
+              <div className="font-display text-xl font-bold text-white tracking-tight uppercase leading-none">
+                Antonio Display
+              </div>
+              <div className="font-body text-xs text-neutral-400 font-light mt-1">
+                Outfit & Inter Body (300/400)
+              </div>
+              <div className="font-mono text-[10px] text-[#00E676] mt-2">
+                Geist Mono Tabular
+              </div>
+            </div>
+
+            {/* Coluna 3: Elevação Tonal */}
+            <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.04]">
+              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500 block mb-2">
+                03 · HAIRLINES 1PX
+              </span>
+              <div className="text-xl font-bold font-mono text-white">
+                rgba(255,255,255,0.06)
+              </div>
+              <p className="text-xs text-neutral-400 font-light leading-relaxed mt-1">
+                3 camadas de elevação (#050505 ➔ #0D0E0E ➔ #141617). Zero bordas grossas.
+              </p>
+            </div>
+          </div>
         </motion.div>
       </motion.div>
     </section>
