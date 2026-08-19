@@ -11,20 +11,52 @@ import { EaseDemo } from "./components/EaseDemo";
 const EASE = [0.16, 1, 0.3, 1] as const;
 const cn = (...classes: (string | boolean | undefined | null | number)[]) => classes.filter(Boolean).join(" ");
 
-const NAV = [
-  { id: "negocio", label: "Visão & Tese" },
-  { id: "manifesto", label: "Manifesto" },
-  { id: "logo", label: "Logo & Identidade" },
-  { id: "cores", label: "Cores & Tokens" },
-  { id: "tipografia", label: "Tipografia" },
-  { id: "tom", label: "Tom de Voz" },
-  { id: "fotografia", label: "Fotografia" },
-  { id: "componentes", label: "Componentes" },
-  { id: "ods", label: "ODS & Território" },
-  { id: "governanca", label: "Governança" },
+interface NavGroup {
+  id: string;
+  title: string;
+  items: {
+    id: string;
+    label: string;
+    desc: string;
+    accent?: string;
+  }[];
+}
+
+const NAV_GROUPS: NavGroup[] = [
+  {
+    id: "identidade",
+    title: "Identidade",
+    items: [
+      { id: "negocio", label: "Visão & Tese", desc: "Posicionamento e modelo de valor", accent: "#00E676" },
+      { id: "manifesto", label: "Manifesto Oficial", desc: "6 compromissos inegociáveis", accent: "#FFD600" },
+      { id: "logo", label: "Logo & Aplicação", desc: "Versões oficial, mono e grid", accent: "#00E676" },
+      { id: "tom", label: "Tom de Voz", desc: "Anti-greenwashing e calçada high-end", accent: "#2979FF" },
+    ],
+  },
+  {
+    id: "tokens",
+    title: "Design Tokens",
+    items: [
+      { id: "cores", label: "Cores & Gradientes", desc: "Paleta pátria e elevação tonal", accent: "#00E676" },
+      { id: "tipografia", label: "Sistema Tipográfico", desc: "Antonio, Outfit & Geist Mono", accent: "#FFD600" },
+      { id: "fotografia", label: "Diretriz Fotográfica", desc: "Tratamento documental e textura", accent: "#2979FF" },
+      { id: "componentes", label: "UI & Componentes", desc: "Bento cards, botões e badges", accent: "#00E676" },
+    ],
+  },
+  {
+    id: "ecossistema",
+    title: "Impacto & Método",
+    items: [
+      { id: "metodo", label: "Método de Squads", desc: "Engenharia de impacto em campo", accent: "#00E676" },
+      { id: "ods", label: "18 Metas ODS", desc: "Território, dados e MEC 10%", accent: "#FFD600" },
+      { id: "governanca", label: "Governança Soberana", desc: "Tríade e integridade auditável", accent: "#2979FF" },
+    ],
+  },
 ];
 
-/** Hook simples para scroll spy */
+const ALL_SECTION_IDS = NAV_GROUPS.flatMap((g) => g.items.map((i) => i.id));
+
+/** Hook para scroll spy */
 function useActiveSection(ids: string[]) {
   const [active, setActive] = useState(ids[0]);
   useEffect(() => {
@@ -35,7 +67,7 @@ function useActiveSection(ids: string[]) {
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
         if (visible[0]) setActive(visible[0].target.id);
       },
-      { rootMargin: "-30% 0px -60% 0px", threshold: [0, 0.25, 0.5, 1] }
+      { rootMargin: "-25% 0px -65% 0px", threshold: [0, 0.25, 0.5, 1] }
     );
     ids.forEach((id) => {
       const el = document.getElementById(id);
@@ -47,51 +79,111 @@ function useActiveSection(ids: string[]) {
 }
 
 function Nav() {
-  const active = useActiveSection(NAV.map((n) => n.id));
+  const active = useActiveSection(ALL_SECTION_IDS);
   const [isOpen, setIsOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   const handleLinkClick = () => {
     setIsOpen(false);
+    setActiveDropdown(null);
   };
 
   return (
-    <header className="sticky top-3 z-50 px-4 transition-all duration-300 pointer-events-none">
-      <div className="max-w-6xl mx-auto pointer-events-auto">
-        <div className="relative flex items-center justify-between h-14 px-5 md:px-6 rounded-full bg-[#050505]/80 backdrop-blur-2xl border border-white/[0.08] shadow-[0_12px_32px_rgba(0,0,0,0.6)]">
-          {/* Logo Minimalista de Marca */}
+    <header className="sticky top-4 z-50 px-4 transition-all duration-300 pointer-events-none">
+      <div className="max-w-4xl mx-auto pointer-events-auto">
+        <div className="relative flex items-center justify-between h-14 px-5 md:px-6 rounded-full bg-[#08090A]/85 backdrop-blur-2xl border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.7)]">
+          {/* Logo Minimalista */}
           <a href="#" className="flex items-center gap-2 select-none shrink-0 group" style={{ textDecoration: "none" }}>
             <span className="font-display text-lg md:text-xl font-bold uppercase tracking-tight text-[#F3F4F6]">
               BRASIL SUSTENTA<span className="text-[#00E676] ml-0.5">.</span>
             </span>
             <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-[#00E676] bg-[#00E676]/10 px-2 py-0.5 rounded-full border border-[#00E676]/20">
-              BRAND GUIDE
+              BRAND
             </span>
           </a>
 
-          {/* Menu Desktop — Pílulas Flutuantes Refinadas */}
-          <nav className="hidden xl:flex items-center gap-1">
-            {NAV.map((n) => {
-              const isActive = active === n.id;
+          {/* Navegação Desktop com Dropdowns */}
+          <nav className="hidden md:flex items-center gap-1.5">
+            {NAV_GROUPS.map((group) => {
+              const isGroupActive = group.items.some((i) => i.id === active);
+              const isDropdownOpen = activeDropdown === group.id;
+
               return (
-                <a
-                  key={n.id}
-                  href={`#${n.id}`}
-                  style={{ textDecoration: "none" }}
-                  className={cn(
-                    "px-3 py-1.5 rounded-full text-xs transition-all duration-200",
-                    isActive
-                      ? "text-white bg-white/[0.08] font-medium border border-white/[0.12] shadow-[0_0_12px_rgba(255,255,255,0.05)]"
-                      : "text-white/60 hover:text-white hover:bg-white/[0.03] border border-transparent font-normal"
-                  )}
+                <div
+                  key={group.id}
+                  className="relative"
+                  onMouseEnter={() => setActiveDropdown(group.id)}
+                  onMouseLeave={() => setActiveDropdown(null)}
                 >
-                  {n.label}
-                </a>
+                  <button
+                    type="button"
+                    className={cn(
+                      "flex items-center gap-1.5 px-3.5 py-1.5 text-[13px] rounded-full transition-all duration-200 cursor-pointer font-normal",
+                      isDropdownOpen || isGroupActive
+                        ? "text-white bg-white/[0.08] font-medium border border-white/[0.10]"
+                        : "text-white/65 hover:text-white hover:bg-white/[0.03] border border-transparent"
+                    )}
+                  >
+                    <span>{group.title}</span>
+                    <svg
+                      className={cn(
+                        "size-3 opacity-50 transition-transform duration-200",
+                        isDropdownOpen && "rotate-180 opacity-100"
+                      )}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+
+                  {/* Dropdown Menu Flutuante */}
+                  {isDropdownOpen && (
+                    <div className="absolute top-full left-0 pt-2 w-80 animate-in fade-in-0 zoom-in-95 duration-150">
+                      <div className="rounded-2xl bg-[#0D0E0E]/98 backdrop-blur-2xl border border-white/[0.10] p-2 shadow-2xl">
+                        <div className="grid gap-0.5">
+                          {group.items.map((item) => {
+                            const isItemActive = active === item.id;
+                            return (
+                              <a
+                                key={item.id}
+                                href={`#${item.id}`}
+                                onClick={handleLinkClick}
+                                style={{ textDecoration: "none" }}
+                                className={cn(
+                                  "group flex items-start gap-2.5 p-2.5 rounded-xl transition-all duration-150",
+                                  isItemActive
+                                    ? "bg-white/[0.06] border border-white/[0.08]"
+                                    : "hover:bg-[#141617] border border-transparent"
+                                )}
+                              >
+                                <span
+                                  className="size-2 rounded-full mt-1.5 shrink-0 transition-transform group-hover:scale-125"
+                                  style={{ background: item.accent ?? "#00E676" }}
+                                />
+                                <div>
+                                  <span className="text-[13px] font-medium text-white/90 group-hover:text-white transition-colors block leading-tight">
+                                    {item.label}
+                                  </span>
+                                  <span className="text-[11px] text-white/40 block leading-tight mt-0.5 font-light">
+                                    {item.desc}
+                                  </span>
+                                </div>
+                              </a>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
               );
             })}
           </nav>
 
-          {/* Ação Direita: Botão Tokens v8.0 */}
-          <div className="hidden lg:flex items-center gap-3">
+          {/* Ação Direita: Botão Pílula */}
+          <div className="hidden sm:flex items-center gap-3">
             <a
               href="#cores"
               style={{ textDecoration: "none" }}
@@ -112,7 +204,7 @@ function Nav() {
           {/* Botão Mobile (Touch Target: 44px) */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="flex xl:hidden size-9 rounded-full bg-white/[0.04] border border-white/[0.08] items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
+            className="flex md:hidden size-9 rounded-full bg-white/[0.04] border border-white/[0.08] items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
             aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
           >
             <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
@@ -147,7 +239,7 @@ function Nav() {
         </div>
       </div>
 
-      {/* Gaveta Mobile — Editorial Minimalist */}
+      {/* Gaveta Mobile — Accordion Minimalist */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -155,36 +247,43 @@ function Nav() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.98 }}
             transition={{ duration: 0.25, ease: EASE }}
-            className="block xl:hidden mt-2 max-w-6xl mx-auto"
+            className="block md:hidden mt-2 max-w-4xl mx-auto"
           >
-            <div className="rounded-3xl bg-[#0D0E0E]/98 backdrop-blur-3xl border border-white/[0.08] p-5 shadow-2xl">
-              <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/[0.06]">
+            <div className="rounded-3xl bg-[#0D0E0E]/98 backdrop-blur-3xl border border-white/[0.08] p-5 shadow-2xl space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
                 <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">Índice da Marca</span>
                 <span className="font-mono text-[10px] text-[#00E676] bg-[#00E676]/10 px-2 py-0.5 rounded-full">v8.0</span>
               </div>
               
-              <div className="grid grid-cols-2 gap-1.5">
-                {NAV.map((n) => {
-                  const isActive = active === n.id;
-                  return (
-                    <a
-                      key={n.id}
-                      href={`#${n.id}`}
-                      onClick={handleLinkClick}
-                      style={{ textDecoration: "none" }}
-                      className={cn(
-                        "flex items-center gap-2 p-2.5 rounded-xl text-xs transition-colors",
-                        isActive
-                          ? "bg-white/[0.08] text-[#00E676] font-medium border border-white/[0.08]"
-                          : "text-white/70 hover:text-white hover:bg-white/[0.03]"
-                      )}
-                    >
-                      <span className={cn("size-1.5 rounded-full", isActive ? "bg-[#00E676]" : "bg-neutral-600")} />
-                      <span>{n.label}</span>
-                    </a>
-                  );
-                })}
-              </div>
+              {NAV_GROUPS.map((group) => (
+                <div key={group.id} className="space-y-1">
+                  <span className="text-[11px] font-mono text-white/40 uppercase tracking-wider block px-1">
+                    {group.title}
+                  </span>
+                  <div className="grid gap-1">
+                    {group.items.map((item) => {
+                      const isItemActive = active === item.id;
+                      return (
+                        <a
+                          key={item.id}
+                          href={`#${item.id}`}
+                          onClick={handleLinkClick}
+                          style={{ textDecoration: "none" }}
+                          className={cn(
+                            "flex items-center justify-between p-2.5 rounded-xl text-xs transition-colors",
+                            isItemActive
+                              ? "bg-white/[0.08] text-[#00E676] font-medium border border-white/[0.08]"
+                              : "text-white/70 hover:text-white hover:bg-white/[0.03]"
+                          )}
+                        >
+                          <span>{item.label}</span>
+                          <span className="size-1.5 rounded-full" style={{ background: item.accent ?? "#00E676" }} />
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
         )}
