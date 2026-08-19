@@ -1,0 +1,1406 @@
+/**
+ * @file tokens.js — Brasil Sustenta Design Tokens
+ * Auto-gerado a partir de src/data/tokens.json.
+ */
+
+export const tokens = {
+  "_meta": {
+    "name": "Brasil Sustenta — Design Tokens",
+    "version": "9.0",
+    "direction": "Cirdia Quiet Luxury Tech · Swiss 1px Hairline Grid · Pátria High-End",
+    "source": "src/data/tokens.json (SSOT)",
+    "snapshot": "2026-08-19",
+    "note": "Fonte única da verdade. Se mudar aqui, regenerar via node scripts/build-tokens.mjs."
+  },
+  "color": {
+    "base": [
+      {
+        "name": "paper",
+        "var": "--color-paper",
+        "hex": "#08090A",
+        "label": "Preto Grafite Cirdia (Base)",
+        "use": "Canvas de fundo principal"
+      },
+      {
+        "name": "paper-2",
+        "var": "--color-paper-2",
+        "hex": "#121417",
+        "label": "Superfície Bento (Cards)",
+        "use": "Superfícies de cards, bento e painéis"
+      },
+      {
+        "name": "paper-3",
+        "var": "--color-paper-3",
+        "hex": "#1C1F24",
+        "label": "Superfície Ativa (Hover)",
+        "use": "Hover de cards, menus e elevação ativa"
+      },
+      {
+        "name": "paper-4",
+        "var": "--color-paper-4",
+        "hex": "#262A30",
+        "label": "Superfície Flutuante",
+        "use": "Dropdowns, modais e tooltips"
+      },
+      {
+        "name": "ink",
+        "var": "--color-ink",
+        "hex": "#F3F4F6",
+        "label": "Cinza Alabastro (95%)",
+        "use": "Texto principal, títulos e alto contraste"
+      },
+      {
+        "name": "ink-2",
+        "var": "--color-ink-2",
+        "hex": "#E5E7EB",
+        "label": "Cinza Claro (85%)",
+        "use": "Subtítulos e ênfase secundária"
+      },
+      {
+        "name": "ink-3",
+        "var": "--color-ink-3",
+        "hex": "#9CA3AF",
+        "label": "Cinza Titânio (65%)",
+        "use": "Corpo de texto e descrições"
+      },
+      {
+        "name": "ink-4",
+        "var": "--color-ink-4",
+        "hex": "#6B7280",
+        "label": "Cinza Neutro (50%)",
+        "use": "Legendas e placeholders"
+      },
+      {
+        "name": "ink-5",
+        "var": "--color-ink-5",
+        "hex": "#4B5563",
+        "label": "Cinza Escuro (40%)",
+        "use": "Metadados, timestamps e suporte"
+      }
+    ],
+    "persona": [
+      {
+        "name": "leaf",
+        "var": "--color-leaf",
+        "hex": "#00E676",
+        "label": "Verde Amazônia Tech",
+        "persona": "B2B / Empresas",
+        "use": "CTAs de sucesso, squads de transição, impacto territorial"
+      },
+      {
+        "name": "leaf-bright",
+        "var": "--color-leaf-bright",
+        "hex": "#00FF87",
+        "label": "Verde Amazônia Glow",
+        "persona": "B2B / Empresas",
+        "use": "Acentos bioluminescentes e hover verde"
+      },
+      {
+        "name": "leaf-soft",
+        "var": "--color-leaf-soft",
+        "value": "rgba(0, 230, 118, 0.08)",
+        "label": "Verde Amazônia Soft (8%)",
+        "persona": "B2B / Empresas",
+        "use": "Superfícies suaves e badges B2B"
+      },
+      {
+        "name": "atlantic",
+        "var": "--color-atlantic",
+        "hex": "#2979FF",
+        "label": "Azul Atlântico Deep",
+        "persona": "B2G / Prefeituras + Universidades",
+        "use": "Compliance, segurança jurídica, MEC, governança pública"
+      },
+      {
+        "name": "atlantic-bright",
+        "var": "--color-atlantic-bright",
+        "hex": "#5393FF",
+        "label": "Azul Atlântico Glow",
+        "persona": "B2G / Prefeituras + Universidades",
+        "use": "Acentos bioluminescentes e hover azul"
+      },
+      {
+        "name": "atlantic-soft",
+        "var": "--color-atlantic-soft",
+        "value": "rgba(41, 121, 255, 0.08)",
+        "label": "Azul Atlântico Soft (8%)",
+        "persona": "B2G / Prefeituras + Universidades",
+        "use": "Superfícies suaves e badges B2G"
+      },
+      {
+        "name": "sun",
+        "var": "--color-sun",
+        "hex": "#FFD600",
+        "label": "Amarelo Ouro Solar",
+        "persona": "Talentos / Juventude",
+        "use": "Matchings Suzely, scores de aderência, ODS, protagonismo jovem"
+      },
+      {
+        "name": "sun-bright",
+        "var": "--color-sun-bright",
+        "hex": "#FFE033",
+        "label": "Amarelo Solar Glow",
+        "persona": "Talentos / Juventude",
+        "use": "Acentos luminosos e hover amarelo"
+      },
+      {
+        "name": "sun-soft",
+        "var": "--color-sun-soft",
+        "value": "rgba(255, 214, 0, 0.08)",
+        "label": "Amarelo Solar Soft (8%)",
+        "persona": "Talentos / Juventude",
+        "use": "Superfícies suaves e badges de talentos"
+      }
+    ],
+    "status": [
+      {
+        "name": "clay",
+        "var": "--color-clay",
+        "hex": "#FF1744",
+        "label": "Vermelho Alerta",
+        "use": "Erros críticos, cancelamentos, cancelas de risco, don'ts"
+      },
+      {
+        "name": "clay-soft",
+        "var": "--color-clay-soft",
+        "value": "rgba(255, 23, 68, 0.08)",
+        "label": "Vermelho Alerta Soft (8%)",
+        "use": "Badges de erro e caixas de restrição"
+      },
+      {
+        "name": "orange",
+        "var": "--color-orange",
+        "hex": "#FF9100",
+        "label": "Laranja Termográfico",
+        "use": "Fases em andamento, transição e sprints ativas"
+      },
+      {
+        "name": "orange-soft",
+        "var": "--color-orange-soft",
+        "value": "rgba(255, 145, 0, 0.08)",
+        "label": "Laranja Termográfico Soft (8%)",
+        "use": "Badges de progresso e alertas intermediários"
+      }
+    ],
+    "border": [
+      {
+        "name": "border",
+        "var": "--color-border",
+        "value": "rgba(255, 255, 255, 0.06)",
+        "label": "Hairline 1px Repousada",
+        "use": "Grade suíça, divisores e bordas de containers"
+      },
+      {
+        "name": "border-strong",
+        "var": "--color-border-strong",
+        "value": "rgba(255, 255, 255, 0.14)",
+        "label": "Hairline 1px Ativa",
+        "use": "Hover, foco, cards ativos e elevação de destaque"
+      }
+    ]
+  },
+  "typography": {
+    "families": {
+      "display": {
+        "var": "--font-display",
+        "stack": "Antonio, sans-serif",
+        "role": "Display Monumental / H1 / H2"
+      },
+      "impact": {
+        "var": "--font-impact",
+        "stack": "Antonio, Impact, sans-serif",
+        "role": "Display / Impact All-Caps"
+      },
+      "body": {
+        "var": "--font-body",
+        "stack": "Outfit, system-ui, -apple-system, sans-serif",
+        "role": "H3 / corpo de texto / labels"
+      },
+      "mono": {
+        "var": "--font-mono",
+        "stack": "\"Geist Mono\", \"SF Mono\", monospace",
+        "role": "Scores / números / eyebrow / código"
+      }
+    },
+    "scale": [
+      {
+        "level": "Display",
+        "family": "Antonio",
+        "weight": "700/900",
+        "size": "8rem",
+        "tracking": "-0.05em",
+        "transform": "UPPERCASE"
+      },
+      {
+        "level": "H1",
+        "family": "Antonio",
+        "weight": "700",
+        "size": "5rem",
+        "tracking": "-0.04em",
+        "transform": "UPPERCASE"
+      },
+      {
+        "level": "H2",
+        "family": "Antonio",
+        "weight": "600",
+        "size": "3rem",
+        "tracking": "-0.03em",
+        "transform": "UPPERCASE"
+      },
+      {
+        "level": "H3",
+        "family": "Outfit",
+        "weight": "700",
+        "size": "1.75rem",
+        "tracking": "normal",
+        "transform": "None"
+      },
+      {
+        "level": "Body",
+        "family": "Outfit",
+        "weight": "400",
+        "size": "1.125rem",
+        "tracking": "normal",
+        "transform": "None"
+      },
+      {
+        "level": "Label",
+        "family": "Outfit",
+        "weight": "500",
+        "size": "0.75rem",
+        "tracking": "0.1em",
+        "transform": "UPPERCASE"
+      },
+      {
+        "level": "Score",
+        "family": "Geist Mono",
+        "weight": "700",
+        "size": "2.5rem",
+        "tracking": "-0.02em",
+        "transform": "None"
+      }
+    ]
+  },
+  "radius": [
+    {
+      "name": "sm",
+      "var": "--radius-sm",
+      "value": "8px"
+    },
+    {
+      "name": "md",
+      "var": "--radius-md",
+      "value": "12px"
+    },
+    {
+      "name": "lg",
+      "var": "--radius-lg",
+      "value": "16px"
+    },
+    {
+      "name": "xl",
+      "var": "--radius-xl",
+      "value": "24px"
+    },
+    {
+      "name": "pill",
+      "var": "--radius-pill",
+      "value": "9999px"
+    }
+  ],
+  "motion": {
+    "ease": "cubic-bezier(0.16, 1, 0.3, 1)",
+    "duration": "0.6–0.8s entrada · 0.08s stagger",
+    "properties": "transform · opacity · clip-path (compositor-friendly)",
+    "tokens": [
+      {
+        "name": "ease-expo",
+        "var": "--ease-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "label": "Aceleração Exponencial High-End"
+      },
+      {
+        "name": "duration-hover",
+        "var": "--duration-hover",
+        "value": "200ms",
+        "label": "Transição de Hover"
+      },
+      {
+        "name": "duration-press",
+        "var": "--duration-press",
+        "value": "80ms",
+        "label": "Feedback Tátil de Clique"
+      },
+      {
+        "name": "duration-release",
+        "var": "--duration-release",
+        "value": "240ms",
+        "label": "Retorno de Clique"
+      },
+      {
+        "name": "spring-damping",
+        "var": "--spring-damping",
+        "value": "0.85",
+        "label": "Amortecimento Spring"
+      },
+      {
+        "name": "spring-stiffness",
+        "var": "--spring-stiffness",
+        "value": "120",
+        "label": "Rigidez Spring"
+      }
+    ]
+  },
+  "glass": [
+    {
+      "name": "ultra-thin",
+      "var": "--glass-ultra-thin",
+      "value": "rgba(18, 20, 23, 0.48)",
+      "label": "Vidro Ultra Fino (Cards Repousados)"
+    },
+    {
+      "name": "thin",
+      "var": "--glass-thin",
+      "value": "rgba(18, 20, 23, 0.60)",
+      "label": "Vidro Fino (Dropdowns e Menus)"
+    },
+    {
+      "name": "regular",
+      "var": "--glass-regular",
+      "value": "rgba(18, 20, 23, 0.75)",
+      "label": "Vidro Regular (Header e Modais)"
+    },
+    {
+      "name": "thick",
+      "var": "--glass-thick",
+      "value": "rgba(18, 20, 23, 0.88)",
+      "label": "Vidro Espesso (Overlays)"
+    },
+    {
+      "name": "backdrop-blur",
+      "var": "--glass-backdrop-blur",
+      "value": "24px",
+      "label": "Desfoque de Fundo Padrão (24px)"
+    },
+    {
+      "name": "backdrop-blur-thin",
+      "var": "--glass-backdrop-blur-thin",
+      "value": "12px",
+      "label": "Desfoque de Fundo Suave (12px)"
+    },
+    {
+      "name": "backdrop-saturation",
+      "var": "--glass-backdrop-saturation",
+      "value": "140%",
+      "label": "Saturação de Fundo (140%)"
+    }
+  ],
+  "gradient": [
+    {
+      "name": "verde-aurora",
+      "var": "--gradient-verde-aurora",
+      "value": "linear-gradient(135deg, #00E676 0%, #00C832 100%)",
+      "label": "Gradiente Aurora Verde"
+    },
+    {
+      "name": "azul-aurora",
+      "var": "--gradient-azul-aurora",
+      "value": "linear-gradient(135deg, #2979FF 0%, #0047FF 100%)",
+      "label": "Gradiente Aurora Azul"
+    },
+    {
+      "name": "amarelo-aurora",
+      "var": "--gradient-amarelo-aurora",
+      "value": "linear-gradient(135deg, #FFD600 0%, #E6C200 100%)",
+      "label": "Gradiente Aurora Amarelo"
+    },
+    {
+      "name": "empresa",
+      "var": "--gradient-empresa",
+      "value": "radial-gradient(circle at center, rgba(0, 230, 118, 0.12) 0%, transparent 70%)",
+      "label": "Bioluminescência Empresa B2B"
+    },
+    {
+      "name": "prefeitura",
+      "var": "--gradient-prefeitura",
+      "value": "radial-gradient(circle at center, rgba(41, 121, 255, 0.12) 0%, transparent 70%)",
+      "label": "Bioluminescência Governo/Academia"
+    },
+    {
+      "name": "ods",
+      "var": "--gradient-ods",
+      "value": "radial-gradient(circle at center, rgba(255, 214, 0, 0.10) 0%, transparent 70%)",
+      "label": "Bioluminescência Talentos/ODS"
+    }
+  ],
+  "cta": [
+    {
+      "name": "cta-verde",
+      "var": "--cta-verde",
+      "value": "#00E676",
+      "label": "CTA Verde Amazônia"
+    },
+    {
+      "name": "cta-verde-text",
+      "var": "--cta-verde-text",
+      "value": "#08090A",
+      "label": "Texto CTA Verde"
+    },
+    {
+      "name": "cta-amarelo",
+      "var": "--cta-amarelo",
+      "value": "#FFD600",
+      "label": "CTA Amarelo Solar"
+    },
+    {
+      "name": "cta-amarelo-text",
+      "var": "--cta-amarelo-text",
+      "value": "#08090A",
+      "label": "Texto CTA Amarelo"
+    },
+    {
+      "name": "cta-azul",
+      "var": "--cta-azul",
+      "value": "#2979FF",
+      "label": "CTA Azul Atlântico"
+    },
+    {
+      "name": "cta-azul-text",
+      "var": "--cta-azul-text",
+      "value": "#F3F4F6",
+      "label": "Texto CTA Azul"
+    }
+  ],
+  "ods": [
+    {
+      "n": 1,
+      "var": "--color-ods-1",
+      "hex": "#E5243B",
+      "label": "Erradicação da Pobreza",
+      "shortLabel": "Sem Pobreza"
+    },
+    {
+      "n": 2,
+      "var": "--color-ods-2",
+      "hex": "#DDA63A",
+      "label": "Fome Zero e Agricultura Sustentável",
+      "shortLabel": "Fome Zero"
+    },
+    {
+      "n": 3,
+      "var": "--color-ods-3",
+      "hex": "#4C9F38",
+      "label": "Saúde e Bem-Estar",
+      "shortLabel": "Saúde"
+    },
+    {
+      "n": 4,
+      "var": "--color-ods-4",
+      "hex": "#C5192D",
+      "label": "Educação de Qualidade",
+      "shortLabel": "Educação"
+    },
+    {
+      "n": 5,
+      "var": "--color-ods-5",
+      "hex": "#FF3A21",
+      "label": "Igualdade de Gênero",
+      "shortLabel": "Gênero"
+    },
+    {
+      "n": 6,
+      "var": "--color-ods-6",
+      "hex": "#26BDE2",
+      "label": "Água Potável e Saneamento",
+      "shortLabel": "Água Limpa"
+    },
+    {
+      "n": 7,
+      "var": "--color-ods-7",
+      "hex": "#FCC30B",
+      "label": "Energia Limpa e Acessível",
+      "shortLabel": "Energia Limpa"
+    },
+    {
+      "n": 8,
+      "var": "--color-ods-8",
+      "hex": "#A21942",
+      "label": "Trabalho Decente e Crescimento Econômico",
+      "shortLabel": "Trabalho Decente"
+    },
+    {
+      "n": 9,
+      "var": "--color-ods-9",
+      "hex": "#FD6925",
+      "label": "Indústria, Inovação e Infraestrutura",
+      "shortLabel": "Indústria e Inovação"
+    },
+    {
+      "n": 10,
+      "var": "--color-ods-10",
+      "hex": "#DD1367",
+      "label": "Redução das Desigualdades",
+      "shortLabel": "Redução Desigualdades"
+    },
+    {
+      "n": 11,
+      "var": "--color-ods-11",
+      "hex": "#FD9D24",
+      "label": "Cidades e Comunidades Sustentáveis",
+      "shortLabel": "Cidades Sustentáveis"
+    },
+    {
+      "n": 12,
+      "var": "--color-ods-12",
+      "hex": "#BF8B2E",
+      "label": "Consumo e Produção Responsáveis",
+      "shortLabel": "Consumo Responsável"
+    },
+    {
+      "n": 13,
+      "var": "--color-ods-13",
+      "hex": "#3F7E44",
+      "label": "Ação Contra a Mudança Global do Clima",
+      "shortLabel": "Ação Climática"
+    },
+    {
+      "n": 14,
+      "var": "--color-ods-14",
+      "hex": "#0A97D9",
+      "label": "Vida na Água",
+      "shortLabel": "Vida na Água"
+    },
+    {
+      "n": 15,
+      "var": "--color-ods-15",
+      "hex": "#56C02B",
+      "label": "Vida Terrestre",
+      "shortLabel": "Vida Terrestre"
+    },
+    {
+      "n": 16,
+      "var": "--color-ods-16",
+      "hex": "#00689D",
+      "label": "Paz, Justiça e Instituições Eficazes",
+      "shortLabel": "Paz e Justiça"
+    },
+    {
+      "n": 17,
+      "var": "--color-ods-17",
+      "hex": "#19486A",
+      "label": "Parcerias e Meios de Implementação",
+      "shortLabel": "Parcerias"
+    },
+    {
+      "n": 18,
+      "var": "--color-ods-18",
+      "hex": "#795548",
+      "label": "Igualdade Étnico-Racial",
+      "shortLabel": "Igualdade Étnico-Racial"
+    }
+  ]
+};
+
+export const flatTokens = {
+  "--font-display": "Antonio, sans-serif",
+  "--font-impact": "Antonio, Impact, sans-serif",
+  "--font-body": "Outfit, system-ui, -apple-system, sans-serif",
+  "--font-mono": "\"Geist Mono\", \"SF Mono\", monospace",
+  "--color-paper": "#08090A",
+  "--color-paper-2": "#121417",
+  "--color-paper-3": "#1C1F24",
+  "--color-paper-4": "#262A30",
+  "--color-ink": "#F3F4F6",
+  "--color-ink-2": "#E5E7EB",
+  "--color-ink-3": "#9CA3AF",
+  "--color-ink-4": "#6B7280",
+  "--color-ink-5": "#4B5563",
+  "--color-leaf": "#00E676",
+  "--color-leaf-bright": "#00FF87",
+  "--color-leaf-soft": "rgba(0, 230, 118, 0.08)",
+  "--color-atlantic": "#2979FF",
+  "--color-atlantic-bright": "#5393FF",
+  "--color-atlantic-soft": "rgba(41, 121, 255, 0.08)",
+  "--color-sun": "#FFD600",
+  "--color-sun-bright": "#FFE033",
+  "--color-sun-soft": "rgba(255, 214, 0, 0.08)",
+  "--color-clay": "#FF1744",
+  "--color-clay-soft": "rgba(255, 23, 68, 0.08)",
+  "--color-orange": "#FF9100",
+  "--color-orange-soft": "rgba(255, 145, 0, 0.08)",
+  "--color-border": "rgba(255, 255, 255, 0.06)",
+  "--color-border-strong": "rgba(255, 255, 255, 0.14)",
+  "--radius-sm": "8px",
+  "--radius-md": "12px",
+  "--radius-lg": "16px",
+  "--radius-xl": "24px",
+  "--radius-pill": "9999px",
+  "--color-ods-1": "#E5243B",
+  "--color-ods-2": "#DDA63A",
+  "--color-ods-3": "#4C9F38",
+  "--color-ods-4": "#C5192D",
+  "--color-ods-5": "#FF3A21",
+  "--color-ods-6": "#26BDE2",
+  "--color-ods-7": "#FCC30B",
+  "--color-ods-8": "#A21942",
+  "--color-ods-9": "#FD6925",
+  "--color-ods-10": "#DD1367",
+  "--color-ods-11": "#FD9D24",
+  "--color-ods-12": "#BF8B2E",
+  "--color-ods-13": "#3F7E44",
+  "--color-ods-14": "#0A97D9",
+  "--color-ods-15": "#56C02B",
+  "--color-ods-16": "#00689D",
+  "--color-ods-17": "#19486A",
+  "--color-ods-18": "#795548",
+  "--glass-ultra-thin": "rgba(18, 20, 23, 0.48)",
+  "--glass-thin": "rgba(18, 20, 23, 0.60)",
+  "--glass-regular": "rgba(18, 20, 23, 0.75)",
+  "--glass-thick": "rgba(18, 20, 23, 0.88)",
+  "--glass-backdrop-blur": "24px",
+  "--glass-backdrop-blur-thin": "12px",
+  "--glass-backdrop-saturation": "140%",
+  "--gradient-verde-aurora": "linear-gradient(135deg, #00E676 0%, #00C832 100%)",
+  "--gradient-azul-aurora": "linear-gradient(135deg, #2979FF 0%, #0047FF 100%)",
+  "--gradient-amarelo-aurora": "linear-gradient(135deg, #FFD600 0%, #E6C200 100%)",
+  "--gradient-empresa": "radial-gradient(circle at center, rgba(0, 230, 118, 0.12) 0%, transparent 70%)",
+  "--gradient-prefeitura": "radial-gradient(circle at center, rgba(41, 121, 255, 0.12) 0%, transparent 70%)",
+  "--gradient-ods": "radial-gradient(circle at center, rgba(255, 214, 0, 0.10) 0%, transparent 70%)",
+  "--cta-verde": "#00E676",
+  "--cta-verde-text": "#08090A",
+  "--cta-amarelo": "#FFD600",
+  "--cta-amarelo-text": "#08090A",
+  "--cta-azul": "#2979FF",
+  "--cta-azul-text": "#F3F4F6",
+  "--ease-expo": "cubic-bezier(0.16, 1, 0.3, 1)",
+  "--duration-hover": "200ms",
+  "--duration-press": "80ms",
+  "--duration-release": "240ms",
+  "--spring-damping": "0.85",
+  "--spring-stiffness": "120"
+};
+
+export const colors = {
+  base: [
+  {
+    "name": "paper",
+    "var": "--color-paper",
+    "hex": "#08090A",
+    "label": "Preto Grafite Cirdia (Base)",
+    "use": "Canvas de fundo principal"
+  },
+  {
+    "name": "paper-2",
+    "var": "--color-paper-2",
+    "hex": "#121417",
+    "label": "Superfície Bento (Cards)",
+    "use": "Superfícies de cards, bento e painéis"
+  },
+  {
+    "name": "paper-3",
+    "var": "--color-paper-3",
+    "hex": "#1C1F24",
+    "label": "Superfície Ativa (Hover)",
+    "use": "Hover de cards, menus e elevação ativa"
+  },
+  {
+    "name": "paper-4",
+    "var": "--color-paper-4",
+    "hex": "#262A30",
+    "label": "Superfície Flutuante",
+    "use": "Dropdowns, modais e tooltips"
+  },
+  {
+    "name": "ink",
+    "var": "--color-ink",
+    "hex": "#F3F4F6",
+    "label": "Cinza Alabastro (95%)",
+    "use": "Texto principal, títulos e alto contraste"
+  },
+  {
+    "name": "ink-2",
+    "var": "--color-ink-2",
+    "hex": "#E5E7EB",
+    "label": "Cinza Claro (85%)",
+    "use": "Subtítulos e ênfase secundária"
+  },
+  {
+    "name": "ink-3",
+    "var": "--color-ink-3",
+    "hex": "#9CA3AF",
+    "label": "Cinza Titânio (65%)",
+    "use": "Corpo de texto e descrições"
+  },
+  {
+    "name": "ink-4",
+    "var": "--color-ink-4",
+    "hex": "#6B7280",
+    "label": "Cinza Neutro (50%)",
+    "use": "Legendas e placeholders"
+  },
+  {
+    "name": "ink-5",
+    "var": "--color-ink-5",
+    "hex": "#4B5563",
+    "label": "Cinza Escuro (40%)",
+    "use": "Metadados, timestamps e suporte"
+  }
+],
+  persona: [
+  {
+    "name": "leaf",
+    "var": "--color-leaf",
+    "hex": "#00E676",
+    "label": "Verde Amazônia Tech",
+    "persona": "B2B / Empresas",
+    "use": "CTAs de sucesso, squads de transição, impacto territorial"
+  },
+  {
+    "name": "leaf-bright",
+    "var": "--color-leaf-bright",
+    "hex": "#00FF87",
+    "label": "Verde Amazônia Glow",
+    "persona": "B2B / Empresas",
+    "use": "Acentos bioluminescentes e hover verde"
+  },
+  {
+    "name": "leaf-soft",
+    "var": "--color-leaf-soft",
+    "value": "rgba(0, 230, 118, 0.08)",
+    "label": "Verde Amazônia Soft (8%)",
+    "persona": "B2B / Empresas",
+    "use": "Superfícies suaves e badges B2B"
+  },
+  {
+    "name": "atlantic",
+    "var": "--color-atlantic",
+    "hex": "#2979FF",
+    "label": "Azul Atlântico Deep",
+    "persona": "B2G / Prefeituras + Universidades",
+    "use": "Compliance, segurança jurídica, MEC, governança pública"
+  },
+  {
+    "name": "atlantic-bright",
+    "var": "--color-atlantic-bright",
+    "hex": "#5393FF",
+    "label": "Azul Atlântico Glow",
+    "persona": "B2G / Prefeituras + Universidades",
+    "use": "Acentos bioluminescentes e hover azul"
+  },
+  {
+    "name": "atlantic-soft",
+    "var": "--color-atlantic-soft",
+    "value": "rgba(41, 121, 255, 0.08)",
+    "label": "Azul Atlântico Soft (8%)",
+    "persona": "B2G / Prefeituras + Universidades",
+    "use": "Superfícies suaves e badges B2G"
+  },
+  {
+    "name": "sun",
+    "var": "--color-sun",
+    "hex": "#FFD600",
+    "label": "Amarelo Ouro Solar",
+    "persona": "Talentos / Juventude",
+    "use": "Matchings Suzely, scores de aderência, ODS, protagonismo jovem"
+  },
+  {
+    "name": "sun-bright",
+    "var": "--color-sun-bright",
+    "hex": "#FFE033",
+    "label": "Amarelo Solar Glow",
+    "persona": "Talentos / Juventude",
+    "use": "Acentos luminosos e hover amarelo"
+  },
+  {
+    "name": "sun-soft",
+    "var": "--color-sun-soft",
+    "value": "rgba(255, 214, 0, 0.08)",
+    "label": "Amarelo Solar Soft (8%)",
+    "persona": "Talentos / Juventude",
+    "use": "Superfícies suaves e badges de talentos"
+  }
+],
+  status: [
+  {
+    "name": "clay",
+    "var": "--color-clay",
+    "hex": "#FF1744",
+    "label": "Vermelho Alerta",
+    "use": "Erros críticos, cancelamentos, cancelas de risco, don'ts"
+  },
+  {
+    "name": "clay-soft",
+    "var": "--color-clay-soft",
+    "value": "rgba(255, 23, 68, 0.08)",
+    "label": "Vermelho Alerta Soft (8%)",
+    "use": "Badges de erro e caixas de restrição"
+  },
+  {
+    "name": "orange",
+    "var": "--color-orange",
+    "hex": "#FF9100",
+    "label": "Laranja Termográfico",
+    "use": "Fases em andamento, transição e sprints ativas"
+  },
+  {
+    "name": "orange-soft",
+    "var": "--color-orange-soft",
+    "value": "rgba(255, 145, 0, 0.08)",
+    "label": "Laranja Termográfico Soft (8%)",
+    "use": "Badges de progresso e alertas intermediários"
+  }
+],
+  border: [
+  {
+    "name": "border",
+    "var": "--color-border",
+    "value": "rgba(255, 255, 255, 0.06)",
+    "label": "Hairline 1px Repousada",
+    "use": "Grade suíça, divisores e bordas de containers"
+  },
+  {
+    "name": "border-strong",
+    "var": "--color-border-strong",
+    "value": "rgba(255, 255, 255, 0.14)",
+    "label": "Hairline 1px Ativa",
+    "use": "Hover, foco, cards ativos e elevação de destaque"
+  }
+],
+  ods: [
+  {
+    "n": 1,
+    "var": "--color-ods-1",
+    "hex": "#E5243B",
+    "label": "Erradicação da Pobreza",
+    "shortLabel": "Sem Pobreza"
+  },
+  {
+    "n": 2,
+    "var": "--color-ods-2",
+    "hex": "#DDA63A",
+    "label": "Fome Zero e Agricultura Sustentável",
+    "shortLabel": "Fome Zero"
+  },
+  {
+    "n": 3,
+    "var": "--color-ods-3",
+    "hex": "#4C9F38",
+    "label": "Saúde e Bem-Estar",
+    "shortLabel": "Saúde"
+  },
+  {
+    "n": 4,
+    "var": "--color-ods-4",
+    "hex": "#C5192D",
+    "label": "Educação de Qualidade",
+    "shortLabel": "Educação"
+  },
+  {
+    "n": 5,
+    "var": "--color-ods-5",
+    "hex": "#FF3A21",
+    "label": "Igualdade de Gênero",
+    "shortLabel": "Gênero"
+  },
+  {
+    "n": 6,
+    "var": "--color-ods-6",
+    "hex": "#26BDE2",
+    "label": "Água Potável e Saneamento",
+    "shortLabel": "Água Limpa"
+  },
+  {
+    "n": 7,
+    "var": "--color-ods-7",
+    "hex": "#FCC30B",
+    "label": "Energia Limpa e Acessível",
+    "shortLabel": "Energia Limpa"
+  },
+  {
+    "n": 8,
+    "var": "--color-ods-8",
+    "hex": "#A21942",
+    "label": "Trabalho Decente e Crescimento Econômico",
+    "shortLabel": "Trabalho Decente"
+  },
+  {
+    "n": 9,
+    "var": "--color-ods-9",
+    "hex": "#FD6925",
+    "label": "Indústria, Inovação e Infraestrutura",
+    "shortLabel": "Indústria e Inovação"
+  },
+  {
+    "n": 10,
+    "var": "--color-ods-10",
+    "hex": "#DD1367",
+    "label": "Redução das Desigualdades",
+    "shortLabel": "Redução Desigualdades"
+  },
+  {
+    "n": 11,
+    "var": "--color-ods-11",
+    "hex": "#FD9D24",
+    "label": "Cidades e Comunidades Sustentáveis",
+    "shortLabel": "Cidades Sustentáveis"
+  },
+  {
+    "n": 12,
+    "var": "--color-ods-12",
+    "hex": "#BF8B2E",
+    "label": "Consumo e Produção Responsáveis",
+    "shortLabel": "Consumo Responsável"
+  },
+  {
+    "n": 13,
+    "var": "--color-ods-13",
+    "hex": "#3F7E44",
+    "label": "Ação Contra a Mudança Global do Clima",
+    "shortLabel": "Ação Climática"
+  },
+  {
+    "n": 14,
+    "var": "--color-ods-14",
+    "hex": "#0A97D9",
+    "label": "Vida na Água",
+    "shortLabel": "Vida na Água"
+  },
+  {
+    "n": 15,
+    "var": "--color-ods-15",
+    "hex": "#56C02B",
+    "label": "Vida Terrestre",
+    "shortLabel": "Vida Terrestre"
+  },
+  {
+    "n": 16,
+    "var": "--color-ods-16",
+    "hex": "#00689D",
+    "label": "Paz, Justiça e Instituições Eficazes",
+    "shortLabel": "Paz e Justiça"
+  },
+  {
+    "n": 17,
+    "var": "--color-ods-17",
+    "hex": "#19486A",
+    "label": "Parcerias e Meios de Implementação",
+    "shortLabel": "Parcerias"
+  },
+  {
+    "n": 18,
+    "var": "--color-ods-18",
+    "hex": "#795548",
+    "label": "Igualdade Étnico-Racial",
+    "shortLabel": "Igualdade Étnico-Racial"
+  }
+],
+};
+
+export const typography = {
+  "families": {
+    "display": {
+      "var": "--font-display",
+      "stack": "Antonio, sans-serif",
+      "role": "Display Monumental / H1 / H2"
+    },
+    "impact": {
+      "var": "--font-impact",
+      "stack": "Antonio, Impact, sans-serif",
+      "role": "Display / Impact All-Caps"
+    },
+    "body": {
+      "var": "--font-body",
+      "stack": "Outfit, system-ui, -apple-system, sans-serif",
+      "role": "H3 / corpo de texto / labels"
+    },
+    "mono": {
+      "var": "--font-mono",
+      "stack": "\"Geist Mono\", \"SF Mono\", monospace",
+      "role": "Scores / números / eyebrow / código"
+    }
+  },
+  "scale": [
+    {
+      "level": "Display",
+      "family": "Antonio",
+      "weight": "700/900",
+      "size": "8rem",
+      "tracking": "-0.05em",
+      "transform": "UPPERCASE"
+    },
+    {
+      "level": "H1",
+      "family": "Antonio",
+      "weight": "700",
+      "size": "5rem",
+      "tracking": "-0.04em",
+      "transform": "UPPERCASE"
+    },
+    {
+      "level": "H2",
+      "family": "Antonio",
+      "weight": "600",
+      "size": "3rem",
+      "tracking": "-0.03em",
+      "transform": "UPPERCASE"
+    },
+    {
+      "level": "H3",
+      "family": "Outfit",
+      "weight": "700",
+      "size": "1.75rem",
+      "tracking": "normal",
+      "transform": "None"
+    },
+    {
+      "level": "Body",
+      "family": "Outfit",
+      "weight": "400",
+      "size": "1.125rem",
+      "tracking": "normal",
+      "transform": "None"
+    },
+    {
+      "level": "Label",
+      "family": "Outfit",
+      "weight": "500",
+      "size": "0.75rem",
+      "tracking": "0.1em",
+      "transform": "UPPERCASE"
+    },
+    {
+      "level": "Score",
+      "family": "Geist Mono",
+      "weight": "700",
+      "size": "2.5rem",
+      "tracking": "-0.02em",
+      "transform": "None"
+    }
+  ]
+};
+
+export const radius = [
+  {
+    "name": "sm",
+    "var": "--radius-sm",
+    "value": "8px"
+  },
+  {
+    "name": "md",
+    "var": "--radius-md",
+    "value": "12px"
+  },
+  {
+    "name": "lg",
+    "var": "--radius-lg",
+    "value": "16px"
+  },
+  {
+    "name": "xl",
+    "var": "--radius-xl",
+    "value": "24px"
+  },
+  {
+    "name": "pill",
+    "var": "--radius-pill",
+    "value": "9999px"
+  }
+];
+
+export const motion = {
+  "ease": "cubic-bezier(0.16, 1, 0.3, 1)",
+  "duration": "0.6–0.8s entrada · 0.08s stagger",
+  "properties": "transform · opacity · clip-path (compositor-friendly)",
+  "tokens": [
+    {
+      "name": "ease-expo",
+      "var": "--ease-expo",
+      "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "label": "Aceleração Exponencial High-End"
+    },
+    {
+      "name": "duration-hover",
+      "var": "--duration-hover",
+      "value": "200ms",
+      "label": "Transição de Hover"
+    },
+    {
+      "name": "duration-press",
+      "var": "--duration-press",
+      "value": "80ms",
+      "label": "Feedback Tátil de Clique"
+    },
+    {
+      "name": "duration-release",
+      "var": "--duration-release",
+      "value": "240ms",
+      "label": "Retorno de Clique"
+    },
+    {
+      "name": "spring-damping",
+      "var": "--spring-damping",
+      "value": "0.85",
+      "label": "Amortecimento Spring"
+    },
+    {
+      "name": "spring-stiffness",
+      "var": "--spring-stiffness",
+      "value": "120",
+      "label": "Rigidez Spring"
+    }
+  ]
+};
+
+export const glass = [
+  {
+    "name": "ultra-thin",
+    "var": "--glass-ultra-thin",
+    "value": "rgba(18, 20, 23, 0.48)",
+    "label": "Vidro Ultra Fino (Cards Repousados)"
+  },
+  {
+    "name": "thin",
+    "var": "--glass-thin",
+    "value": "rgba(18, 20, 23, 0.60)",
+    "label": "Vidro Fino (Dropdowns e Menus)"
+  },
+  {
+    "name": "regular",
+    "var": "--glass-regular",
+    "value": "rgba(18, 20, 23, 0.75)",
+    "label": "Vidro Regular (Header e Modais)"
+  },
+  {
+    "name": "thick",
+    "var": "--glass-thick",
+    "value": "rgba(18, 20, 23, 0.88)",
+    "label": "Vidro Espesso (Overlays)"
+  },
+  {
+    "name": "backdrop-blur",
+    "var": "--glass-backdrop-blur",
+    "value": "24px",
+    "label": "Desfoque de Fundo Padrão (24px)"
+  },
+  {
+    "name": "backdrop-blur-thin",
+    "var": "--glass-backdrop-blur-thin",
+    "value": "12px",
+    "label": "Desfoque de Fundo Suave (12px)"
+  },
+  {
+    "name": "backdrop-saturation",
+    "var": "--glass-backdrop-saturation",
+    "value": "140%",
+    "label": "Saturação de Fundo (140%)"
+  }
+];
+
+export const gradient = [
+  {
+    "name": "verde-aurora",
+    "var": "--gradient-verde-aurora",
+    "value": "linear-gradient(135deg, #00E676 0%, #00C832 100%)",
+    "label": "Gradiente Aurora Verde"
+  },
+  {
+    "name": "azul-aurora",
+    "var": "--gradient-azul-aurora",
+    "value": "linear-gradient(135deg, #2979FF 0%, #0047FF 100%)",
+    "label": "Gradiente Aurora Azul"
+  },
+  {
+    "name": "amarelo-aurora",
+    "var": "--gradient-amarelo-aurora",
+    "value": "linear-gradient(135deg, #FFD600 0%, #E6C200 100%)",
+    "label": "Gradiente Aurora Amarelo"
+  },
+  {
+    "name": "empresa",
+    "var": "--gradient-empresa",
+    "value": "radial-gradient(circle at center, rgba(0, 230, 118, 0.12) 0%, transparent 70%)",
+    "label": "Bioluminescência Empresa B2B"
+  },
+  {
+    "name": "prefeitura",
+    "var": "--gradient-prefeitura",
+    "value": "radial-gradient(circle at center, rgba(41, 121, 255, 0.12) 0%, transparent 70%)",
+    "label": "Bioluminescência Governo/Academia"
+  },
+  {
+    "name": "ods",
+    "var": "--gradient-ods",
+    "value": "radial-gradient(circle at center, rgba(255, 214, 0, 0.10) 0%, transparent 70%)",
+    "label": "Bioluminescência Talentos/ODS"
+  }
+];
+
+export const cta = [
+  {
+    "name": "cta-verde",
+    "var": "--cta-verde",
+    "value": "#00E676",
+    "label": "CTA Verde Amazônia"
+  },
+  {
+    "name": "cta-verde-text",
+    "var": "--cta-verde-text",
+    "value": "#08090A",
+    "label": "Texto CTA Verde"
+  },
+  {
+    "name": "cta-amarelo",
+    "var": "--cta-amarelo",
+    "value": "#FFD600",
+    "label": "CTA Amarelo Solar"
+  },
+  {
+    "name": "cta-amarelo-text",
+    "var": "--cta-amarelo-text",
+    "value": "#08090A",
+    "label": "Texto CTA Amarelo"
+  },
+  {
+    "name": "cta-azul",
+    "var": "--cta-azul",
+    "value": "#2979FF",
+    "label": "CTA Azul Atlântico"
+  },
+  {
+    "name": "cta-azul-text",
+    "var": "--cta-azul-text",
+    "value": "#F3F4F6",
+    "label": "Texto CTA Azul"
+  }
+];
+
+export const ods = [
+  {
+    "n": 1,
+    "var": "--color-ods-1",
+    "hex": "#E5243B",
+    "label": "Erradicação da Pobreza",
+    "shortLabel": "Sem Pobreza"
+  },
+  {
+    "n": 2,
+    "var": "--color-ods-2",
+    "hex": "#DDA63A",
+    "label": "Fome Zero e Agricultura Sustentável",
+    "shortLabel": "Fome Zero"
+  },
+  {
+    "n": 3,
+    "var": "--color-ods-3",
+    "hex": "#4C9F38",
+    "label": "Saúde e Bem-Estar",
+    "shortLabel": "Saúde"
+  },
+  {
+    "n": 4,
+    "var": "--color-ods-4",
+    "hex": "#C5192D",
+    "label": "Educação de Qualidade",
+    "shortLabel": "Educação"
+  },
+  {
+    "n": 5,
+    "var": "--color-ods-5",
+    "hex": "#FF3A21",
+    "label": "Igualdade de Gênero",
+    "shortLabel": "Gênero"
+  },
+  {
+    "n": 6,
+    "var": "--color-ods-6",
+    "hex": "#26BDE2",
+    "label": "Água Potável e Saneamento",
+    "shortLabel": "Água Limpa"
+  },
+  {
+    "n": 7,
+    "var": "--color-ods-7",
+    "hex": "#FCC30B",
+    "label": "Energia Limpa e Acessível",
+    "shortLabel": "Energia Limpa"
+  },
+  {
+    "n": 8,
+    "var": "--color-ods-8",
+    "hex": "#A21942",
+    "label": "Trabalho Decente e Crescimento Econômico",
+    "shortLabel": "Trabalho Decente"
+  },
+  {
+    "n": 9,
+    "var": "--color-ods-9",
+    "hex": "#FD6925",
+    "label": "Indústria, Inovação e Infraestrutura",
+    "shortLabel": "Indústria e Inovação"
+  },
+  {
+    "n": 10,
+    "var": "--color-ods-10",
+    "hex": "#DD1367",
+    "label": "Redução das Desigualdades",
+    "shortLabel": "Redução Desigualdades"
+  },
+  {
+    "n": 11,
+    "var": "--color-ods-11",
+    "hex": "#FD9D24",
+    "label": "Cidades e Comunidades Sustentáveis",
+    "shortLabel": "Cidades Sustentáveis"
+  },
+  {
+    "n": 12,
+    "var": "--color-ods-12",
+    "hex": "#BF8B2E",
+    "label": "Consumo e Produção Responsáveis",
+    "shortLabel": "Consumo Responsável"
+  },
+  {
+    "n": 13,
+    "var": "--color-ods-13",
+    "hex": "#3F7E44",
+    "label": "Ação Contra a Mudança Global do Clima",
+    "shortLabel": "Ação Climática"
+  },
+  {
+    "n": 14,
+    "var": "--color-ods-14",
+    "hex": "#0A97D9",
+    "label": "Vida na Água",
+    "shortLabel": "Vida na Água"
+  },
+  {
+    "n": 15,
+    "var": "--color-ods-15",
+    "hex": "#56C02B",
+    "label": "Vida Terrestre",
+    "shortLabel": "Vida Terrestre"
+  },
+  {
+    "n": 16,
+    "var": "--color-ods-16",
+    "hex": "#00689D",
+    "label": "Paz, Justiça e Instituições Eficazes",
+    "shortLabel": "Paz e Justiça"
+  },
+  {
+    "n": 17,
+    "var": "--color-ods-17",
+    "hex": "#19486A",
+    "label": "Parcerias e Meios de Implementação",
+    "shortLabel": "Parcerias"
+  },
+  {
+    "n": 18,
+    "var": "--color-ods-18",
+    "hex": "#795548",
+    "label": "Igualdade Étnico-Racial",
+    "shortLabel": "Igualdade Étnico-Racial"
+  }
+];
+
+export default tokens;
