@@ -1,5 +1,5 @@
-import { useEffect, useState, type ReactNode } from "react";
-import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import { useState, type ReactNode } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import tokens from "./data/tokens.json";
 import { Section, Eyebrow, CopyChip } from "./components/primitives";
 import { Logo } from "./components/Logo";
@@ -7,445 +7,12 @@ import { ODSBadge } from "./components/ODSBadge";
 import { Grain, SectionGlow, Dot } from "./components/Atmosphere";
 import { FlowDemo } from "./components/FlowDemo";
 import { EaseDemo } from "./components/EaseDemo";
+import { Header } from "./layouts/Header";
+import { Hero } from "./layouts/Hero";
+import { TaxonomicMetadata } from "./components/TaxonomicMetadata";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-const cn = (...classes: (string | boolean | undefined | null | number)[]) => classes.filter(Boolean).join(" ");
 
-interface NavGroup {
-  id: string;
-  title: string;
-  items: {
-    id: string;
-    label: string;
-    desc: string;
-    accent?: string;
-  }[];
-}
-
-const NAV_GROUPS: NavGroup[] = [
-  {
-    id: "identidade",
-    title: "Identidade",
-    items: [
-      { id: "negocio", label: "Visão & Tese", desc: "Posicionamento e modelo de valor", accent: "#00E676" },
-      { id: "manifesto", label: "Manifesto Oficial", desc: "6 compromissos inegociáveis", accent: "#FFD600" },
-      { id: "logo", label: "Logo & Aplicação", desc: "Versões oficial, mono e grid", accent: "#00E676" },
-      { id: "tom", label: "Tom de Voz", desc: "Anti-greenwashing e calçada high-end", accent: "#2979FF" },
-    ],
-  },
-  {
-    id: "tokens",
-    title: "Design Tokens",
-    items: [
-      { id: "cores", label: "Cores & Gradientes", desc: "Paleta pátria e elevação tonal", accent: "#00E676" },
-      { id: "tipografia", label: "Sistema Tipográfico", desc: "Antonio, Outfit & Geist Mono", accent: "#FFD600" },
-      { id: "fotografia", label: "Diretriz Fotográfica", desc: "Tratamento documental e textura", accent: "#2979FF" },
-      { id: "componentes", label: "UI & Componentes", desc: "Bento cards, botões e badges", accent: "#00E676" },
-    ],
-  },
-  {
-    id: "ecossistema",
-    title: "Impacto & Método",
-    items: [
-      { id: "metodo", label: "Método de Squads", desc: "Engenharia de impacto em campo", accent: "#00E676" },
-      { id: "ods", label: "18 Metas ODS", desc: "Território, dados e MEC 10%", accent: "#FFD600" },
-      { id: "governanca", label: "Governança Soberana", desc: "Tríade e integridade auditável", accent: "#2979FF" },
-    ],
-  },
-];
-
-const ALL_SECTION_IDS = NAV_GROUPS.flatMap((g) => g.items.map((i) => i.id));
-
-/** Hook para scroll spy */
-function useActiveSection(ids: string[]) {
-  const [active, setActive] = useState(ids[0]);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]) setActive(visible[0].target.id);
-      },
-      { rootMargin: "-25% 0px -65% 0px", threshold: [0, 0.25, 0.5, 1] }
-    );
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
-  }, [ids]);
-  return active;
-}
-
-function Nav() {
-  const active = useActiveSection(ALL_SECTION_IDS);
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-
-  const handleLinkClick = () => {
-    setIsOpen(false);
-    setActiveDropdown(null);
-  };
-
-  return (
-    <header className="sticky top-4 z-50 px-4 transition-all duration-300 pointer-events-none">
-      <div className="max-w-4xl mx-auto pointer-events-auto">
-        <div className="relative flex items-center justify-between h-14 px-5 md:px-6 rounded-full bg-[#08090A]/85 backdrop-blur-2xl border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.7)]">
-          {/* Logo Minimalista */}
-          <a href="#" className="flex items-center gap-2 select-none shrink-0 group" style={{ textDecoration: "none" }}>
-            <span className="font-display text-lg md:text-xl font-bold uppercase tracking-tight text-[#F3F4F6]">
-              BRASIL SUSTENTA<span className="text-[#00E676] ml-0.5">.</span>
-            </span>
-            <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-[#00E676] bg-[#00E676]/10 px-2 py-0.5 rounded-full border border-[#00E676]/20">
-              BRAND
-            </span>
-          </a>
-
-          {/* Navegação Desktop com Dropdowns */}
-          <nav className="hidden md:flex items-center gap-1.5">
-            {NAV_GROUPS.map((group) => {
-              const isGroupActive = group.items.some((i) => i.id === active);
-              const isDropdownOpen = activeDropdown === group.id;
-
-              return (
-                <div
-                  key={group.id}
-                  className="relative"
-                  onMouseEnter={() => setActiveDropdown(group.id)}
-                  onMouseLeave={() => setActiveDropdown(null)}
-                >
-                  <button
-                    type="button"
-                    className={cn(
-                      "flex items-center gap-1.5 px-3.5 py-1.5 text-[13px] rounded-full transition-all duration-200 cursor-pointer font-normal",
-                      isDropdownOpen || isGroupActive
-                        ? "text-white bg-white/[0.08] font-medium border border-white/[0.10]"
-                        : "text-white/65 hover:text-white hover:bg-white/[0.03] border border-transparent"
-                    )}
-                  >
-                    <span>{group.title}</span>
-                    <svg
-                      className={cn(
-                        "size-3 opacity-50 transition-transform duration-200",
-                        isDropdownOpen && "rotate-180 opacity-100"
-                      )}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-
-                  {/* Dropdown Menu Flutuante */}
-                  {isDropdownOpen && (
-                    <div className="absolute top-full left-0 pt-2 w-80 animate-in fade-in-0 zoom-in-95 duration-150">
-                      <div className="rounded-2xl bg-[#0D0E0E]/98 backdrop-blur-2xl border border-white/[0.10] p-2 shadow-2xl">
-                        <div className="grid gap-0.5">
-                          {group.items.map((item) => {
-                            const isItemActive = active === item.id;
-                            return (
-                              <a
-                                key={item.id}
-                                href={`#${item.id}`}
-                                onClick={handleLinkClick}
-                                style={{ textDecoration: "none" }}
-                                className={cn(
-                                  "group flex items-start gap-2.5 p-2.5 rounded-xl transition-all duration-150",
-                                  isItemActive
-                                    ? "bg-white/[0.06] border border-white/[0.08]"
-                                    : "hover:bg-[#141617] border border-transparent"
-                                )}
-                              >
-                                <span
-                                  className="size-2 rounded-full mt-1.5 shrink-0 transition-transform group-hover:scale-125"
-                                  style={{ background: item.accent ?? "#00E676" }}
-                                />
-                                <div>
-                                  <span className="text-[13px] font-medium text-white/90 group-hover:text-white transition-colors block leading-tight">
-                                    {item.label}
-                                  </span>
-                                  <span className="text-[11px] text-white/40 block leading-tight mt-0.5 font-light">
-                                    {item.desc}
-                                  </span>
-                                </div>
-                              </a>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </nav>
-
-          {/* Ação Direita: Botão Pílula */}
-          <div className="hidden sm:flex items-center gap-3">
-            <a
-              href="#cores"
-              style={{ textDecoration: "none" }}
-              className="font-mono text-[11px] text-white/50 hover:text-white transition-colors px-2 py-1"
-            >
-              v8.0 High-End
-            </a>
-            <a
-              href="#componentes"
-              style={{ textDecoration: "none" }}
-              className="relative inline-flex items-center justify-center gap-1.5 px-4 h-8 rounded-full bg-white text-[#050505] text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:bg-[#00E676] active:scale-[0.98] shadow-[0_0_16px_rgba(255,255,255,0.08)] hover:shadow-[0_0_20px_rgba(0,230,118,0.25)]"
-            >
-              <span>Ver UI</span>
-              <span className="text-[10px]">→</span>
-            </a>
-          </div>
-
-          {/* Botão Mobile (Touch Target: 44px) */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="flex md:hidden size-9 rounded-full bg-white/[0.04] border border-white/[0.08] items-center justify-center text-white/80 hover:text-white transition-colors cursor-pointer"
-            aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
-          >
-            <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
-              <motion.path
-                d="M3 4.5H15"
-                stroke={isOpen ? "#00E676" : "#F3F4F6"}
-                strokeWidth="1.75"
-                strokeLinecap="round"
-                animate={isOpen ? { rotate: 45, y: 3.5 } : { rotate: 0, y: 0 }}
-                transition={{ duration: 0.2, ease: "easeInOut" }}
-                style={{ originX: "9px", originY: "4.5px" }}
-              />
-              <motion.path
-                d="M3 9H15"
-                stroke={isOpen ? "#00E676" : "#F3F4F6"}
-                strokeWidth="1.75"
-                strokeLinecap="round"
-                animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-                transition={{ duration: 0.15 }}
-              />
-              <motion.path
-                d="M3 13.5H15"
-                stroke={isOpen ? "#00E676" : "#F3F4F6"}
-                strokeWidth="1.75"
-                strokeLinecap="round"
-                animate={isOpen ? { rotate: -45, y: -3.5 } : { rotate: 0, y: 0 }}
-                transition={{ duration: 0.2, ease: "easeInOut" }}
-                style={{ originX: "9px", originY: "13.5px" }}
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {/* Gaveta Mobile — Accordion Minimalist */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.98 }}
-            transition={{ duration: 0.25, ease: EASE }}
-            className="block md:hidden mt-2 max-w-4xl mx-auto"
-          >
-            <div className="rounded-3xl bg-[#0D0E0E]/98 backdrop-blur-3xl border border-white/[0.08] p-5 shadow-2xl space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
-                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">Índice da Marca</span>
-                <span className="font-mono text-[10px] text-[#00E676] bg-[#00E676]/10 px-2 py-0.5 rounded-full">v8.0</span>
-              </div>
-              
-              {NAV_GROUPS.map((group) => (
-                <div key={group.id} className="space-y-1">
-                  <span className="text-[11px] font-mono text-white/40 uppercase tracking-wider block px-1">
-                    {group.title}
-                  </span>
-                  <div className="grid gap-1">
-                    {group.items.map((item) => {
-                      const isItemActive = active === item.id;
-                      return (
-                        <a
-                          key={item.id}
-                          href={`#${item.id}`}
-                          onClick={handleLinkClick}
-                          style={{ textDecoration: "none" }}
-                          className={cn(
-                            "flex items-center justify-between p-2.5 rounded-xl text-xs transition-colors",
-                            isItemActive
-                              ? "bg-white/[0.08] text-[#00E676] font-medium border border-white/[0.08]"
-                              : "text-white/70 hover:text-white hover:bg-white/[0.03]"
-                          )}
-                        >
-                          <span>{item.label}</span>
-                          <span className="size-1.5 rounded-full" style={{ background: item.accent ?? "#00E676" }} />
-                        </a>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
-  );
-}
-
-function Hero() {
-  const reduced = useReducedMotion();
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: reduced ? 0 : 30, filter: "blur(8px)" },
-    show: { opacity: 1, y: 0, filter: "blur(0px)" },
-  };
-
-  return (
-    <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden">
-      {/* Bioluminescência Atmosférica Suave */}
-      <SectionGlow color="#00E676" position="50% 20%" opacity={0.06} size="50%" />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute top-10 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[radial-gradient(circle_at_center,_rgba(0,230,118,0.08)_0%,_rgba(41,121,255,0.04)_50%,_transparent_75%)] blur-3xl"
-      />
-
-      <motion.div
-        initial="hidden"
-        animate="show"
-        transition={{ staggerChildren: reduced ? 0 : 0.1, delayChildren: 0.1 }}
-        className="max-w-5xl mx-auto px-6 relative text-center"
-      >
-        {/* Eyebrow Chip Minimalista */}
-        <motion.div variants={fadeUp} transition={{ duration: 0.7, ease: EASE }} className="flex justify-center mb-6">
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
-            <span className="size-2 rounded-full bg-[#00E676] animate-pulse shadow-[0_0_8px_#00E676]" />
-            <span className="font-mono text-[11px] uppercase tracking-[0.20em] text-white/80 font-medium">
-              Obsidian V6 · Fonte Única de Marca
-            </span>
-          </div>
-        </motion.div>
-
-        {/* Título Monumental Limpo (Sem Gradiente Arco-íris) */}
-        <motion.h1
-          variants={fadeUp}
-          transition={{ duration: 1.0, ease: EASE }}
-          className="font-display text-5xl sm:text-7xl md:text-8xl lg:text-[6.5rem] font-black uppercase tracking-[-0.04em] leading-[0.90] text-[#F3F4F6] mb-6"
-        >
-          DESIGN SYSTEM<br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F3F4F6] via-[#E5E7EB] to-neutral-400">
-            ALTO LUXO PÁTRIA<span className="text-[#00E676]">.</span>
-          </span>
-        </motion.h1>
-
-        {/* Subtítulo Editorial Arejado */}
-        <motion.p
-          variants={fadeUp}
-          transition={{ duration: 1.0, ease: EASE }}
-          className="text-base sm:text-lg md:text-xl text-neutral-400 font-body font-light leading-[1.65] max-w-2xl mx-auto mb-10"
-        >
-          A arquitetura visual e os tokens definitivos do <strong className="text-white font-medium">Brasil Sustenta</strong>. 
-          Onde a precisão algorítmica da inteligência territorial encontra o minimalismo contemporâneo de alto luxo.
-        </motion.p>
-
-        {/* Ações Primárias em Cápsula */}
-        <motion.div
-          variants={fadeUp}
-          transition={{ duration: 1.0, ease: EASE }}
-          className="flex flex-wrap items-center justify-center gap-3.5 mb-16"
-        >
-          <a
-            href="#cores"
-            style={{ textDecoration: "none" }}
-            className="relative inline-flex items-center justify-center gap-2 px-8 h-12 rounded-full bg-white text-[#050505] text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:bg-[#00E676] active:scale-[0.98] shadow-[0_0_24px_rgba(255,255,255,0.15)] hover:shadow-[0_0_28px_rgba(0,230,118,0.35)]"
-          >
-            <span>Explorar Tokens & Cores</span>
-            <span className="text-sm">↓</span>
-          </a>
-
-          <a
-            href="#componentes"
-            style={{ textDecoration: "none" }}
-            className="inline-flex items-center justify-center gap-2 px-7 h-12 rounded-full bg-white/[0.04] text-white/90 hover:text-white border border-white/[0.08] hover:border-white/[0.18] hover:bg-white/[0.07] text-xs font-medium uppercase tracking-wider transition-all duration-300"
-          >
-            <span>Biblioteca UI</span>
-            <span className="text-sm text-white/50">→</span>
-          </a>
-        </motion.div>
-
-        {/* Bento Showcase Card Flutuante (Visual Preview) */}
-        <motion.div
-          variants={fadeUp}
-          transition={{ duration: 1.2, ease: EASE }}
-          className="relative rounded-3xl bg-[#0D0E0E]/80 backdrop-blur-2xl border border-white/[0.08] p-6 md:p-8 text-left shadow-[0_24px_60px_rgba(0,0,0,0.8)] overflow-hidden"
-        >
-          {/* Luz de fundo do Bento Card */}
-          <div className="pointer-events-none absolute -top-24 -right-24 size-64 rounded-full bg-[#00E676]/[0.06] blur-3xl" />
-
-          {/* Header do Bento Card */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/[0.06] mb-6">
-            <div className="flex items-center gap-3">
-              <span className="size-2.5 rounded-full bg-[#00E676]" />
-              <span className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-white/80">
-                LIVESTACK · TOKENS V8.0
-              </span>
-            </div>
-            <div className="flex items-center gap-2 font-mono text-[11px] text-neutral-400">
-              <span className="text-neutral-600 font-light">SHA-256:</span>
-              <span className="text-white/70">8cfea8b...verified</span>
-            </div>
-          </div>
-
-          {/* 3 Colunas de Showcase */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Coluna 1: Paleta Pátria */}
-            <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.04]">
-              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500 block mb-3">
-                01 · ACENTOS CROMÁTICOS
-              </span>
-              <div className="flex items-center gap-2.5 mb-2">
-                <div className="size-6 rounded-full bg-[#00E676] shadow-[0_0_10px_rgba(0,230,118,0.4)]" title="Verde Amazônia #00E676" />
-                <div className="size-6 rounded-full bg-[#2979FF] shadow-[0_0_10px_rgba(41,121,255,0.4)]" title="Azul Atlântico #2979FF" />
-                <div className="size-6 rounded-full bg-[#FFD600] shadow-[0_0_10px_rgba(255,214,0,0.4)]" title="Amarelo Ouro Solar #FFD600" />
-              </div>
-              <p className="text-xs text-neutral-400 font-light leading-relaxed mt-2">
-                Acentos bioluminescentes cirúrgicos contidos em ≤5% da tela.
-              </p>
-            </div>
-
-            {/* Coluna 2: Hierarquia Tipográfica */}
-            <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.04]">
-              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500 block mb-2">
-                02 · TIPOGRAFIA
-              </span>
-              <div className="font-display text-xl font-bold text-white tracking-tight uppercase leading-none">
-                Antonio Display
-              </div>
-              <div className="font-body text-xs text-neutral-400 font-light mt-1">
-                Outfit & Inter Body (300/400)
-              </div>
-              <div className="font-mono text-[10px] text-[#00E676] mt-2">
-                Geist Mono Tabular
-              </div>
-            </div>
-
-            {/* Coluna 3: Elevação Tonal */}
-            <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.04]">
-              <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500 block mb-2">
-                03 · HAIRLINES 1PX
-              </span>
-              <div className="text-xl font-bold font-mono text-white">
-                rgba(255,255,255,0.06)
-              </div>
-              <p className="text-xs text-neutral-400 font-light leading-relaxed mt-1">
-                3 camadas de elevação (#050505 ➔ #0D0E0E ➔ #141617). Zero bordas grossas.
-              </p>
-            </div>
-          </div>
-        </motion.div>
-      </motion.div>
-    </section>
-  );
-}
 
 function LogoCard({ label, sub, bg, labelColor = "#9CA3AF", children }: { label: string; sub: string; bg: string; labelColor?: string; children: ReactNode }) {
   return (
@@ -1007,415 +574,404 @@ export default function App() {
     <div style={{ position: "relative", minHeight: "100vh", background: "#050505", color: "#F3F4F6" }}>
       <Grain />
       <div style={{ position: "relative", zIndex: 2 }}>
-      <Nav />
-      <Hero />
+        <TaxonomicMetadata />
+        <Header />
+        <Hero />
 
-      {/* O NEGÓCIO — a narrativa unificada de valor */}
-      <Section id="negocio" eyebrow="Camada 1 · O Negócio / Playbook" title={<>Inovação territorial que gera ROI socioambiental real.</>} intro="Substituímos o greenwashing e a teoria inócua das consultorias de slides por squads integrados (embedded) e auditáveis no território. O Brasil Sustenta é o matching engine de talentos e o compliance prático das suas metas ESG. Unimos o brilhantismo universitário sob governança de mercado para entregar em semanas o que o seu RH/Sustentabilidade levaria meses para estruturar.">
-        <SectionGlow color="#00FF41" position="10% 40%" opacity={0.06} />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.25rem", position: "relative" }}>
-          {[
-            { t: "Modelo Embedded (Súper Teammates)", b: "Não entregamos relatórios teóricos e sumimos. Alocamos squads de impacto integrados ao seu fluxo, sob a governança da Tríade (Embaixador + Coordenador + Empresa)." },
-            { t: "Engine Suzely (Fit Explicável)", b: "O matching de competências, disponibilidade e relevância ODS territorial é calculado via Inteligência Artificial baseada em dados reais das calçadas parceiras." },
-            { t: "Talent Pool & Voluntariado v7", b: "Os squads atuam como funil prático de talentos e de voluntariado de mentoria corporativa (ESG Social). O RH assina a Suzely para contratar os jovens pré-avaliados em campo (Placement SaaS)." },
-            { t: "Compliance & ROI Síncronos", b: "Lucro e impacto andam juntos. A entrega técnica atende às exigências de inovação da marca e gera as métricas ODS auditadas exigidas pela regulação de mercado." },
-          ].map((x) => (
-            <div key={x.t} className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.75rem", background: "#0D0E0E" }}>
-              <h3 className="font-display" style={{ fontSize: "1.4rem", fontWeight: 700, color: "#F3F4F6", margin: "0 0 0.75rem" }}>{x.t}</h3>
-              <p style={{ fontSize: "0.95rem", color: "#9CA3AF", lineHeight: 1.6, margin: 0 }}>{x.b}</p>
-            </div>
-          ))}
-        </div>
-
-        <div style={{ marginTop: "2.5rem", borderTop: "1px solid var(--color-border)", paddingTop: "2rem" }}>
-          <Eyebrow>As Verticais de Squads de Impacto (Especialidades & Entregáveis)</Eyebrow>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.25rem", marginTop: "1rem" }}>
-            {[
-              { 
-                title: "Tech & Data (Código Real & IA)", 
-                color: "#0055FF", 
-                tag: "SQUADS DE ENGENHARIA",
-                what: "Construção de MVPs de alta performance, arquiteturas de dados territoriais com georreferenciamento e motores de matching alimentados por inteligência artificial explicável.",
-                how: "Através de sprints de 6 semanas no modelo de governança da Tríade. Usamos TypeScript, React, Next.js, tRPC e bancos de dados vetoriais (pgvector no Supabase) para ligar problemas de campo a soluções digitais rápidas e robustas, focando em acessibilidade digital (WCAG) nas periferias.",
-                deliverables: [
-                  "MVPs de software web e mobile funcionais",
-                  "Dashboards dinâmicos de dados ESG e relatórios",
-                  "Georreferenciamento de ativos comunitários",
-                  "Integração do Fit Score ODS da Suzely (APIs)",
-                  "Sistemas de rastreabilidade de dados na blockchain"
-                ]
-              },
-              { 
-                title: "Criatividade, Voz & Mídia (Design & Comunicação)", 
-                color: "#FFC700", 
-                tag: "SQUADS DE DESIGN & MÍDIA",
-                what: "Identidades visuais de impacto, interfaces UX/UI premium de alta fidelidade, copywriting corporativo de calçada, gravação audiovisual documental de campo, fotografia territorial e gestão estratégica de mídias sociais.",
-                how: "Por meio de imersão direta nas calçadas parceiras para extrair a verdade empírica. Aplicamos o design system Neon Pátria (estética escura e limpa com contrastes semânticos neon) e copywriting provocativo que atrai a juventude universitária e gera conversão comercial.",
-                deliverables: [
-                  "Branding completo (identidade visual, guias estáticos)",
-                  "UI/UX Wireframes de alta fidelidade e protótipos",
-                  "Linha editorial e copywriting anti-greenwashing",
-                  "Produção de mídias (peças de áudio/vídeo curtas)",
-                  "Fotografia documental e banco de imagem exclusivo",
-                  "Estratégia e posts para mídias sociais da causa"
-                ]
-              },
-              { 
-                title: "ESG & Território (Ação na Calçada)", 
-                color: "#00FF41", 
-                tag: "SQUADS DE ESG & IMPACTO",
-                what: "Mapeamento socioeconômico e territorial em profundidade nos HUBs locais, diagnósticos qualitativos de vulnerabilidade e articulação de embaixadores universitários com a comunidade.",
-                how: "Fazemos escuta horizontal e levantamento de dados primários in loco, cruzando as dores e ativos locais com as metas da Agenda ODS. Estruturamos a ponte que conecta o retorno das empresas à resolução de problemas crônicos no território.",
-                deliverables: [
-                  "Mapeamento social e de vulnerabilidade regional",
-                  "Planejamento de conformidade com metas ODS",
-                  "Painéis de escuta de lideranças da comunidade",
-                  "Coleta e validação física de dados locais",
-                  "Relatórios empíricos de impacto e ativos"
-                ]
-              },
-              { 
-                title: "PR, Eventos & Ativação (Presença Territorial)", 
-                color: "#FF1744", 
-                tag: "SQUADS DE PR & ATIVAÇÃO",
-                what: "Relacionamento com imprensa regional, organização de fóruns, feiras e ativações físicas no território, intervenções urbanas de marca e produção de eventos nos HUBs comunitários.",
-                how: "Coordenamos ações físicas de impacto com embaixadores universitários e coletivos locais. Promovemos assessoria de imprensa focada em pautas legítimas de transformação social, gerando mídia espontânea e engajamento orgânico de causa.",
-                deliverables: [
-                  "Kits e estratégias de Assessoria de Imprensa",
-                  "Projetos executivos de intervenções urbanas (OOH)",
-                  "Eventos presenciais de impacto nos HUBs locais",
-                  "Cobertura digital em tempo real das ações",
-                  "Parcerias de co-branding com marcas de calçada"
-                ]
-              },
-              { 
-                title: "Compliance, Finanças & Métricas (ESG Audit)", 
-                color: "#FF9100", 
-                tag: "SQUADS DE COMPLIANCE & FINANÇAS",
-                what: "Modelagem de ROI de Shared Value, auditoria jurídica de evidências locais de impacto, conformidade técnica com regulação nacional e internacional e relatórios corporativos.",
-                how: "Mapeamos e auditamos cada centavo investido e cada ação de campo segundo frameworks globais (GRI, SASB, CVM 193). Estruturamos os dados coletados de forma segura, rastreável e auditável por Big Four.",
-                deliverables: [
-                  "Matrizes de Materialidade e conformidade de mercado",
-                  "Modelagem e relatórios de ROI de Shared Value",
-                  "Dossiês de conformidade e auditorias estruturadas",
-                  "Relatórios integrados para investidores e Boards",
-                  "Mapeamento e conformidade de créditos sociais"
-                ]
-              },
-              { 
-                title: "GovTech, Urbanismo & Cidades (Inovação Pública)", 
-                color: "#0055FF", 
-                tag: "SQUADS DE GOVTECH & CIDADES",
-                what: "Infraestrutura urbana verde, mobilidade ativa, soluções de saneamento descentralizado e digitalização de serviços públicos governamentais locais (B2G).",
-                how: "Unimos o urbanismo acadêmico com a inteligência empírica das periferias. Através de co-criação com gestores públicos, prefeituras e a comunidade, criamos soluções escaláveis, sustentáveis e de baixíssima pegada de carbono.",
-                deliverables: [
-                  "Desenho urbano de mobilidade ativa periférica",
-                  "Projetos de transição ecológica e infraestrutura verde",
-                  "Desenvolvimento de plataformas GovTech (B2G)",
-                  "Estudos de saneamento ecológico descentralizado",
-                  "Planos diretores locais de HUBs de impacto"
-                ]
-              }
-            ].map((v) => (
-              <div key={v.title} className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.75rem", background: "#0D0E0E", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                <div>
-                  <span className="font-mono" style={{ fontSize: "0.625rem", color: v.color, letterSpacing: "0.15em", textTransform: "uppercase" }}>{v.tag}</span>
-                  <h4 className="font-display" style={{ fontSize: "1.3rem", color: "#F3F4F6", margin: "0.5rem 0 0.75rem", lineHeight: 1.1 }}>{v.title}</h4>
-                  
-                  <div style={{ marginBottom: "1rem" }}>
-                    <span className="font-mono" style={{ fontSize: "0.55rem", color: v.color, letterSpacing: "0.15em", textTransform: "uppercase", display: "block", marginBottom: 4 }}>O que é feito:</span>
-                    <p style={{ fontSize: "0.82rem", color: "#9CA3AF", lineHeight: 1.5, margin: 0 }}>{v.what}</p>
-                  </div>
-                  
-                  <div style={{ marginBottom: "1.5rem" }}>
-                    <span className="font-mono" style={{ fontSize: "0.55rem", color: v.color, letterSpacing: "0.15em", textTransform: "uppercase", display: "block", marginBottom: 4 }}>Como é feito:</span>
-                    <p style={{ fontSize: "0.82rem", color: "#9CA3AF", lineHeight: 1.5, margin: 0 }}>{v.how}</p>
-                  </div>
-                </div>
-                
-                <div style={{ borderTop: "1px solid var(--color-border-strong)", paddingTop: "1rem" }}>
-                  <span className="font-mono" style={{ fontSize: "0.55rem", color: "#4B5563", letterSpacing: "0.1em", textTransform: "uppercase", display: "block", marginBottom: 8 }}>O que prestamos (Entregáveis):</span>
-                  <ul className="font-mono" style={{ margin: 0, paddingLeft: 0, listStyle: "none", color: "#F3F4F6", fontSize: "0.7rem", display: "flex", flexDirection: "column", gap: 6 }}>
-                    {v.deliverables.map((d) => (
-                      <li key={d} style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
-                        <span style={{ color: v.color }}>▪</span> {d}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      {/* MANIFESTO — cartazes Gen Z de shared value */}
-      <Section id="manifesto" eyebrow="Camada 1.5 · O Manifesto" title={<>A visão do Shared Value.</>} intro="Acreditamos que impacto socioambiental gera retorno financeiro legítimo, e que o retorno financeiro financia a escala do impacto. É assim que superamos o greenwashing e criamos soluções perpétuas.">
-        <ManifestoSection />
-      </Section>
-
-      {/* LOGO — 4 lockups */}
-      <Section id="logo" eyebrow="Camada 2 · Logo" title="A assinatura visual." intro="A logo do Brasil Sustenta é empilhada, utilizando a fonte Antonio Black e finalizada com o ponto final verde amazônia tech. É minimalista, geométrica, de forte presença visual e inalterável.">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1.25rem" }}>
-          <LogoCard label="Principal" sub="Empilhado · fundo escuro" bg="#050505">
-            <Logo size={2.2} />
-          </LogoCard>
-          <LogoCard label="Negativo" sub="Fundo claro" bg="#F3F4F6" labelColor="#4B5563">
-            <span className="font-display" style={{ display: "flex", flexDirection: "column", lineHeight: 0.88, fontSize: "2.2rem", fontWeight: 900 }}>
-              <span style={{ color: "#050505" }}>BRASIL</span>
-              <span style={{ color: "#050505" }}>SUSTENTA<span style={{ color: "#00FF41" }}>.</span></span>
-            </span>
-          </LogoCard>
-          <LogoCard label="Monocromático" sub="Tudo branco · sem ponto colorido" bg="#0D0E0E">
-            <span className="font-display" style={{ display: "flex", flexDirection: "column", lineHeight: 0.88, fontSize: "2.2rem", fontWeight: 900 }}>
-              <span style={{ color: "#F3F4F6" }}>BRASIL</span>
-              <span style={{ color: "#F3F4F6" }}>SUSTENTA<span style={{ color: "#F3F4F6" }}>.</span></span>
-            </span>
-          </LogoCard>
-          <LogoCard label="Novo Símbolo v7 (Match-Net)" sub="Monograma geométrico bioluminescente" bg="#030303">
-            <div style={{ position: "relative", width: 70, height: 70, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
-                <path d="M25 20H55C70 20 70 38 55 38C70 38 70 56 55 56H25V20Z" stroke="url(#paint0_linear_v7_original)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M25 56C25 70 38 80 50 80C65 80 75 70 75 56" stroke="url(#paint1_linear_v7_original)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="4 4"/>
-                <circle cx="55" cy="38" r="6" fill="#00FF41" />
-                <circle cx="50" cy="80" r="6" fill="#FFC700" />
-                <circle cx="75" cy="56" r="6" fill="#0055FF" />
-                <defs>
-                  <linearGradient id="paint0_linear_v7_original" x1="25" y1="20" x2="70" y2="56" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#00FF41"/>
-                    <stop offset="0.5" stopColor="#FFC700"/>
-                    <stop offset="1" stopColor="#0055FF"/>
-                  </linearGradient>
-                  <linearGradient id="paint1_linear_v7_original" x1="25" y1="56" x2="75" y2="80" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#FFC700"/>
-                    <stop offset="1" stopColor="#0055FF"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-          </LogoCard>
-          <LogoCard label="Favicon v7" sub="Aba de navegador · ícone de app" bg="#050505">
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
-              <div style={{ width: 64, height: 64, background: "#030303", border: "1px solid var(--color-border-strong)", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 20px rgba(0, 255, 65, 0.15)" }}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" style={{ width: 36, height: 36 }}>
-                  <path d="M25 20H55C70 20 70 38 55 38C70 38 70 56 55 56H25V20Z" stroke="#00FF41" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
-                  <circle cx="55" cy="38" r="8" fill="#FFC700" />
-                </svg>
-              </div>
-              <CopyChip value='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M25 20H55C70 20 70 38 55 38C70 38 70 56 55 56H25V20Z" stroke="#00FF41" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/><circle cx="55" cy="38" r="8" fill="#FFC700"/></svg>' label="Copiar SVG" />
-            </div>
-          </LogoCard>
-        </div>
-        <div style={{ marginTop: "1.5rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-          <div style={{ border: "1px solid rgba(0,255,65,0.2)", borderRadius: 12, padding: "1.25rem", background: "rgba(0,255,65,0.04)" }}>
-            <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#00FF41", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 8 }}>✓ Regras de Uso</div>
-            <ul style={{ margin: 0, paddingLeft: "1.1rem", color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.7 }}>
-              <li>BRASIL sempre empilhado sobre SUSTENTA.</li>
-              <li>Símbolo Match-Net v7 sempre renderizado em alta definição SVG.</li>
-              <li>Cores semânticas do símbolo correspondem ao degradê verde-amarelo-azul.</li>
-            </ul>
-          </div>
-          <div style={{ border: "1px solid rgba(255,23,68,0.2)", borderRadius: 12, padding: "1.25rem", background: "rgba(255,23,68,0.04)" }}>
-            <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#FF1744", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 8 }}>✕ Proibido</div>
-            <ul style={{ margin: 0, paddingLeft: "1.1rem", color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.7 }}>
-              <li>Nunca escrever em linha horizontal única.</li>
-              <li>Nunca mudar o ponto final para outra cor.</li>
-              <li>Nunca aplicar sombras, gradientes ou contornos no texto.</li>
-            </ul>
-          </div>
-        </div>
-      </Section>
-
-      {/* CORES & GRADIENTES */}
-      <Section id="cores" eyebrow="Camada 2.5 · Cores & Gradientes" title="A paleta semântica." intro="Dividimos a paleta de cores por persona de atuação. Cores puras servem como acentos dinâmicos em superfícies e detalhes, nunca como fundo de grandes blocos. Adicionamos gradientes premium para conferir profundidade e modernidade.">
-        <Eyebrow>Por Persona</Eyebrow>
-        <div style={{ marginTop: 12, marginBottom: 32 }}><ColorRow items={tokens.color.persona} /></div>
-        <Eyebrow>Gradientes Premium</Eyebrow>
-        <GradientShowcase />
-        <div style={{ height: 32 }} />
-        <Eyebrow>Base & Neutros</Eyebrow>
-        <div style={{ marginTop: 12, marginBottom: 32 }}><ColorRow items={tokens.color.base} /></div>
-        <Eyebrow>Status</Eyebrow>
-        <div style={{ marginTop: 12 }}><ColorRow items={tokens.color.status} /></div>
-      </Section>
-
-      {/* TIPOGRAFIA */}
-      <Section id="tipografia" eyebrow="Camada 3 · Tipografia" title="A escala monumentalista." intro="Antonio (Display/Cabeçalhos) · Outfit (Leitura/Corpo) · Geist Mono (Dados/Fórmulas/Eyebrows). No máximo duas famílias por tela ou peça. Mono é reservada estritamente para números de score, metadados e tags.">
-        <TypographyPlayground />
-        <div style={{ marginTop: "2.5rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-          {tokens.typography.scale.map((t) => (
-            <div key={t.level} style={{ borderBottom: "1px solid var(--color-border)", padding: "1.25rem 0", display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
-              <span style={{
-                fontFamily: t.family === "Antonio" ? "var(--font-display)" : t.family === "Geist Mono" ? "var(--font-mono)" : "var(--font-body)",
-                fontSize: `min(${t.size}, 12vw)`, fontWeight: parseInt(t.weight) || 700,
-                letterSpacing: t.tracking, textTransform: t.transform === "UPPERCASE" ? "uppercase" : "none",
-                color: "#F3F4F6", lineHeight: 1,
-              }}>
-                {t.level}
-              </span>
-              <span className="font-mono" style={{ fontSize: "0.75rem", color: "#9CA3AF" }}>
-                {t.family} · {t.weight} · {t.size} · {t.tracking}
-              </span>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* TOM DE VOZ — Tradutor anti-greenwashing */}
-      <Section id="tom" eyebrow="Camada 4 · Tom de Voz" title="Inconformismo e rigor real." intro="Falamos com soberania territorial e atitude pragmática: provocativo, focado em negócios, guiado por evidências científicas e desenhado para gerar valor econômico legítimo na comunidade de baixo para cima.">
-        <ToneTranslator />
-
-        <div style={{ marginTop: "2rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
-          <div className="bs-card" style={{ border: "1px solid rgba(0, 255, 65, 0.2)", borderRadius: 16, padding: "1.5rem", background: "rgba(0, 255, 65, 0.02)" }}>
-            <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#00FF41" }}>✓ O QUE DIZER (RIGOR E ATITUDE)</span>
-            <ul style={{ color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.7, margin: "1rem 0 0", paddingLeft: "1.2rem" }}>
-              <li>Ancorar soluções em <span style={{ color: "#F3F4F6" }}>evidências quantificáveis</span> (ODS, Fit Scores).</li>
-              <li>Falar da base criativa e universitária com <span style={{ color: "#F3F4F6" }}>protagonismo e autoria</span>.</li>
-              <li>Usar a verdade nua e crua do território ("direto na calçada", "corre real").</li>
-              <li>Princípios operacionais: <span style={{ color: "#F3F4F6" }}>"Entrar Sem Viés"</span> (ouvir antes de projetar) e <span style={{ color: "#F3F4F6" }}>"Execução Rápida"</span> (sprints com risco calculado).</li>
-            </ul>
-          </div>
-          <div className="bs-card" style={{ border: "1px solid rgba(255, 23, 68, 0.2)", borderRadius: 16, padding: "1.5rem", background: "rgba(255, 23, 68, 0.02)" }}>
-            <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#FF1744" }}>✕ O QUE EVITAR (FALTA DE EVIDÊNCIA / CLICHÊ)</span>
-            <ul style={{ color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.7, margin: "1rem 0 0", paddingLeft: "1.2rem" }}>
-              <li>Termos abstratos e paternalistas: <span style={{ color: "#F3F4F6" }}>"capacitar jovens carentes"</span>, <span style={{ color: "#F3F4F6" }}>"ajudar o próximo"</span>.</li>
-              <li>Clichês corporativos vazios: <span style={{ color: "#F3F4F6" }}>"sinergia inovadora"</span>, <span style={{ color: "#F3F4F6" }}>"ecossistema disruptivo"</span>.</li>
-              <li>Fórmulas de greenwashing: <span style={{ color: "#F3F4F6" }}>"construir um amanhã verde"</span>, <span style={{ color: "#F3F4F6" }}>"salvar o planeta"</span>.</li>
-              <li>Paternalismo institucional tradicional que anule a voz ativa da comunidade.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div style={{ marginTop: "1.5rem", border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#060606" }}>
-          <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#FFC700", marginBottom: 10 }}>[ ATITUDE COMERCIAL: A VERDADE DO IMPACTO ]</div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "1.5rem" }}>
-            <p style={{ color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.6, margin: 0 }}>
-              Nossa atitude comercial rejeita o greenwashing e a teoria inócua das consultorias tradicionais. Entramos no território desprovidos de jargões de slides para encontrar a verdade prática das necessidades locais. Operamos de forma científica e com governança corporativa blindada, testando hipóteses em campo de maneira ágil.
-            </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-              <div className="font-mono" style={{ fontSize: "0.75rem", color: "#F3F4F6", textTransform: "uppercase" }}>Os dois pilares inegociáveis de redação comercial:</div>
-              <ul style={{ margin: 0, paddingLeft: "1.1rem", color: "#9CA3AF", fontSize: "0.8rem", lineHeight: 1.6 }}>
-                <li><strong style={{ color: "#FFC700" }}>Entrar Sem Viés (Desaprendizado de Slide):</strong> Nunca venda respostas prontas no slide de onboarding. Diga: *"Entramos no território para ouvir a comunidade e projetar a partir dos fatos locais, não de suposições corporativas."*</li>
-                <li><strong style={{ color: "#FFC700" }}>Execução de Campo Rápida (Sprints de Evidência):</strong> Valide rápido sob risco controlado. Diga: *"Construímos e testamos soluções em campo através de sprints de 6 semanas, corrigindo a rota de imediato a partir de dados reais da calçada."*</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* FOTOGRAFIA — Slider interativo */}
-      <Section id="fotografia" eyebrow="Camada 5 · Fotografia" title="Realidade documental." intro="Pessoas reais, estudantes no campus, bairros e cidades brasileiras. Baixo contraste de saturação, granulação orgânica e overlays escuros que permitem excelente legibilidade de texto sob a imagem.">
-        <PhotoSlider />
-
-        <div style={{ marginTop: "1.5rem", border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.25rem", background: "#060606" }}>
-          <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#0055FF", marginBottom: 10 }}>[ CSS TOKENS PARA FOTOGRAFIA ]</div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "1.5rem", alignItems: "center" }}>
-            <p style={{ color: "#9CA3AF", fontSize: "0.8rem", lineHeight: 1.5, margin: 0 }}>
-              Todas as fotografias de pessoas ou do território devem ser dessaturadas para neutralizar cores estranhas ao design system e receber overlays sutis dos nossos gradientes semânticos (Leaf ou Atlantic) para fixar a assinatura visual da marca.
-            </p>
-            <pre style={{ margin: 0, padding: "1rem", background: "#050505", borderRadius: 8, border: "1px solid var(--color-border-strong)", fontSize: "0.7rem", color: "#00FF41", overflowX: "auto", fontFamily: "var(--font-mono)" }}>
-{`.photo-brand-filter {
-  filter: grayscale(0.15) contrast(1.05) brightness(0.9);
-  /* Overlay Leaf/Atlantic */
-  background: radial-gradient(circle at 10% 20%, rgba(0, 255, 65, 0.12) 0%, transparent 60%),
-              radial-gradient(circle at 90% 80%, rgba(0, 85, 255, 0.12) 0%, transparent 60%);
-}`}
-            </pre>
-          </div>
-        </div>
-      </Section>
-
-      {/* O MÉTODO — fluxo operacional */}
-      <Section id="metodo" eyebrow="Camada 6 · O Método" title="O pipeline de valor." intro="Rastreabilidade do início ao fim. Cada squad passa por checkpoints bem definidos no sistema que geram evidência digital. Transparência operacional completa.">
-        <SectionGlow color="#0055FF" position="50% 50%" opacity={0.05} />
-        <FlowDemo />
-      </Section>
-
-      {/* COMPONENTES */}
-      <Section id="componentes" eyebrow="Camada 7 · Componentes" title="Primitivos interativos." intro="Espelho de nossos componentes principais exportados de apps/web/src/components/. Hairlines, botões pílulas e fit scores explicados.">
-        <div className="bento-grid" style={{ marginTop: "2rem" }}>
-          {/* Coluna 1: Botoes (Bento span 2 colunas) */}
-          <div className="glass-card bento-2col" style={{ padding: "2rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-            <div>
-              <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#00E676", letterSpacing: "0.15em", textTransform: "uppercase" }}>✓ Botões Cápsula High-End (Touch Target &gt; 44px)</span>
-              <p style={{ color: "#9CA3AF", fontSize: "0.85rem", margin: "0.5rem 0 1.5rem", lineHeight: 1.5 }}>
-                Botões pílula táteis (rounded-full) com transições elásticas naturais e acentos bioluminescentes contidos.
-              </p>
-            </div>
-            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", alignItems: "center" }}>
-              <button className="h-11 px-7 rounded-full bg-[#00E676] text-[#050505] font-semibold text-xs uppercase tracking-wider transition-all duration-200 hover:bg-[#00FF87] active:scale-[0.98] shadow-[0_0_20px_rgba(0,230,118,0.25)] cursor-pointer">
-                Ativar Squad ESG
-              </button>
-              <button className="h-11 px-7 rounded-full bg-white/[0.04] text-white border border-white/[0.10] font-medium text-xs uppercase tracking-wider transition-all duration-200 hover:bg-white/[0.08] hover:border-white/[0.20] active:scale-[0.98] cursor-pointer">
-                Ver Casos de Sucesso
-              </button>
-              <button className="h-11 px-7 rounded-full bg-[#FFD600] text-[#050505] font-semibold text-xs uppercase tracking-wider transition-all duration-200 hover:bg-[#FFE033] active:scale-[0.98] shadow-[0_0_20px_rgba(255,214,0,0.25)] cursor-pointer">
-                Inscrever Campus
-              </button>
-            </div>
-          </div>
-          
-          {/* Coluna 2: Fit Score Card */}
-          <div className="glass-card" style={{ padding: "2rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-            <div>
-              <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#FFC700", letterSpacing: "0.15em", textTransform: "uppercase" }}>EXPLICAÇÃO DO FIT SCORE</span>
-              <div style={{ display: "flex", alignItems: "baseline", gap: 8, margin: "1.5rem 0 1rem" }}>
-                <span className="font-mono" style={{ fontSize: "3.5rem", fontWeight: 700, color: "#FFC700", lineHeight: 1 }}>87</span>
-                <span className="font-mono" style={{ color: "#4B5563", fontSize: "0.9rem" }}>/100</span>
-              </div>
-              <p style={{ color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.5, margin: "0 0 1.25rem" }}>
-                Cálculo em tempo real gerado pela Suzely baseado nas compatibilidades abaixo:
-              </p>
-            </div>
-            <div>
-              {[["Skills Técnicas", 82, "#00FF41"], ["Objetivos ODS", 91, "#FFC700"], ["Contexto Territorial", 74, "#0055FF"]].map(([l, v, c]) => (
-                <div key={l as string} style={{ marginBottom: 10 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.7rem", marginBottom: 4 }}>
-                    <span className="font-mono" style={{ color: "#F3F4F6", textTransform: "uppercase" }}>{l as string}</span>
-                    <span className="font-mono" style={{ color: c as string }}>{v as number}%</span>
-                  </div>
-                  <div style={{ height: 6, background: "rgba(255,255,255,0.06)", borderRadius: 9999 }}>
-                    <div style={{ width: `${v}%`, height: "100%", background: c as string, borderRadius: 9999 }} />
-                  </div>
+        {/* 01. VISÃO & MANIFESTO */}
+        <div id="visao-manifesto">
+          <Section id="negocio" eyebrow="01. Visão & Manifesto · O Negócio / Playbook" title={<>Inovação territorial que gera ROI socioambiental real.</>} intro="Substituímos o greenwashing e a teoria inócua das consultorias de slides por squads integrados (embedded) e auditáveis no território. O Brasil Sustenta é o matching engine de talentos e o compliance prático das suas metas ESG. Unimos o brilhantismo universitário sob governança de mercado para entregar em semanas o que o seu RH/Sustentabilidade levaria meses para estruturar.">
+            <SectionGlow color="#00E676" position="10% 40%" opacity={0.06} />
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.25rem", position: "relative" }}>
+              {[
+                { t: "Modelo Embedded (Súper Teammates)", b: "Não entregamos relatórios teóricos e sumimos. Alocamos squads de impacto integrados ao seu fluxo, sob a governança da Tríade (Embaixador + Coordenador + Empresa)." },
+                { t: "Engine Suzely (Fit Explicável)", b: "O matching de competências, disponibilidade e relevância ODS territorial é calculado via Inteligência Artificial baseada em dados reais das calçadas parceiras." },
+                { t: "Talent Pool & Voluntariado v7", b: "Os squads atuam como funil prático de talentos e de voluntariado de mentoria corporativa (ESG Social). O RH assina a Suzely para contratar os jovens pré-avaliados em campo (Placement SaaS)." },
+                { t: "Compliance & ROI Síncronos", b: "Lucro e impacto andam juntos. A entrega técnica atende às exigências de inovação da marca e gera as métricas ODS auditadas exigidas pela regulação de mercado." },
+              ].map((x) => (
+                <div key={x.t} className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.75rem", background: "#121417" }}>
+                  <h3 className="font-display" style={{ fontSize: "1.4rem", fontWeight: 700, color: "#F3F4F6", margin: "0 0 0.75rem" }}>{x.t}</h3>
+                  <p style={{ fontSize: "0.95rem", color: "#9CA3AF", lineHeight: 1.6, margin: 0 }}>{x.b}</p>
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </Section>
 
-      {/* ODS GRID INTERATIVO */}
-      <Section id="ods" eyebrow="Camada 8 · Agenda ODS" title="A ancoragem ODS." intro="Toda ação operacional é atrelada a uma das 18 metas de desenvolvimento sustentável ODS brasileiras. Selecione uma meta abaixo para ver os desafios práticos envolvidos.">
-        <ODSInteractiveGrid />
-      </Section>
-
-      {/* GOVERNANÇA */}
-      <Section id="governanca" eyebrow="Camada 9 · Governança" title="Quem decide e evolui." intro="Tokens são a única fonte da verdade de cores, fontes e espaçamentos. Qualquer mudança estrutural deve ser proposta via Architecture Decision Records (ADRs) no Vault de Governança.">
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.25rem" }}>
-          {[
-            { l: "🔴 Inalterável (Soberano)", c: "#FF1744", b: "Logo oficial, nome, paleta semântica principal e tom de voz anti-greenwashing. Apenas o Brand Owner decide." },
-            { l: "🟡 Adaptável (Evolutivo)", c: "#FFC700", b: "Novos componentes do design system, gradientes secundários e escalas de texto. Propostas via PR de ADR." },
-            { l: "🟢 Livre (Execução)", c: "#00FF41", b: "Uso combinado de tokens existentes para criar novas páginas, posts e ilustrações no tom de voz oficial." },
-          ].map((x) => (
-            <div key={x.l} className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
-              <div className="font-mono" style={{ fontWeight: 700, color: x.c, marginBottom: 8, fontSize: "0.85rem" }}>{x.l}</div>
-              <p style={{ fontSize: "0.85rem", color: "#9CA3AF", lineHeight: 1.6, margin: 0 }}>{x.b}</p>
+            <div style={{ marginTop: "2.5rem", borderTop: "1px solid var(--color-border)", paddingTop: "2rem" }}>
+              <Eyebrow>As Verticais de Squads de Impacto (Especialidades & Entregáveis)</Eyebrow>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.25rem", marginTop: "1rem" }}>
+                {[
+                  { 
+                    title: "Tech & Data (Código Real & IA)", 
+                    color: "#2979FF", 
+                    tag: "SQUADS DE ENGENHARIA",
+                    what: "Construção de MVPs de alta performance, arquiteturas de dados territoriais com georreferenciamento e motores de matching alimentados por inteligência artificial explicável.",
+                    how: "Através de sprints de 6 semanas no modelo de governança da Tríade. Usamos TypeScript, React, Next.js, tRPC e bancos de dados vetoriais (pgvector no Supabase) para ligar problemas de campo a soluções digitais rápidas e robustas, focando em acessibilidade digital (WCAG) nas periferias.",
+                    deliverables: [
+                      "Plataformas Web & Mobile PWA (React 19 / Vite / Tailwind)",
+                      "Motores de Inteligência e Recomendação (Suzely Vector Matching)",
+                      "Pipelines de ETL e Dashboards de Métricas ESG em Tempo Real",
+                      "Auditorias Técnicas de Código e Acessibilidade Digital"
+                    ]
+                  },
+                  { 
+                    title: "Território & Campo (Mapeamento & MEC 10%)", 
+                    color: "#00E676", 
+                    tag: "SQUADS DE EXTENSÃO & IMPACTO",
+                    what: "Diagnóstico in loco de vulnerabilidades, aplicação de metodologias ágeis em comunidades e articulação institucional para curricularização de extensão (MEC 10%).",
+                    how: "Squads multidisciplinares alocados diretamente em hubs parceiros e calçadas periféricas. Realizam escuta ativa, co-criação de soluções com lideranças locais e validação de hipóteses com metodologia científica, garantindo conformidade regulatória para as universidades envolvidas.",
+                    deliverables: [
+                      "Relatórios de Validação Territorial com Rastreabilidade Fotográfica",
+                      "Dossiês de Curricularização de Extensão Universitária (MEC 10%)",
+                      "Planos de Ação Comunitária e Mapeamento de Stakeholders",
+                      "Workshops de Co-criação e Engajamento de Lideranças Locais"
+                    ]
+                  },
+                  { 
+                    title: "Gestão & Estratégia (Compliance & Finanças)", 
+                    color: "#FFD600", 
+                    tag: "SQUADS DE NEGÓCIOS & SUSTENTABILIDADE",
+                    what: "Estruturação de modelos de negócios regenerativos, compliance com frameworks globais (GRI, SASB, ODS) e análise de viabilidade econômico-financeira de projetos sociais.",
+                    how: "Aplicação do conceito de Shared Value (Valor Compartilhado) para demonstrar que lucro e impacto social são mutuamente reforçadores. Elaboração de matrizes de materialidade, projeções de ROI socioambiental e preparação para captação de recursos via blended finance.",
+                    deliverables: [
+                      "Matrizes de Materialidade e Alinhamento aos 18 ODS Brasileiros",
+                      "Modelos Financeiros de Shared Value e Projeção de ROI Social",
+                      "Relatórios de Sustentabilidade em Padrão Global (GRI / SASB)",
+                      "Estruturação de Projetos para Editais e Captação de Financiamento"
+                    ]
+                  },
+                  { 
+                    title: "Design & Comunicação (Brutalismo Tropical)", 
+                    color: "#FF9100", 
+                    tag: "SQUADS DE IDENTIDADE & PRODUTO",
+                    what: "Design de produtos digitais com estética Quiet Luxury Tech, campanhas de comunicação anti-greenwashing e narrativas de marca baseadas na verdade do território.",
+                    how: "Criação de design systems modulares inspirados no brutalismo tropical com grid suíço de 1px. Desenvolvimento de interfaces intuitivas, tipografia monumental e identidades visuais de alta densidade que rejeitam clichês corporativos e valorizam a cultura local com elegância contemporânea.",
+                    deliverables: [
+                      "Design Systems Completos (Tokens, Componentes e Brand Books)",
+                      "Protótipos de Alta Fidelidade (Figma) e Arquitetura de Informação",
+                      "Guias de Tom de Voz e Diretrizes de Comunicação Anti-Greenwashing",
+                      "Ativos Visuais e Tratamento Documental de Fotografia de Campo"
+                    ]
+                  }
+                ].map((v) => (
+                  <div key={v.title} className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#121417", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                    <div>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "0.75rem" }}>
+                        <span className="font-mono" style={{ fontSize: "0.625rem", color: v.color, letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 700 }}>
+                          {v.tag}
+                        </span>
+                        <Dot color={v.color} size={6} />
+                      </div>
+                      <h4 className="font-display" style={{ fontSize: "1.2rem", fontWeight: 700, color: "#F3F4F6", margin: "0 0 0.5rem" }}>
+                        {v.title}
+                      </h4>
+                      <p style={{ fontSize: "0.85rem", color: "#9CA3AF", lineHeight: 1.5, margin: "0 0 1rem" }}>
+                        {v.what}
+                      </p>
+                      <p style={{ fontSize: "0.8rem", color: "#6B7280", lineHeight: 1.5, margin: "0 0 1.25rem", fontStyle: "italic" }}>
+                        {v.how}
+                      </p>
+                    </div>
+                    
+                    <div style={{ borderTop: "1px solid var(--color-border-strong)", paddingTop: "1rem" }}>
+                      <span className="font-mono" style={{ fontSize: "0.55rem", color: "#9CA3AF", letterSpacing: "0.1em", textTransform: "uppercase", display: "block", marginBottom: 8 }}>O que prestamos (Entregáveis):</span>
+                      <ul className="font-mono" style={{ margin: 0, paddingLeft: 0, listStyle: "none", color: "#F3F4F6", fontSize: "0.7rem", display: "flex", flexDirection: "column", gap: 6 }}>
+                        {v.deliverables.map((d) => (
+                          <li key={d} style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
+                            <span style={{ color: v.color }}>▪</span> {d}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
-        </div>
-        <div style={{ marginTop: "1.5rem", border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#0D0E0E" }}>
-          <EaseDemo />
+          </Section>
+
+          {/* MANIFESTO — cartazes Gen Z de shared value */}
+          <Section id="manifesto" eyebrow="Camada 1.5 · O Manifesto" title={<>A visão do Shared Value.</>} intro="Acreditamos que impacto socioambiental gera retorno financeiro legítimo, e que o retorno financeiro financia a escala do impacto. É assim que superamos o greenwashing e criamos soluções perpétuas.">
+            <ManifestoSection />
+          </Section>
         </div>
 
-        <div style={{ marginTop: "2rem", borderTop: "1px solid var(--color-border)", paddingTop: "1.5rem" }}>
-          <Eyebrow>Template de Proposta de Mudança (ADR)</Eyebrow>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "1.5rem", marginTop: "1rem" }}>
-            <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              <p style={{ color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.6, margin: 0 }}>
-                Qualquer modificação estrutural na identidade de marca (ex: propor novos gradientes, introduzir fontes alternativas ou alterar lockups de logo) precisa seguir o fluxo formal de open-source do ecossistema. Use este padrão de ADR em formato markdown e envie um Pull Request para revisão da diretoria criativa (CPO).
-              </p>
+        {/* 02. LOGOMARCA & GEOMETRIA */}
+        <div id="logo-geometria">
+          <Section id="logo" eyebrow="02. Logomarca & Geometria" title="A assinatura visual." intro="A logo do Brasil Sustenta é empilhada, utilizando a fonte Antonio Black e finalizada com o ponto final verde amazônia tech. É minimalista, geométrica, de forte presença visual e inalterável.">
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1.25rem" }}>
+              <LogoCard label="Principal" sub="Empilhado · fundo escuro" bg="#08090A">
+                <Logo size={2.2} />
+              </LogoCard>
+              <LogoCard label="Negativo" sub="Fundo claro" bg="#F3F4F6" labelColor="#4B5563">
+                <span className="font-display" style={{ display: "flex", flexDirection: "column", lineHeight: 0.88, fontSize: "2.2rem", fontWeight: 900 }}>
+                  <span style={{ color: "#08090A" }}>BRASIL</span>
+                  <span style={{ color: "#08090A" }}>SUSTENTA<span style={{ color: "#00E676" }}>.</span></span>
+                </span>
+              </LogoCard>
+              <LogoCard label="Monocromático" sub="Tudo branco · sem ponto colorido" bg="#121417">
+                <span className="font-display" style={{ display: "flex", flexDirection: "column", lineHeight: 0.88, fontSize: "2.2rem", fontWeight: 900 }}>
+                  <span style={{ color: "#F3F4F6" }}>BRASIL</span>
+                  <span style={{ color: "#F3F4F6" }}>SUSTENTA<span style={{ color: "#F3F4F6" }}>.</span></span>
+                </span>
+              </LogoCard>
+              <LogoCard label="Símbolo Monograma (Match-Net)" sub="Monograma geométrico bioluminescente" bg="#08090A">
+                <div style={{ position: "relative", width: 70, height: 70, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
+                    <path d="M25 20H55C70 20 70 38 55 38C70 38 70 56 55 56H25V20Z" stroke="url(#paint0_linear_v7_original)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M25 56C25 70 38 80 50 80C65 80 75 70 75 56" stroke="url(#paint1_linear_v7_original)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="4 4"/>
+                    <circle cx="55" cy="38" r="6" fill="#00E676" />
+                    <circle cx="50" cy="80" r="6" fill="#FFD600" />
+                    <circle cx="75" cy="56" r="6" fill="#2979FF" />
+                    <defs>
+                      <linearGradient id="paint0_linear_v7_original" x1="25" y1="20" x2="70" y2="56" gradientUnits="userSpaceOnUse">
+                        <stop stopColor="#00E676"/>
+                        <stop offset="0.5" stopColor="#FFD600"/>
+                        <stop offset="1" stopColor="#2979FF"/>
+                      </linearGradient>
+                      <linearGradient id="paint1_linear_v7_original" x1="25" y1="56" x2="75" y2="80" gradientUnits="userSpaceOnUse">
+                        <stop stopColor="#FFD600"/>
+                        <stop offset="1" stopColor="#2979FF"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+              </LogoCard>
+              <LogoCard label="Favicon v8" sub="Aba de navegador · ícone de app" bg="#08090A">
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+                  <div style={{ width: 64, height: 64, background: "#121417", border: "1px solid var(--color-border-strong)", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 20px rgba(0, 230, 118, 0.15)" }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" style={{ width: 36, height: 36 }}>
+                      <path d="M25 20H55C70 20 70 38 55 38C70 38 70 56 55 56H25V20Z" stroke="#00E676" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
+                      <circle cx="55" cy="38" r="8" fill="#FFD600" />
+                    </svg>
+                  </div>
+                  <CopyChip value='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M25 20H55C70 20 70 38 55 38C70 38 70 56 55 56H25V20Z" stroke="#00E676" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/><circle cx="55" cy="38" r="8" fill="#FFD600"/></svg>' label="Copiar SVG" />
+                </div>
+              </LogoCard>
             </div>
-            <pre style={{ margin: 0, padding: "1.25rem", background: "#050505", borderRadius: 12, border: "1px solid var(--color-border-strong)", fontSize: "0.7rem", color: "#F3F4F6", overflowX: "auto", fontFamily: "var(--font-mono)", lineHeight: 1.5 }}>
+            <div style={{ marginTop: "1.5rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+              <div style={{ border: "1px solid rgba(0,230,118,0.2)", borderRadius: 12, padding: "1.25rem", background: "rgba(0,230,118,0.04)" }}>
+                <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#00E676", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 8 }}>✓ Regras de Uso</div>
+                <ul style={{ margin: 0, paddingLeft: "1.1rem", color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.7 }}>
+                  <li>BRASIL sempre empilhado sobre SUSTENTA.</li>
+                  <li>Símbolo Match-Net sempre renderizado em alta definição SVG.</li>
+                  <li>Cores semânticas do símbolo correspondem ao degradê verde-amarelo-azul Pátria.</li>
+                </ul>
+              </div>
+              <div style={{ border: "1px solid rgba(255,23,68,0.2)", borderRadius: 12, padding: "1.25rem", background: "rgba(255,23,68,0.04)" }}>
+                <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#FF1744", textTransform: "uppercase", letterSpacing: "0.15em", marginBottom: 8 }}>✕ Proibido</div>
+                <ul style={{ margin: 0, paddingLeft: "1.1rem", color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.7 }}>
+                  <li>Nunca escrever em linha horizontal única.</li>
+                  <li>Nunca mudar o ponto final para outra cor.</li>
+                  <li>Nunca aplicar sombras, gradientes ou contornos no texto.</li>
+                </ul>
+              </div>
+            </div>
+          </Section>
+        </div>
+
+        {/* 03. SISTEMA CROMÁTICO */}
+        <div id="sistema-cromatico">
+          <Section id="cores" eyebrow="03. Sistema Cromático & Elevação Tonal" title="A paleta semântica." intro="Dividimos a paleta de cores por persona de atuação. Cores puras servem como acentos dinâmicos em superfícies e detalhes, nunca como fundo de grandes blocos. Adicionamos gradientes premium para conferir profundidade e modernidade.">
+            <Eyebrow>Por Persona</Eyebrow>
+            <div style={{ marginTop: 12, marginBottom: 32 }}><ColorRow items={tokens.color.persona} /></div>
+            <Eyebrow>Gradientes Premium</Eyebrow>
+            <GradientShowcase />
+            <div style={{ height: 32 }} />
+            <Eyebrow>Base & Neutros</Eyebrow>
+            <div style={{ marginTop: 12, marginBottom: 32 }}><ColorRow items={tokens.color.base} /></div>
+            <Eyebrow>Status</Eyebrow>
+            <div style={{ marginTop: 12 }}><ColorRow items={tokens.color.status} /></div>
+          </Section>
+        </div>
+
+        {/* 04. TIPOGRAFIA ESCULTURAL */}
+        <div id="tipografia-escultural">
+          <Section id="tipografia" eyebrow="04. Tipografia Escultural" title="A escala monumentalista." intro="Antonio (Display/Cabeçalhos) · Outfit (Leitura/Corpo) · Geist Mono (Dados/Fórmulas/Eyebrows). No máximo duas famílias por tela ou peça. Mono é reservada estritamente para números de score, metadados e tags.">
+            <TypographyPlayground />
+            <div style={{ marginTop: "2.5rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+              {tokens.typography.scale.map((t) => (
+                <div key={t.level} style={{ borderBottom: "1px solid var(--color-border)", padding: "1.25rem 0", display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
+                  <span style={{
+                    fontFamily: t.family === "Antonio" ? "var(--font-display)" : t.family === "Geist Mono" ? "var(--font-mono)" : "var(--font-body)",
+                    fontSize: `min(${t.size}, 12vw)`, fontWeight: parseInt(t.weight) || 700,
+                    letterSpacing: t.tracking, textTransform: t.transform === "UPPERCASE" ? "uppercase" : "none",
+                    color: "#F3F4F6", lineHeight: 1,
+                  }}>
+                    {t.level}
+                  </span>
+                  <span className="font-mono" style={{ fontSize: "0.75rem", color: "#9CA3AF" }}>
+                    {t.family} · {t.weight} · {t.size} · {t.tracking}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </Section>
+        </div>
+
+        {/* 05. TOM DE VOZ */}
+        <div id="tom-de-voz">
+          <Section id="tom" eyebrow="05. Tom de Voz & Anti-Greenwashing" title="Inconformismo e rigor real." intro="Falamos com soberania territorial e atitude pragmática: provocativo, focado em negócios, guiado por evidências científicas e desenhado para gerar valor econômico legítimo na comunidade de baixo para cima.">
+            <ToneTranslator />
+
+            <div style={{ marginTop: "2rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
+              <div className="bs-card" style={{ border: "1px solid rgba(0, 230, 118, 0.2)", borderRadius: 16, padding: "1.5rem", background: "rgba(0, 230, 118, 0.02)" }}>
+                <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#00E676" }}>✓ O QUE DIZER (RIGOR E ATITUDE)</span>
+                <ul style={{ color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.7, margin: "1rem 0 0", paddingLeft: "1.2rem" }}>
+                  <li>Ancorar soluções em <span style={{ color: "#F3F4F6" }}>evidências quantificáveis</span> (ODS, Fit Scores).</li>
+                  <li>Falar da base criativa e universitária com <span style={{ color: "#F3F4F6" }}>protagonismo e autoria</span>.</li>
+                  <li>Usar a verdade nua e crua do território ("direto na calçada", "corre real").</li>
+                  <li>Princípios operacionais: <span style={{ color: "#F3F4F6" }}>"Entrar Sem Viés"</span> (ouvir antes de projetar) e <span style={{ color: "#F3F4F6" }}>"Execução Rápida"</span> (sprints com risco calculado).</li>
+                </ul>
+              </div>
+              <div className="bs-card" style={{ border: "1px solid rgba(255, 23, 68, 0.2)", borderRadius: 16, padding: "1.5rem", background: "rgba(255, 23, 68, 0.02)" }}>
+                <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#FF1744" }}>✕ O QUE EVITAR (FALTA DE EVIDÊNCIA / CLICHÊ)</span>
+                <ul style={{ color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.7, margin: "1rem 0 0", paddingLeft: "1.2rem" }}>
+                  <li>Termos abstratos e paternalistas: <span style={{ color: "#F3F4F6" }}>"capacitar jovens carentes"</span>, <span style={{ color: "#F3F4F6" }}>"ajudar o próximo"</span>.</li>
+                  <li>Clichês corporativos vazios: <span style={{ color: "#F3F4F6" }}>"sinergia inovadora"</span>, <span style={{ color: "#F3F4F6" }}>"ecossistema disruptivo"</span>.</li>
+                  <li>Fórmulas de greenwashing: <span style={{ color: "#F3F4F6" }}>"construir um amanhã verde"</span>, <span style={{ color: "#F3F4F6" }}>"salvar o planeta"</span>.</li>
+                  <li>Paternalismo institucional tradicional que anule a voz ativa da comunidade.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div style={{ marginTop: "1.5rem", border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#121417" }}>
+              <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#FFD600", marginBottom: 10 }}>[ ATITUDE COMERCIAL: A VERDADE DO IMPACTO ]</div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "1.5rem" }}>
+                <p style={{ color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.6, margin: 0 }}>
+                  Nossa atitude comercial rejeita o greenwashing e a teoria inócua das consultorias tradicionais. Entramos no território desprovidos de jargões de slides para encontrar a verdade prática das necessidades locais. Operamos de forma científica e com governança corporativa blindada, testando hipóteses em campo de maneira ágil.
+                </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  <div className="font-mono" style={{ fontSize: "0.75rem", color: "#F3F4F6", textTransform: "uppercase" }}>Os dois pilares inegociáveis de redação comercial:</div>
+                  <ul style={{ margin: 0, paddingLeft: "1.1rem", color: "#9CA3AF", fontSize: "0.8rem", lineHeight: 1.6 }}>
+                    <li><strong style={{ color: "#FFD600" }}>Entrar Sem Viés (Desaprendizado de Slide):</strong> Nunca venda respostas prontas no slide de onboarding. Diga: *"Entramos no território para ouvir a comunidade e projetar a partir dos fatos locais, não de suposições corporativas."*</li>
+                    <li><strong style={{ color: "#FFD600" }}>Execução de Campo Rápida (Sprints de Evidência):</strong> Valide rápido sob risco controlado. Diga: *"Construímos e testamos soluções em campo através de sprints de 6 semanas, corrigindo a rota de imediato a partir de dados reais da calçada."*</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </Section>
+        </div>
+
+        {/* 06. DIRETRIZ FOTOGRÁFICA */}
+        <div id="diretriz-fotografica">
+          <Section id="fotografia" eyebrow="06. Diretriz Fotográfica" title="Realidade documental." intro="Pessoas reais, estudantes no campus, bairros e cidades brasileiras. Baixo contraste de saturação, granulação orgânica e overlays escuros que permitem excelente legibilidade de texto sob a imagem.">
+            <PhotoSlider />
+
+            <div style={{ marginTop: "1.5rem", border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.25rem", background: "#121417" }}>
+              <div className="font-mono" style={{ fontSize: "0.6875rem", color: "#2979FF", marginBottom: 10 }}>[ CSS TOKENS PARA FOTOGRAFIA ]</div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "1.5rem", alignItems: "center" }}>
+                <p style={{ color: "#9CA3AF", fontSize: "0.8rem", lineHeight: 1.5, margin: 0 }}>
+                  Todas as fotografias de pessoas ou do território devem ser dessaturadas para neutralizar cores estranhas ao design system e receber overlays sutis dos nossos gradientes semânticos (Leaf ou Atlantic) para fixar a assinatura visual da marca.
+                </p>
+                <pre style={{ margin: 0, padding: "1rem", background: "#08090A", borderRadius: 8, border: "1px solid var(--color-border-strong)", fontSize: "0.7rem", color: "#00E676", overflowX: "auto", fontFamily: "var(--font-mono)" }}>
+{`.photo-brand-filter {
+  filter: grayscale(0.15) contrast(1.05) brightness(0.9);
+  /* Overlay Leaf/Atlantic */
+  background: radial-gradient(circle at 10% 20%, rgba(0, 230, 118, 0.12) 0%, transparent 60%),
+              radial-gradient(circle at 90% 80%, rgba(41, 121, 255, 0.12) 0%, transparent 60%);
+}`}
+                </pre>
+              </div>
+            </div>
+          </Section>
+        </div>
+
+        {/* O MÉTODO — fluxo operacional */}
+        <div id="metodo-fluxo">
+          <Section id="metodo" eyebrow="Método de Engenharia Territorial" title="O pipeline de valor." intro="Rastreabilidade do início ao fim. Cada squad passa por checkpoints bem definidos no sistema que geram evidência digital. Transparência operacional completa.">
+            <SectionGlow color="#2979FF" position="50% 50%" opacity={0.05} />
+            <FlowDemo />
+          </Section>
+        </div>
+
+        {/* 07. COMPONENTES & BENTO UI */}
+        <div id="componentes-bento">
+          <Section id="componentes" eyebrow="07. Componentes & Bento UI" title="Primitivos interativos." intro="Espelho de nossos componentes principais exportados de apps/web/src/components/. Hairlines, botões pílulas e fit scores explicados.">
+            <div className="bento-grid" style={{ marginTop: "2rem" }}>
+              {/* Coluna 1: Botoes (Bento span 2 colunas) */}
+              <div className="glass-card bento-2col" style={{ padding: "2rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                <div>
+                  <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#00E676", letterSpacing: "0.15em", textTransform: "uppercase" }}>✓ Botões Cápsula High-End (Touch Target &gt; 44px)</span>
+                  <p style={{ color: "#9CA3AF", fontSize: "0.85rem", margin: "0.5rem 0 1.5rem", lineHeight: 1.5 }}>
+                    Botões pílula táteis (rounded-full) com transições elásticas naturais e acentos bioluminescentes contidos.
+                  </p>
+                </div>
+                <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", alignItems: "center" }}>
+                  <button className="min-h-[44px] h-11 px-7 rounded-full bg-[#00E676] text-[#08090A] font-semibold text-xs uppercase tracking-wider transition-all duration-200 hover:bg-[#00FF87] active:scale-[0.98] shadow-[0_0_20px_rgba(0,230,118,0.25)] cursor-pointer">
+                    Ativar Squad ESG
+                  </button>
+                  <button className="min-h-[44px] h-11 px-7 rounded-full bg-white/[0.04] text-white border border-white/[0.10] font-medium text-xs uppercase tracking-wider transition-all duration-200 hover:bg-white/[0.08] hover:border-white/[0.20] active:scale-[0.98] cursor-pointer">
+                    Ver Casos de Sucesso
+                  </button>
+                  <button className="min-h-[44px] h-11 px-7 rounded-full bg-[#FFD600] text-[#08090A] font-semibold text-xs uppercase tracking-wider transition-all duration-200 hover:bg-[#FFE033] active:scale-[0.98] shadow-[0_0_20px_rgba(255,214,0,0.25)] cursor-pointer">
+                    Inscrever Campus
+                  </button>
+                </div>
+              </div>
+              
+              {/* Coluna 2: Fit Score Card */}
+              <div className="glass-card" style={{ padding: "2rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                <div>
+                  <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#FFD600", letterSpacing: "0.15em", textTransform: "uppercase" }}>EXPLICAÇÃO DO FIT SCORE</span>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: 8, margin: "1.5rem 0 1rem" }}>
+                    <span className="font-mono" style={{ fontSize: "3.5rem", fontWeight: 700, color: "#FFD600", lineHeight: 1 }}>87</span>
+                    <span className="font-mono" style={{ color: "#9CA3AF", fontSize: "0.9rem" }}>/100</span>
+                  </div>
+                  <p style={{ color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.5, margin: "0 0 1.25rem" }}>
+                    Cálculo em tempo real gerado pela Suzely baseado nas compatibilidades abaixo:
+                  </p>
+                </div>
+                <div>
+                  {[["Skills Técnicas", 82, "#00E676"], ["Objetivos ODS", 91, "#FFD600"], ["Contexto Territorial", 74, "#2979FF"]].map(([l, v, c]) => (
+                    <div key={l as string} style={{ marginBottom: 10 }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.7rem", marginBottom: 4 }}>
+                        <span className="font-mono" style={{ color: "#F3F4F6", textTransform: "uppercase" }}>{l as string}</span>
+                        <span className="font-mono" style={{ color: c as string }}>{v as number}%</span>
+                      </div>
+                      <div style={{ height: 6, background: "rgba(255,255,255,0.06)", borderRadius: 9999 }}>
+                        <div style={{ width: `${v}%`, height: "100%", background: c as string, borderRadius: 9999 }} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Section>
+        </div>
+
+        {/* 08. AGENDA ODS 1-18 & GOVERNANÇA */}
+        <div id="ods-governanca">
+          {/* ODS GRID INTERATIVO */}
+          <Section id="ods" eyebrow="08. Agenda ODS 1-18 & Governança" title="A ancoragem ODS." intro="Toda ação operacional é atrelada a uma das 18 metas de desenvolvimento sustentável ODS brasileiras. Selecione uma meta abaixo para ver os desafios práticos envolvidos.">
+            <ODSInteractiveGrid />
+          </Section>
+
+          {/* GOVERNANÇA */}
+          <Section id="governanca" eyebrow="Framework de Governança Soberana" title="Quem decide e evolui." intro="Tokens são a única fonte da verdade de cores, fontes e espaçamentos. Qualquer mudança estrutural deve ser proposta via Architecture Decision Records (ADRs) no Vault de Governança.">
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.25rem" }}>
+              {[
+                { l: "🔴 Inalterável (Soberano)", c: "#FF1744", b: "Logo oficial, nome, paleta semântica principal e tom de voz anti-greenwashing. Apenas o Brand Owner decide." },
+                { l: "🟡 Adaptável (Evolutivo)", c: "#FFD600", b: "Novos componentes do design system, gradientes secundários e escalas de texto. Propostas via PR de ADR." },
+                { l: "🟢 Livre (Execução)", c: "#00E676", b: "Uso combinado de tokens existentes para criar novas páginas, posts e ilustrações no tom de voz oficial." },
+              ].map((x) => (
+                <div key={x.l} className="bs-card" style={{ border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#121417" }}>
+                  <div className="font-mono" style={{ fontWeight: 700, color: x.c, marginBottom: 8, fontSize: "0.85rem" }}>{x.l}</div>
+                  <p style={{ fontSize: "0.85rem", color: "#9CA3AF", lineHeight: 1.6, margin: 0 }}>{x.b}</p>
+                </div>
+              ))}
+            </div>
+            <div style={{ marginTop: "1.5rem", border: "1px solid var(--color-border)", borderRadius: 16, padding: "1.5rem", background: "#121417" }}>
+              <EaseDemo />
+            </div>
+
+            <div style={{ marginTop: "2rem", borderTop: "1px solid var(--color-border)", paddingTop: "1.5rem" }}>
+              <Eyebrow>Template de Proposta de Mudança (ADR)</Eyebrow>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "1.5rem", marginTop: "1rem" }}>
+                <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                  <p style={{ color: "#9CA3AF", fontSize: "0.85rem", lineHeight: 1.6, margin: 0 }}>
+                    Qualquer modificação estrutural na identidade de marca (ex: propor novos gradientes, introduzir fontes alternativas ou alterar lockups de logo) precisa seguir o fluxo formal de open-source do ecossistema. Use este padrão de ADR em formato markdown e envie um Pull Request para revisão da diretoria criativa (CPO).
+                  </p>
+                </div>
+                <pre style={{ margin: 0, padding: "1.25rem", background: "#08090A", borderRadius: 12, border: "1px solid var(--color-border-strong)", fontSize: "0.7rem", color: "#F3F4F6", overflowX: "auto", fontFamily: "var(--font-mono)", lineHeight: 1.5 }}>
 {`# ADR-002: [Título da Proposta de Mudança]
 Status: Proposto | Data: 2026-06-18
 Autor: @seu_github
@@ -1430,17 +986,18 @@ Autor: @seu_github
 - Visual: [Como afeta as landings]
 - Técnico: [Novos tokens de CSS gerados]
 - Narrativa: [Alinhamento com "Quem sustenta é nóis"]`}
-            </pre>
-          </div>
+                </pre>
+              </div>
+            </div>
+          </Section>
         </div>
-      </Section>
 
-      <footer style={{ borderTop: "1px solid var(--color-border)", padding: "4rem 1.5rem", textAlign: "center" }}>
-        <Logo size={1.0} />
-        <p className="font-mono" style={{ color: "#4B5563", fontSize: "0.6875rem", marginTop: "1.5rem", textTransform: "uppercase", letterSpacing: "0.2em" }}>
-          Brasil Sustenta Venture v{tokens._meta.version} · Snapshot {tokens._meta.snapshot} · Quem Sustenta é Nóis
-        </p>
-      </footer>
+        <footer style={{ borderTop: "1px solid var(--color-border)", padding: "4rem 1.5rem", textAlign: "center" }}>
+          <Logo size={1.0} />
+          <p className="font-mono" style={{ color: "#4B5563", fontSize: "0.6875rem", marginTop: "1.5rem", textTransform: "uppercase", letterSpacing: "0.2em" }}>
+            Brasil Sustenta Venture v{tokens._meta.version} · Snapshot {tokens._meta.snapshot} · Quem Sustenta é Nóis
+          </p>
+        </footer>
       </div>
     </div>
   );
