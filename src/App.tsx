@@ -75,7 +75,7 @@ const SQUADS_VERTICALS: SquadVertical[] = [
   },
   {
     id: "design-comunicacao",
-    title: "Design & Identidade (Brutalismo Tropical)",
+    title: "Design & Identidade (Quiet Luxury Tech)",
     tag: "SQUADS DE IDENTIDADE & PRODUTO",
     color: "#FF9100",
     what: "Design de produtos digitais com estética Quiet Luxury Tech, branding anti-greenwashing e narrativas de marca ancoradas na verdade da calçada.",
