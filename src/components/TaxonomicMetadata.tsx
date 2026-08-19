@@ -15,7 +15,7 @@ export function TaxonomicMetadata({
   lat = "-22.9068°",
   lon = "-47.0616°",
   hub = "CAMPINAS/SP",
-  spec = "CIRDIA QUIET LUXURY",
+  spec = "OBSIDIAN V6",
   status = "VERIFIED",
   version = "v8.0",
 }: TaxonomicMetadataProps) {

@@ -1,5 +1,5 @@
 /* AUTO-GERADO de src/data/tokens.json — NÃO editar manualmente. */
-/* Fonte: Brasil Sustenta — Design Tokens v9.0 · Cirdia Quiet Luxury Tech · Swiss 1px Hairline Grid · Pátria High-End */
+/* Fonte: Brasil Sustenta — Design Tokens v9.0 · Obsidian V6 · Grid Suíço 1px · Pátria High-End */
 /* Snapshot: 2026-08-19 */
 
 @theme {
@@ -9,7 +9,7 @@
   --font-body: Outfit, system-ui, -apple-system, sans-serif;
   --font-mono: "Geist Mono", "SF Mono", monospace;
 
-  /* 3 Camadas de Elevação Tonal Cirdia & Neutros */
+  /* 3 Camadas de Elevação Tonal & Neutros */
   --color-paper: #08090A;
   --color-paper-2: #121417;
   --color-paper-3: #1C1F24;
@@ -66,7 +66,7 @@
   --color-ods-17: #19486A;
   --color-ods-18: #795548;
 
-  /* Glassmorphism Cirdia */
+  /* Glassmorphism Obsidian */
   --glass-ultra-thin: rgba(18, 20, 23, 0.48);
   --glass-thin: rgba(18, 20, 23, 0.60);
   --glass-regular: rgba(18, 20, 23, 0.75);

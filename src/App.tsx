@@ -12,7 +12,6 @@ import { Hero } from "./layouts/Hero";
 import { TaxonomicMetadata } from "./components/TaxonomicMetadata";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-// Cirdia Quiet Luxury Tech
 
 
 
@@ -75,10 +74,10 @@ const SQUADS_VERTICALS: SquadVertical[] = [
   },
   {
     id: "design-comunicacao",
-    title: "Design & Identidade (Quiet Luxury Tech)",
+    title: "Design & Identidade Digital",
     tag: "SQUADS DE IDENTIDADE & PRODUTO",
     color: "#FF9100",
-    what: "Design de produtos digitais com estética Quiet Luxury Tech, branding anti-greenwashing e narrativas de marca ancoradas na verdade da calçada.",
+    what: "Design de produtos digitais de alta fidelidade, branding anti-greenwashing e narrativas de marca ancoradas na verdade da calçada.",
     how: "Criação de design systems modulares com grid suíço de 1px e tipografia escultural. Interfaces intuitivas que valorizam a identidade nacional com elegância contemporânea.",
     deliverables: [
       "Design Systems Completos (Tokens, Componentes e Brand Books)",
@@ -192,7 +191,7 @@ export function VisionManifestoSection() {
           </p>
         </div>
 
-        {/* Faixa de Métricas Estratégicas Cirdia */}
+        {/* Faixa de Métricas Estratégicas */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-16">
           {[
             { value: "R$ 50 BI", label: "Mercado de Descarbonização", accent: "#00E676" },
@@ -1029,7 +1028,7 @@ export function ColorPaletteSection() {
             Swatches de Luminância & <span className="text-[#00E676]">Cores Pátria</span>.
           </h2>
           <p className="font-body text-base sm:text-lg text-[#9CA3AF] leading-[1.65] font-light">
-            Especificações físico-ópticas das Cores Pátria com conformidade WCAG AA/AAA auditada contra nosso canvas escuro (#08090A). A elevação tonal Cirdia organiza as 3 camadas espaciais de interface com hairlines suíças de 1px.
+            Especificações físico-ópticas das Cores Pátria com conformidade WCAG AA/AAA auditada contra nosso canvas escuro (#08090A). A elevação tonal Obsidian organiza as 3 camadas espaciais de interface com hairlines suíças de 1px.
           </p>
         </div>
 
@@ -1104,12 +1103,12 @@ export function ColorPaletteSection() {
           </div>
         </div>
 
-        {/* Elevação Tonal Cirdia (Layer Stack 3D) */}
+        {/* Elevação Tonal Obsidian (Layer Stack 3D) */}
         <div className="mb-16 rounded-3xl bg-[#121417] border border-white/[0.08] p-6 sm:p-8">
           <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/[0.06] mb-6">
             <div>
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-[#00E676] font-semibold block">
-                ELEVAÇÃO TONAL CIRDIA
+                ELEVAÇÃO TONAL OBSIDIAN
               </span>
               <h3 className="font-display text-2xl sm:text-3xl font-bold uppercase text-[#F3F4F6] mt-1">
                 As 4 Camadas Físicas de Profundidade
@@ -2210,7 +2209,7 @@ export function ImagerySection() {
               />
               <div className="absolute top-4 left-4 z-10">
                 <span className="font-mono text-[10px] uppercase font-bold tracking-widest bg-[#08090A]/85 text-[#00E676] px-3 py-1.5 rounded-full border border-[#00E676]/30 backdrop-blur-md">
-                  ✓ DEPOIS: TRATAMENTO DOCUMENTAL CIRDIA
+                  ✓ DEPOIS: TRATAMENTO DOCUMENTAL SOBERANO
                 </span>
               </div>
             </div>
@@ -2672,7 +2671,7 @@ export function ComponentsBentoSection() {
         {/* Bento Grid: Biblioteca de Botões Cápsula & Badges Táteis */}
         <div className="mb-16">
           <span className="font-mono text-xs uppercase tracking-[0.2em] text-white/50 font-semibold block mb-6">
-            // BIBLIOTECA INTERATIVA DE COMPONENTES CIRDIA
+            // BIBLIOTECA INTERATIVA DE COMPONENTES
           </span>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -2687,7 +2686,7 @@ export function ComponentsBentoSection() {
                   Pílulas Táteis de Alta Densidade
                 </h4>
                 <p className="font-body text-xs text-[#9CA3AF] mb-6 font-light leading-relaxed">
-                  Botões com raio full (`rounded-full`), touch targets mínimos de 44px e feedback elástico Cirdia.
+                  Botões com raio full (`rounded-full`), touch targets mínimos de 44px e feedback tátil de alta precisão.
                 </p>
               </div>
 
@@ -2759,7 +2758,7 @@ export function ComponentsBentoSection() {
             <div className="bs-card rounded-2xl bg-[#121417] border border-white/[0.06] p-6 sm:p-8 flex flex-col justify-between">
               <div>
                 <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#FF9100] font-bold block mb-2">
-                  HAIRLINES SUÍÇAS 1PX & VIDRO CIRDIA
+                  HAIRLINES SUÍÇAS 1PX & VIDRO LÍQUIDO
                 </span>
                 <h4 className="font-display text-xl font-bold uppercase text-[#F3F4F6] mb-3">
                   Superfície & Microinteração
@@ -3384,12 +3383,12 @@ export default function App() {
         {/* 08. AGENDA ODS 1-18 & GOVERNANÇA DA TRÍADE */}
         <ODSGovernanceSection />
 
-        {/* Rodapé Editorial Cirdia */}
+        {/* Rodapé Editorial */}
         <footer className="border-t border-white/[0.06] py-16 px-6 text-center bg-[#08090A]">
           <div className="max-w-4xl mx-auto flex flex-col items-center gap-6">
             <Logo size={1.2} />
             <p className="font-mono text-xs text-[#9CA3AF] max-w-xl font-light">
-              Brasil Sustenta Venture · Benchmark Cirdia Quiet Luxury Tech · Grid Suíço de 1px · Quem Sustenta é Nóis.
+              Brasil Sustenta Venture · Design System Obsidian V6 · Grid Suíço de 1px · Quem Sustenta é Nóis.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-white/40">
               <span>v{tokens._meta.version} High-End</span>

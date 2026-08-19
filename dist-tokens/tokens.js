@@ -7,7 +7,7 @@ export const tokens = {
   "_meta": {
     "name": "Brasil Sustenta — Design Tokens",
     "version": "9.0",
-    "direction": "Cirdia Quiet Luxury Tech · Swiss 1px Hairline Grid · Pátria High-End",
+    "direction": "Obsidian V6 · Grid Suíço 1px · Pátria High-End",
     "source": "src/data/tokens.json (SSOT)",
     "snapshot": "2026-08-19",
     "note": "Fonte única da verdade. Se mudar aqui, regenerar via node scripts/build-tokens.mjs."
@@ -18,7 +18,7 @@ export const tokens = {
         "name": "paper",
         "var": "--color-paper",
         "hex": "#08090A",
-        "label": "Preto Grafite Cirdia (Base)",
+        "label": "Preto Grafite (Canvas Base)",
         "use": "Canvas de fundo principal"
       },
       {
@@ -686,7 +686,7 @@ export const colors = {
     "name": "paper",
     "var": "--color-paper",
     "hex": "#08090A",
-    "label": "Preto Grafite Cirdia (Base)",
+    "label": "Preto Grafite (Canvas Base)",
     "use": "Canvas de fundo principal"
   },
   {

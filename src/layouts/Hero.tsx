@@ -51,7 +51,7 @@ export function Hero() {
       aria-label="Introdução Hero Monumental Brasil Sustenta"
       className="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden"
     >
-      {/* Bioluminescência Atmosférica Suave Cirdia */}
+      {/* Bioluminescência Atmosférica Suave */}
       <SectionGlow color="#00E676" position="50% 15%" opacity={0.05} size="50%" />
       <div
         aria-hidden="true"

@@ -34,8 +34,8 @@ for (const [, f] of Object.entries(tokens.typography.families)) {
 }
 lines.push(``);
 
-// 3 Camadas de Elevação Tonal Cirdia & Neutros Ink
-lines.push(`  /* 3 Camadas de Elevação Tonal Cirdia & Neutros */`);
+// 3 Camadas de Elevação Tonal & Neutros Ink
+lines.push(`  /* 3 Camadas de Elevação Tonal & Neutros */`);
 for (const c of tokens.color.base) {
   lines.push(`  ${c.var}: ${c.hex ?? c.value};`);
 }
@@ -78,7 +78,7 @@ if (Array.isArray(tokens.ods)) {
 
 // Glassmorphism & Liquid Glass
 if (Array.isArray(tokens.glass)) {
-  lines.push(`  /* Glassmorphism Cirdia */`);
+  lines.push(`  /* Glassmorphism Obsidian */`);
   for (const g of tokens.glass) {
     lines.push(`  ${g.var}: ${g.value};`);
   }
