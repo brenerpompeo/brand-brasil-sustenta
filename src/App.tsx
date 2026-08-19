@@ -1337,19 +1337,19 @@ export default function App() {
           {/* Coluna 1: Botoes (Bento span 2 colunas) */}
           <div className="glass-card bento-2col" style={{ padding: "2rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
             <div>
-              <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#00FF41", letterSpacing: "0.15em", textTransform: "uppercase" }}>✓ Botões Encorpados v7 (Touch Target &gt; 44px)</span>
+              <span className="font-mono" style={{ fontSize: "0.6875rem", color: "#00E676", letterSpacing: "0.15em", textTransform: "uppercase" }}>✓ Botões Cápsula High-End (Touch Target &gt; 44px)</span>
               <p style={{ color: "#9CA3AF", fontSize: "0.85rem", margin: "0.5rem 0 1.5rem", lineHeight: 1.5 }}>
-                Botões pílula táteis otimizados para uso mobile sob o polegar, com transições aceleradas e gradientes bioluminescentes da Pátria Cyber-Glow.
+                Botões pílula táteis (rounded-full) com transições elásticas naturais e acentos bioluminescentes contidos.
               </p>
             </div>
             <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", alignItems: "center" }}>
-              <button className="btn-v7 btn-v7-primary">
+              <button className="h-11 px-7 rounded-full bg-[#00E676] text-[#050505] font-semibold text-xs uppercase tracking-wider transition-all duration-200 hover:bg-[#00FF87] active:scale-[0.98] shadow-[0_0_20px_rgba(0,230,118,0.25)] cursor-pointer">
                 Ativar Squad ESG
               </button>
-              <button className="btn-v7 btn-v7-secondary">
+              <button className="h-11 px-7 rounded-full bg-white/[0.04] text-white border border-white/[0.10] font-medium text-xs uppercase tracking-wider transition-all duration-200 hover:bg-white/[0.08] hover:border-white/[0.20] active:scale-[0.98] cursor-pointer">
                 Ver Casos de Sucesso
               </button>
-              <button className="btn-v7 btn-v7-solar">
+              <button className="h-11 px-7 rounded-full bg-[#FFD600] text-[#050505] font-semibold text-xs uppercase tracking-wider transition-all duration-200 hover:bg-[#FFE033] active:scale-[0.98] shadow-[0_0_20px_rgba(255,214,0,0.25)] cursor-pointer">
                 Inscrever Campus
               </button>
             </div>
