@@ -30,6 +30,16 @@ export function Hero() {
     }, 1500);
   };
 
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    const simpleId = targetId.replace(/^\d+-/, "");
+    const targetElement = document.getElementById(targetId) || document.getElementById(simpleId);
+    if (targetElement) {
+      e.preventDefault();
+      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.pushState(null, "", `#${targetId}`);
+    }
+  };
+
   const fadeUp = {
     hidden: { opacity: 0, y: reduced ? 0 : 25, filter: "blur(6px)" },
     show: { opacity: 1, y: 0, filter: "blur(0px)" },
@@ -93,7 +103,8 @@ export function Hero() {
           className="flex flex-wrap items-center justify-center gap-3.5 mb-16"
         >
           <a
-            href="#sistema-cromatico"
+            href="#03-sistema-cromatico"
+            onClick={(e) => handleSmoothScroll(e, "03-sistema-cromatico")}
             style={{ textDecoration: "none" }}
             className="relative inline-flex items-center justify-center gap-2 px-8 min-h-[44px] h-12 rounded-full bg-white text-[#08090A] text-xs font-semibold uppercase tracking-wider transition-all duration-300 hover:bg-[#00E676] active:scale-[0.98] shadow-[0_0_24px_rgba(255,255,255,0.12)] hover:shadow-[0_0_28px_rgba(0,230,118,0.35)] select-none"
           >
@@ -102,7 +113,8 @@ export function Hero() {
           </a>
 
           <a
-            href="#componentes-bento"
+            href="#07-componentes-bento"
+            onClick={(e) => handleSmoothScroll(e, "07-componentes-bento")}
             style={{ textDecoration: "none" }}
             className="inline-flex items-center justify-center gap-2 px-7 min-h-[44px] h-12 rounded-full bg-white/[0.04] text-white/90 hover:text-white border border-white/[0.08] hover:border-white/[0.18] hover:bg-white/[0.07] text-xs font-medium uppercase tracking-wider transition-all duration-300 select-none"
           >
@@ -163,7 +175,7 @@ export function Hero() {
                         type="button"
                         onClick={() => copyToClipboard(swatch.hex)}
                         title={`Clique para copiar ${swatch.role} (${swatch.hex})`}
-                        className="group flex flex-col items-center gap-1.5 p-2 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.04] hover:border-white/[0.12] transition-all cursor-pointer select-none"
+                        className="group flex flex-col items-center gap-1.5 p-2 min-h-[44px] rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.04] hover:border-white/[0.12] transition-all cursor-pointer select-none"
                       >
                         <div
                           className="size-7 rounded-full transition-transform group-hover:scale-110 group-active:scale-95 shadow-sm"

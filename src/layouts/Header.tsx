@@ -26,28 +26,28 @@ export const CANONICAL_NAV_GROUPS: NavGroup[] = [
     accent: "#00E676",
     items: [
       {
-        id: "visao-manifesto",
+        id: "01-visao-manifesto",
         num: "01",
         label: "Visão & Manifesto",
         desc: "Tese de shared value e compromissos inegociáveis",
         accent: "#00E676",
       },
       {
-        id: "logo-geometria",
+        id: "02-logo-geometria",
         num: "02",
         label: "Logomarca & Geometria",
         desc: "Malha cartesiana, safe-zone e Do's & Don'ts",
         accent: "#00E676",
       },
       {
-        id: "sistema-cromatico",
+        id: "03-sistema-cromatico",
         num: "03",
         label: "Sistema Cromático",
         desc: "Swatches de luminância e 3 elevações tonais",
         accent: "#00E676",
       },
       {
-        id: "tipografia-escultural",
+        id: "04-tipografia-escultural",
         num: "04",
         label: "Tipografia Escultural",
         desc: "Antonio Display, Outfit e Geist Mono",
@@ -61,21 +61,21 @@ export const CANONICAL_NAV_GROUPS: NavGroup[] = [
     accent: "#FFD600",
     items: [
       {
-        id: "tom-de-voz",
+        id: "05-tom-de-voz",
         num: "05",
         label: "Tom de Voz",
         desc: "Filtro anti-greenwashing e calçada high-end",
         accent: "#2979FF",
       },
       {
-        id: "diretriz-fotografica",
+        id: "06-diretriz-fotografica",
         num: "06",
         label: "Diretriz Fotográfica",
         desc: "Tratamento documental e granulação orgânica",
         accent: "#2979FF",
       },
       {
-        id: "componentes-bento",
+        id: "07-componentes-bento",
         num: "07",
         label: "Componentes & Bento UI",
         desc: "Bento cards, botões cápsula e fit score Suzely",
@@ -89,7 +89,7 @@ export const CANONICAL_NAV_GROUPS: NavGroup[] = [
     accent: "#2979FF",
     items: [
       {
-        id: "ods-governanca",
+        id: "08-ods-governanca",
         num: "08",
         label: "Agenda ODS 1-18 & Governança",
         desc: "18 metas territoriais, MEC 10% e framework ADR",
@@ -101,9 +101,9 @@ export const CANONICAL_NAV_GROUPS: NavGroup[] = [
 
 export const CANONICAL_SECTION_IDS = CANONICAL_NAV_GROUPS.flatMap((g) => g.items.map((i) => i.id));
 
-/** Hook robusto para scroll spy de seções */
+/** Hook robusto para scroll spy de seções com suporte a IDs canônicos */
 export function useActiveSection(ids: string[]) {
-  const [active, setActive] = useState(ids[0] || "visao-manifesto");
+  const [active, setActive] = useState(ids[0] || "01-visao-manifesto");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -111,7 +111,9 @@ export function useActiveSection(ids: string[]) {
       let currentSection = ids[0];
 
       for (const id of ids) {
-        const el = document.getElementById(id);
+        // Busca tanto o ID completo quanto a versão sem prefixo numérico
+        const simpleId = id.replace(/^\d+-/, "");
+        const el = document.getElementById(id) || document.getElementById(simpleId);
         if (el) {
           const top = el.offsetTop;
           if (scrollPosition >= top) {
@@ -136,22 +138,35 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
-  const handleLinkClick = () => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     setIsOpen(false);
     setActiveDropdown(null);
+
+    // Suporte a scroll suave robusto
+    const simpleId = targetId.replace(/^\d+-/, "");
+    const targetElement = document.getElementById(targetId) || document.getElementById(simpleId);
+    if (targetElement) {
+      e.preventDefault();
+      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.pushState(null, "", `#${targetId}`);
+    }
   };
 
   return (
     <header className="sticky top-4 z-50 px-4 transition-all duration-300 pointer-events-none">
       <div className="max-w-5xl mx-auto pointer-events-auto">
-        <div className="relative flex items-center justify-between h-14 px-4 sm:px-6 rounded-full bg-[#08090A]/85 backdrop-blur-2xl border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.7)] transition-colors duration-200 hover:border-white/[0.12]">
+        <div className="relative flex items-center justify-between h-14 px-4 sm:px-6 rounded-full bg-[#08090A]/85 backdrop-blur-2xl border border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.75)] transition-colors duration-200 hover:border-white/[0.14]">
           
           {/* Logo Brasil Sustenta integrado com Monograma Tátil */}
           <a
             href="#"
-            className="flex items-center gap-2.5 select-none shrink-0 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00E676]"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            className="flex items-center gap-2.5 min-h-[44px] select-none shrink-0 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00E676] rounded-full px-1"
             style={{ textDecoration: "none" }}
-            aria-label="Brasil Sustenta Brand Book"
+            aria-label="Brasil Sustenta Brand Book - Início"
           >
             <div className="flex items-center gap-2">
               <span className="font-display text-lg md:text-xl font-bold uppercase tracking-tight text-[#F3F4F6] group-hover:text-white transition-colors">
@@ -166,7 +181,7 @@ export function Header() {
           {/* 3 Dropdowns Interativos Desktop por Pilares */}
           <nav className="hidden md:flex items-center gap-1" aria-label="Navegação Principal">
             {CANONICAL_NAV_GROUPS.map((group) => {
-              const isGroupActive = group.items.some((i) => i.id === active);
+              const isGroupActive = group.items.some((i) => i.id === active || i.id.replace(/^\d+-/, "") === active.replace(/^\d+-/, ""));
               const isDropdownOpen = activeDropdown === group.id;
 
               return (
@@ -181,10 +196,10 @@ export function Header() {
                     onClick={() => setActiveDropdown(isDropdownOpen ? null : group.id)}
                     aria-expanded={isDropdownOpen}
                     className={cn(
-                      "flex items-center gap-1.5 px-3.5 py-1.5 text-[13px] rounded-full transition-all duration-200 cursor-pointer font-normal",
+                      "flex items-center gap-1.5 px-4 min-h-[44px] text-[13px] rounded-full transition-all duration-200 cursor-pointer font-normal",
                       isDropdownOpen || isGroupActive
-                        ? "text-white bg-white/[0.08] font-medium border border-white/[0.10]"
-                        : "text-white/65 hover:text-white hover:bg-white/[0.03] border border-transparent"
+                        ? "text-white bg-white/[0.08] font-medium border border-white/[0.12]"
+                        : "text-white/65 hover:text-white hover:bg-white/[0.04] border border-transparent"
                     )}
                   >
                     <span>{group.title}</span>
@@ -221,17 +236,17 @@ export function Header() {
 
                           <div className="grid gap-1">
                             {group.items.map((item) => {
-                              const isItemActive = active === item.id;
+                              const isItemActive = active === item.id || active.replace(/^\d+-/, "") === item.id.replace(/^\d+-/, "");
                               return (
                                 <a
                                   key={item.id}
                                   href={`#${item.id}`}
-                                  onClick={handleLinkClick}
+                                  onClick={(e) => handleLinkClick(e, item.id)}
                                   style={{ textDecoration: "none" }}
                                   className={cn(
-                                    "group flex items-start gap-2.5 p-2.5 rounded-xl transition-all duration-150",
+                                    "group flex items-start gap-2.5 min-h-[44px] p-2.5 rounded-xl transition-all duration-150 cursor-pointer",
                                     isItemActive
-                                      ? "bg-white/[0.08] border border-white/[0.10]"
+                                      ? "bg-white/[0.08] border border-white/[0.12]"
                                       : "hover:bg-[#1C1F24] border border-transparent"
                                   )}
                                 >
@@ -265,19 +280,21 @@ export function Header() {
             })}
           </nav>
 
-          {/* Ação Direita: Indicador de Versão + Botão Cápsula */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* Ação Direita: Indicador de Versão + Botão Cápsula com Touch Target >= 44px */}
+          <div className="hidden sm:flex items-center gap-2">
             <a
-              href="#sistema-cromatico"
+              href="#03-sistema-cromatico"
+              onClick={(e) => handleLinkClick(e, "03-sistema-cromatico")}
               style={{ textDecoration: "none" }}
-              className="font-mono text-[11px] text-white/50 hover:text-white transition-colors px-2 py-1 select-none"
+              className="font-mono text-[11px] text-white/50 hover:text-white transition-colors px-3 min-h-[44px] inline-flex items-center select-none"
             >
               v8.0 High-End
             </a>
             <a
-              href="#componentes-bento"
+              href="#07-componentes-bento"
+              onClick={(e) => handleLinkClick(e, "07-componentes-bento")}
               style={{ textDecoration: "none" }}
-              className="relative inline-flex items-center justify-center gap-1.5 px-4 min-h-[36px] h-9 rounded-full bg-white text-[#08090A] text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:bg-[#00E676] active:scale-[0.98] shadow-[0_0_16px_rgba(255,255,255,0.08)] hover:shadow-[0_0_20px_rgba(0,230,118,0.25)] select-none"
+              className="relative inline-flex items-center justify-center gap-1.5 px-4 min-h-[44px] h-10 rounded-full bg-white text-[#08090A] text-xs font-semibold uppercase tracking-wider transition-all duration-200 hover:bg-[#00E676] active:scale-[0.98] shadow-[0_0_16px_rgba(255,255,255,0.08)] hover:shadow-[0_0_20px_rgba(0,230,118,0.25)] select-none"
             >
               <span>Ver UI</span>
               <span className="text-[10px]" aria-hidden="true">→</span>
@@ -326,7 +343,7 @@ export function Header() {
         </div>
       </div>
 
-      {/* Gaveta Mobile Responsiva — Framer Motion com 8 Seções Canônicas */}
+      {/* Gaveta Mobile Responsiva — Framer Motion com 8 Seções Canônicas e Touch Target >= 44px */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -360,18 +377,18 @@ export function Header() {
                   
                   <div className="grid gap-1">
                     {group.items.map((item) => {
-                      const isItemActive = active === item.id;
+                      const isItemActive = active === item.id || active.replace(/^\d+-/, "") === item.id.replace(/^\d+-/, "");
                       return (
                         <a
                           key={item.id}
                           href={`#${item.id}`}
-                          onClick={handleLinkClick}
+                          onClick={(e) => handleLinkClick(e, item.id)}
                           style={{ textDecoration: "none" }}
                           className={cn(
-                            "flex items-center justify-between min-h-[44px] p-2.5 rounded-xl text-xs transition-colors",
+                            "flex items-center justify-between min-h-[44px] p-2.5 rounded-xl text-xs transition-colors cursor-pointer",
                             isItemActive
-                              ? "bg-white/[0.08] text-[#00E676] font-medium border border-white/[0.08]"
-                              : "text-white/70 hover:text-white hover:bg-white/[0.03]"
+                              ? "bg-white/[0.08] text-[#00E676] font-medium border border-white/[0.10]"
+                              : "text-white/70 hover:text-white hover:bg-white/[0.04]"
                           )}
                         >
                           <div className="flex items-center gap-2.5">
@@ -396,10 +413,10 @@ export function Header() {
 
               <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between">
                 <a
-                  href="#componentes-bento"
-                  onClick={handleLinkClick}
+                  href="#07-componentes-bento"
+                  onClick={(e) => handleLinkClick(e, "07-componentes-bento")}
                   style={{ textDecoration: "none" }}
-                  className="w-full min-h-[44px] flex items-center justify-center gap-2 rounded-full bg-white text-[#08090A] text-xs font-semibold uppercase tracking-wider hover:bg-[#00E676] transition-colors"
+                  className="w-full min-h-[44px] flex items-center justify-center gap-2 rounded-full bg-white text-[#08090A] text-xs font-semibold uppercase tracking-wider hover:bg-[#00E676] transition-colors select-none"
                 >
                   <span>Acessar Biblioteca UI</span>
                   <span className="text-[11px]">→</span>

@@ -579,7 +579,8 @@ export default function App() {
         <Hero />
 
         {/* 01. VISÃO & MANIFESTO */}
-        <div id="visao-manifesto">
+        <div id="01-visao-manifesto">
+          <span id="visao-manifesto" className="sr-only" />
           <Section id="negocio" eyebrow="01. Visão & Manifesto · O Negócio / Playbook" title={<>Inovação territorial que gera ROI socioambiental real.</>} intro="Substituímos o greenwashing e a teoria inócua das consultorias de slides por squads integrados (embedded) e auditáveis no território. O Brasil Sustenta é o matching engine de talentos e o compliance prático das suas metas ESG. Unimos o brilhantismo universitário sob governança de mercado para entregar em semanas o que o seu RH/Sustentabilidade levaria meses para estruturar.">
             <SectionGlow color="#00E676" position="10% 40%" opacity={0.06} />
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.25rem", position: "relative" }}>
@@ -686,16 +687,18 @@ export default function App() {
                 ))}
               </div>
             </div>
-          </Section>
 
-          {/* MANIFESTO — cartazes Gen Z de shared value */}
-          <Section id="manifesto" eyebrow="Camada 1.5 · O Manifesto" title={<>A visão do Shared Value.</>} intro="Acreditamos que impacto socioambiental gera retorno financeiro legítimo, e que o retorno financeiro financia a escala do impacto. É assim que superamos o greenwashing e criamos soluções perpétuas.">
-            <ManifestoSection />
+            {/* MANIFESTO — cartazes Gen Z de shared value */}
+            <div style={{ marginTop: "2.5rem", borderTop: "1px solid var(--color-border)", paddingTop: "2rem" }}>
+              <Eyebrow>O Manifesto (Shared Value na Veia)</Eyebrow>
+              <ManifestoSection />
+            </div>
           </Section>
         </div>
 
         {/* 02. LOGOMARCA & GEOMETRIA */}
-        <div id="logo-geometria">
+        <div id="02-logo-geometria">
+          <span id="logo-geometria" className="sr-only" />
           <Section id="logo" eyebrow="02. Logomarca & Geometria" title="A assinatura visual." intro="A logo do Brasil Sustenta é empilhada, utilizando a fonte Antonio Black e finalizada com o ponto final verde amazônia tech. É minimalista, geométrica, de forte presença visual e inalterável.">
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1.25rem" }}>
               <LogoCard label="Principal" sub="Empilhado · fundo escuro" bg="#08090A">
@@ -769,7 +772,8 @@ export default function App() {
         </div>
 
         {/* 03. SISTEMA CROMÁTICO */}
-        <div id="sistema-cromatico">
+        <div id="03-sistema-cromatico">
+          <span id="sistema-cromatico" className="sr-only" />
           <Section id="cores" eyebrow="03. Sistema Cromático & Elevação Tonal" title="A paleta semântica." intro="Dividimos a paleta de cores por persona de atuação. Cores puras servem como acentos dinâmicos em superfícies e detalhes, nunca como fundo de grandes blocos. Adicionamos gradientes premium para conferir profundidade e modernidade.">
             <Eyebrow>Por Persona</Eyebrow>
             <div style={{ marginTop: 12, marginBottom: 32 }}><ColorRow items={tokens.color.persona} /></div>
@@ -784,7 +788,8 @@ export default function App() {
         </div>
 
         {/* 04. TIPOGRAFIA ESCULTURAL */}
-        <div id="tipografia-escultural">
+        <div id="04-tipografia-escultural">
+          <span id="tipografia-escultural" className="sr-only" />
           <Section id="tipografia" eyebrow="04. Tipografia Escultural" title="A escala monumentalista." intro="Antonio (Display/Cabeçalhos) · Outfit (Leitura/Corpo) · Geist Mono (Dados/Fórmulas/Eyebrows). No máximo duas famílias por tela ou peça. Mono é reservada estritamente para números de score, metadados e tags.">
             <TypographyPlayground />
             <div style={{ marginTop: "2.5rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
@@ -808,7 +813,8 @@ export default function App() {
         </div>
 
         {/* 05. TOM DE VOZ */}
-        <div id="tom-de-voz">
+        <div id="05-tom-de-voz">
+          <span id="tom-de-voz" className="sr-only" />
           <Section id="tom" eyebrow="05. Tom de Voz & Anti-Greenwashing" title="Inconformismo e rigor real." intro="Falamos com soberania territorial e atitude pragmática: provocativo, focado em negócios, guiado por evidências científicas e desenhado para gerar valor econômico legítimo na comunidade de baixo para cima.">
             <ToneTranslator />
 
@@ -852,7 +858,8 @@ export default function App() {
         </div>
 
         {/* 06. DIRETRIZ FOTOGRÁFICA */}
-        <div id="diretriz-fotografica">
+        <div id="06-diretriz-fotografica">
+          <span id="diretriz-fotografica" className="sr-only" />
           <Section id="fotografia" eyebrow="06. Diretriz Fotográfica" title="Realidade documental." intro="Pessoas reais, estudantes no campus, bairros e cidades brasileiras. Baixo contraste de saturação, granulação orgânica e overlays escuros que permitem excelente legibilidade de texto sob a imagem.">
             <PhotoSlider />
 
@@ -884,7 +891,8 @@ export default function App() {
         </div>
 
         {/* 07. COMPONENTES & BENTO UI */}
-        <div id="componentes-bento">
+        <div id="07-componentes-bento">
+          <span id="componentes-bento" className="sr-only" />
           <Section id="componentes" eyebrow="07. Componentes & Bento UI" title="Primitivos interativos." intro="Espelho de nossos componentes principais exportados de apps/web/src/components/. Hairlines, botões pílulas e fit scores explicados.">
             <div className="bento-grid" style={{ marginTop: "2rem" }}>
               {/* Coluna 1: Botoes (Bento span 2 colunas) */}
@@ -939,7 +947,8 @@ export default function App() {
         </div>
 
         {/* 08. AGENDA ODS 1-18 & GOVERNANÇA */}
-        <div id="ods-governanca">
+        <div id="08-ods-governanca">
+          <span id="ods-governanca" className="sr-only" />
           {/* ODS GRID INTERATIVO */}
           <Section id="ods" eyebrow="08. Agenda ODS 1-18 & Governança" title="A ancoragem ODS." intro="Toda ação operacional é atrelada a uma das 18 metas de desenvolvimento sustentável ODS brasileiras. Selecione uma meta abaixo para ver os desafios práticos envolvidos.">
             <ODSInteractiveGrid />
